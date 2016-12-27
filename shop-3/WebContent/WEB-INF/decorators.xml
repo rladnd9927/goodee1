@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding= "euc-kr"?>
+
+<decorators defaultdir="/decorator">
+	<decorator name = "main" page="decorator.jsp"><!-- 
+														decorator 껍데기 양식파일은 page="jsp파일" 와같이 url을 지정해 줌. 
+														만약, 아래 패턴과 다른 페이지는 다른 껍데기 양식을 원할경우,	<decorator>태그를 하나 더 만들어 새로운 껍데기 양식파일을 연결해주면 된다.
+													-->
+		<pattern>*.shop</pattern>
+	</decorator>
+	<excludes><!-- 아래 패턴에 해당하는 url이 올경우, sitemesh에서 제외 시키도록 한다. -->
+	</excludes>
+</decorators>
