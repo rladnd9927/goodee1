@@ -2,7 +2,7 @@
 
 <decorators defaultdir="/decorator">
 	<decorator name = "main" page="decorator.jsp">
-		<pattern>*.shop</pattern>
+		<pattern>*.do</pattern>
 	</decorator>
 <!-- 	<decorator name = "main" page="decorator2.jsp">
 		<pattern>*.bod</pattern>
