@@ -40,6 +40,10 @@ a {
     outline: none;
 	color:#333;
 }
+.logintab{
+	
+	font-style: oblique;
+}
 a:hover {
   text-decoration: none;
   color:#eee;	

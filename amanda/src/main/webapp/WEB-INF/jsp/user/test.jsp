@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<link rel="stylesheet" href="${contextPath}/css/style.css">
+
 <title>로그인</title>
 </head>
 <body>
