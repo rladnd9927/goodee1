@@ -9,20 +9,25 @@
 <title>로그인</title>
 </head>
 <body>
-<div id="wrapper">
-<div id="loginlogo"><img alt="logo" src="../img/logo.jsp"></div>
-<table class ="logintab">
-	<tr><td>아이디</td>
+<form:form modelAttribute="user" method="post" action=".do">
+<div class="loginwrapper">
+<div id="loginlogo"><img alt="logo" src=""></div>
+<table class ="join02">
+	<thead>
+		<tr><th>로그인</th><th></th>
+	</thead>
+	<tr><th>아이디</th>
 		<td><input type="text" id="email"/>
 			</td>
 	</tr>
-	<tr><td>비밀번호</td>
+	<tr><th>비밀번호</th>
 		<td><input type="password" id="password"/>
-			</td>
-	</tr>
-	<tr><td><input type="button" value="회원가입"/></td>
-		<td><input type="button" value="로그인"/></td></tr>
+			</td></tr>
+
 </table>
+<input type="button" class="jb" value="회원가입" onclick="location.href='JoinForm1.do'">
+<input type="submit" class="jb" value="로그인">
 </div>
+</form:form>
 </body>
 </html>

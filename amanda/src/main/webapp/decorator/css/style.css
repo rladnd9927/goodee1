@@ -74,7 +74,12 @@ table.join02 td {
 .joinimg{
 	margin-left: 120px;	
 }
-
+.loginwrapper{
+	width:auto;
+	height:auto;
+	margin-top: 100px;
+	margin-left: 630px;
+}
 .joinwrapper{
 	margin-top: 100px;
 	margin-left: 630px;
@@ -85,7 +90,12 @@ a:hover {
 }
 .joinbutton{
 	margin-left: 170px;
-}.jb {
+}
+.listtab{
+	width:300px;
+	height:auto;
+}
+.jb {
 	text-decoration:none;
 	font-family:Arial;
 	box-shadow:inset #ffffff 0px 5px 8px -1px,#de97ae 1px 5px 2px;
@@ -108,8 +118,8 @@ a:hover {
 	text-align:center;
 	vertical-align:middle;
 	display:inline-block;
-	font-size:15px;
-	color:#8f143d;
+	font-size:20px;
+	color:#de97ae;
 	width:100px;
 	height:12px;
 	padding:13px;
@@ -138,10 +148,20 @@ a:hover {
 	background:-ms-linear-gradient(#ffe0eb, #ffe0eb);
 	background:linear-gradient(#ffe0eb, #ffe0eb);
 }
+.user{
+	background-color: #fff7fc;
+	margin-left: 10px;
+	margin-top: 10px;
+}
 .info {
   float: left;
   margin-top: -45px;
    margin-left: 110px;
+}
+.user{
+	width: 200px;
+	height: 200px;
+	margin: 10px;
 }
 
 .info li {

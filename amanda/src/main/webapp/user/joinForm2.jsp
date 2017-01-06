@@ -16,6 +16,14 @@ function win_open() {
 <title>회원가입</title>
 </head>
 <body>
+<form:form modelAttribute="user" method="post" action=".do">
+	<spring:hasBindErrors name="user">
+		<font color="red">
+			<c:forEach items="${errors.globalErrors}" var="error">
+				<spring:message code="${error.code}"/>
+			</c:forEach>
+		</font>
+	</spring:hasBindErrors>
 <div class="joinwrapper">
 <div class="joinimg">
 <table>
@@ -99,5 +107,6 @@ function win_open() {
 <input type="button" class="jb" value="회원가입">
 </div>
 </div>
+</form:form>
 </body>
 </html>
