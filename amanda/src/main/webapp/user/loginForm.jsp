@@ -5,14 +5,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<link rel="stylesheet" href="decorator/css/style.css">
+<link rel="stylesheet" href="../decorator/css/style.css">
 <title>로그인</title>
 </head>
 <body>
-<img alt="logo" src="">
+<div id="wrapper">
+<div id="loginlogo"><img alt="logo" src="../img/logo.jsp"></div>
 <table class ="logintab">
 	<tr><td>아이디</td>
-		<td><input type="text" id="userId"/>
+		<td><input type="text" id="email"/>
 			</td>
 	</tr>
 	<tr><td>비밀번호</td>
@@ -20,7 +21,8 @@
 			</td>
 	</tr>
 	<tr><td><input type="button" value="회원가입"/></td>
-		<td><input type="button" value="회원가입"/></td></tr>
+		<td><input type="button" value="로그인"/></td></tr>
 </table>
+</div>
 </body>
 </html>
