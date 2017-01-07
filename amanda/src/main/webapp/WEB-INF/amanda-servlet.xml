@@ -19,14 +19,14 @@
 <!-- url과 Controller를 매핑 -->
 <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 <!-- 객체생성 영역 설정 -->
-<context:component-scan base-package=""/>
+<context:component-scan base-package="controller,dao,logic"/>
 <!-- 뷰 결정자 선택 -->
 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	<property name="viewClass">
 		<value>org.springframework.web.servlet.view.JstlView</value>
 	</property>
 	<property name="prefix">
-		<value>/WEB-INF/jsp/</value>
+		<value>/jsp/</value>
 	</property>
 	<property name="suffix">
 		<value>.jsp</value>
