@@ -47,8 +47,10 @@ import logic.ItemService;
 import logic.Mail;
 import logic.Sale;
 import logic.SaleItem;
+import logic.SemiUser;
 import logic.ShopService;
 import logic.User;
+import logic.UserProfile;
 
 @Controller
 public class UserController {
@@ -109,18 +111,18 @@ public class UserController {
 	}
 	
 	@RequestMapping("user/joinForm1")
-	public ModelAndView userEntryForm(){
+	public ModelAndView joinForm1(){
 		ModelAndView mav = new ModelAndView();
-		User user = new User();
-		UserProfile userProfile = new UserProfile();
-
-		DateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-		try{
-			userProfile.setM_birthday(sf.parse("1980-01-01"));
-		}catch(ParseException e){
-			e.printStackTrace();
-		}
-		mav.addObject(user);
+		SemiUser semiuser = new SemiUser();
+		mav.addObject(semiuser);
+		return mav;
+	}
+	
+	@RequestMapping("user/joinForm2")
+	public ModelAndView joinFrom2(){
+		ModelAndView mav = new ModelAndView();
+		UserProfile userprofile = new UserProfile();
+		mav.addObject(userprofile);
 		return mav;
 	}
 	
