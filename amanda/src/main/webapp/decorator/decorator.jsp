@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var = "contextPath" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,13 +13,13 @@
     <title><decorator:title/></title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/jquery.bxslider.css">
-	<link rel="stylesheet" type="text/css" href="css/isotope.css" media="screen" />	
-	<link rel="stylesheet" href="css/animate.css">
-	<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
-	<link href="css/style.css" rel="stylesheet">	
+    <link href="${contextPath}/decorator/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="${contextPath}/decorator/css/font-awesome.min.css">
+	<link rel="stylesheet" href="${contextPath}/decorator/css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="${contextPath}/decorator/css/isotope.css" media="screen" />	
+	<link rel="stylesheet" href="${contextPath}/decorator/css/animate.css">
+	<link rel="stylesheet" href="${contextPath}/decorator/js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="${contextPath}/decorator/css/style.css">	
   </head>
   <body>
 	<header>
@@ -94,14 +100,14 @@
    
 	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->	
-    <script src="js/jquery-2.1.1.min.js"></script>	
+    <script src="${contextPath}/decorator/js/jquery-2.1.1.min.js"></script>	
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-	<script src="js/wow.min.js"></script>
-	<script src="js/fancybox/jquery.fancybox.pack.js"></script>
-	<script src="js/jquery.easing.1.3.js"></script>
-	<script src="js/jquery.bxslider.min.js"></script>
-	<script src="js/functions.js"></script>
+    <script src="${contextPath}/decorator/js/bootstrap.min.js"></script>
+	<script src="${contextPath}/decorator/js/wow.min.js"></script>
+	<script src="${contextPath}/decorator/js/fancybox/jquery.fancybox.pack.js"></script>
+	<script src="${contextPath}/decorator/js/jquery.easing.1.3.js"></script>
+	<script src="${contextPath}/decorator/js/jquery.bxslider.min.js"></script>
+	<script src="${contextPath}/decorator/js/functions.js"></script>
 	<script>wow = new WOW({}).init();</script>
     
 </body>

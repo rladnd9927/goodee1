@@ -53,8 +53,6 @@ public class Board {
 		this.pass = pass;
 	}
 
-
-
 	public String getContent() {
 		return content;
 	}

@@ -4,21 +4,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<style type="text/css">
-
-.mainWrapper{
-	margin:0 auto;
-	border : 1px;
-	width : 360px;
-	height : 300px;
-}
-
-</style>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel="stylesheet" href="../decorator/css/style.css">
 <title>님의 SNS</title>
 </head>
 <body>
-
 <div class="mainWrapper"> <%--가장 바깥 wrapper --%>
   <div class="wrapper"><%-- 한 게시물 wrapper --%>
     <div class="header"><%--본 게시물의 헤더 (프로필, 프사), 등록시간 --%>
