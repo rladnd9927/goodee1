@@ -70,6 +70,7 @@ public class UserController {
 	@RequestMapping("user/userList")
 	public ModelAndView userList(){
 		ModelAndView mav = new ModelAndView();
+		/*mav.addObject(new User());*/
 		return mav;
 	}
 	
@@ -111,6 +112,14 @@ public class UserController {
 	public ModelAndView userEntryForm(){
 		ModelAndView mav = new ModelAndView();
 		User user = new User();
+		UserProfile userProfile = new UserProfile();
+
+		DateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		try{
+			userProfile.setM_birthday(sf.parse("1980-01-01"));
+		}catch(ParseException e){
+			e.printStackTrace();
+		}
 		mav.addObject(user);
 		return mav;
 	}
