@@ -48,7 +48,7 @@
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation"><a href="index.html" class="active">HOME</a></li>
 								<li role="presentation"><a href="services.html">List</a></li>
-								<li role="presentation"><a href="blog.html">Sogaeting</a></li>
+								<li role="presentation"><a href="blindDate.do">BlindDate</a></li>
 								<li role="presentation"><a href="portfolio.html">SNS</a></li>
 								<li role="presentation"><a href="contact.html">MyPage</a></li>		
 								<li role="presentation"><a href="contact.html">Chat</a></li>						
@@ -59,27 +59,6 @@
 			</div>	
 		</nav>		
 	</header>
-	
-	<!--  -->
-	<div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<h1>Here is body area you know??</h1>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-	</div>
 	<decorator:body/>
 	<footer>
 		<div class="last-div">

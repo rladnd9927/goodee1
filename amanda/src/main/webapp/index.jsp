@@ -1,3 +1,3 @@
 <script>
-	location.href='sns/snsmain.do';
+	location.href='blinddate/blindDate.do';
 </script>

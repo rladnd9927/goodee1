@@ -9,7 +9,7 @@
 <title>회원가입</title>
 </head>
 <body>
-<form:form modelAttribute="user" method="post" action="userEntry.shop">
+<form:form modelAttribute="user" method="post" action="joinForm2.do">
 	<spring:hasBindErrors name="user">
 		<font color="red">
 			<c:forEach items="${errors.globalErrors}" var="error">
@@ -37,7 +37,7 @@
 <br/>
 <div class="joinbutton">
 <input type="reset" class="jb" value="리셋">
-<input type="button" class="jb" value="다음">
+<input type="submit" class="jb" value="다음">
 </div>
 </div>
 </form:form>

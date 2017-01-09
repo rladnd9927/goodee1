@@ -47,14 +47,16 @@ import logic.ItemService;
 import logic.Mail;
 import logic.Sale;
 import logic.SaleItem;
+import logic.SemiUser;
 import logic.ShopService;
 import logic.User;
+import logic.UserProfile;
 
 @Controller
 public class UserController {
 	
-	private final String naverid ="wlstjswn0412@naver.com";
-	private final String naverpw = "controll4577";
+	private final String naverid ="";
+	private final String naverpw = "";
 	@Autowired
 	private ShopService shopService;
 	
@@ -63,8 +65,14 @@ public class UserController {
 	
 	@RequestMapping("user/loginForm")
 	public ModelAndView loginForm(){
-		ModelAndView mav = new ModelAndView("user/login");
-		mav.addObject(new User());
+		ModelAndView mav = new ModelAndView();
+		//mav.addObject(new User());
+		return mav;
+	}
+	@RequestMapping("user/userList")
+	public ModelAndView userList(){
+		ModelAndView mav = new ModelAndView();
+		/*mav.addObject(new User());*/
 		return mav;
 	}
 	
@@ -102,17 +110,19 @@ public class UserController {
 		return loginForm();
 	}
 	
-	@RequestMapping("user/userEntryForm")
-	public ModelAndView userEntryForm(){
-		ModelAndView mav = new ModelAndView("user/userEntry");
-		User user = new User();
-		DateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-		try{
-			user.setBirthDay(sf.parse("1980-01-01"));
-		}catch(ParseException e){
-			e.printStackTrace();
-		}
-		mav.addObject(user);
+	@RequestMapping("user/joinForm1")
+	public ModelAndView joinForm1(){
+		ModelAndView mav = new ModelAndView();
+		SemiUser semiuser = new SemiUser();
+		mav.addObject(semiuser);
+		return mav;
+	}
+	
+	@RequestMapping("user/joinForm2")
+	public ModelAndView joinFrom2(){
+		ModelAndView mav = new ModelAndView();
+		UserProfile userprofile = new UserProfile();
+		mav.addObject(userprofile);
 		return mav;
 	}
 	
