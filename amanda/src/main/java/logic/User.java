@@ -1,77 +1,38 @@
 package logic;
 
-import java.util.Date;
-
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
-
 public class User {
-	
-	@Size(min=3,max=10,message="아이디는 3자이상 10자 이하로 입력하세요")
-	private String userId;
-	@Size(min=3,max=12,message="비밀번호는 3자이상 12자이사홀 입력하세요")
-	private String password;
-	private String userName;
-	private String phoneNo;
-	private String postCode;
-	private String address;
-	private String email;
-	@Past(message="생일은 과거날짜만 가능합니다.")
-	private Date birthDay;
-	
-	public String getUserId() {
-		return userId;
+    private int m_number;
+    private String m_email;
+    private String m_password;
+    private String m_name;
+    
+	public int getM_number() {
+		return m_number;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setM_number(int m_number) {
+		this.m_number = m_number;
 	}
-	public String getPassword() {
-		return password;
+	public String getM_email() {
+		return m_email;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setM_email(String m_email) {
+		this.m_email = m_email;
 	}
-	public String getUserName() {
-		return userName;
+	public String getM_password() {
+		return m_password;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setM_password(String m_password) {
+		this.m_password = m_password;
 	}
-	public String getPhoneNo() {
-		return phoneNo;
+	public String getM_name() {
+		return m_name;
 	}
-	public void setPhoneNo(String phoneNo) {
-		this.phoneNo = phoneNo;
-	}
-	public String getPostCode() {
-		return postCode;
-	}
-	public void setPostCode(String postCode) {
-		this.postCode = postCode;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public Date getBirthDay() {
-		return birthDay;
-	}
-	public void setBirthDay(Date birthDay) {
-		this.birthDay = birthDay;
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
 	}
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", password=" + password + ", userName=" + userName + ", phoneNo=" + phoneNo
-				+ ", postCode=" + postCode + ", address=" + address + ", email=" + email + ", birthDay=" + birthDay
-				+ "]";
-	}
-	
+		return "User [m_number=" + m_number + ", m_email=" + m_email + ", m_password=" + m_password + ", m_name="
+				+ m_name + "]";
+	}  
 }

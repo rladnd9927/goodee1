@@ -35,7 +35,7 @@ public class ShopServiceImpl implements ShopService{
 
 	//@Override
 	public User getUserByIdPw(User user) {
-		return userDao.getUser(user.getUserId(),user.getPassword());
+		return userDao.getUser(user.getM_email(),user.getM_password());
 	}
 
 	//@Override

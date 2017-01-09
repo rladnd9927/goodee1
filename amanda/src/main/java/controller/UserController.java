@@ -53,8 +53,8 @@ import logic.User;
 @Controller
 public class UserController {
 	
-	private final String naverid ="wlstjswn0412@naver.com";
-	private final String naverpw = "controll4577";
+	private final String naverid = "";
+	private final String naverpw = "";
 	@Autowired
 	private ShopService shopService;
 	
@@ -63,8 +63,8 @@ public class UserController {
 	
 	@RequestMapping("user/loginForm")
 	public ModelAndView loginForm(){
-		ModelAndView mav = new ModelAndView("user/login");
-		mav.addObject(new User());
+		ModelAndView mav = new ModelAndView();
+		/*mav.addObject(new User());*/
 		return mav;
 	}
 	
@@ -82,7 +82,7 @@ public class UserController {
 			return mav;
 		}
 		session.setAttribute("USER", loginUser);
-		List<Sale> salelist = shopService.saleList(user.getUserId());
+		List<Sale> salelist = shopService.saleList(user.getM_email());
 		for(Sale sale : salelist){
 			List<SaleItem> saleItemList = shopService.saleItemList(sale.getSaleId());
 			for(SaleItem sitem : saleItemList){
