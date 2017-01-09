@@ -9,12 +9,40 @@
 </head>
 <body>
 <div class="container">
+	<div class="searchuser">
+		<select>
+			<option selected="selected">카테고리</option>
+			<option>성격</option>
+			<option>지역</option>
+			<option>나이</option>
+			<option>키</option>
+		</select>
+		<input type="text">
+		<input type="button" value="찾기" class="search">
+	</div>
+	<h2>명예의 전당</h2>
 	<div class="userwrapper">
 		<div class="user">
 			<div class="usericon" ><img src="" alt="usericon" width="150" height="150"></div>
 			<div class="userprofile"><font color="black">mem.id</font></div>
 		</div>
+		<div class="user">
+			<div class="usericon" ><img src="" alt="usericon" width="150" height="150"></div>
+			<div class="userprofile"><font color="black">mem.id</font></div>
+		</div>
 	</div>
+	<hr/>
+	<div class="userwrapper">
+		<h2>회원리스트</h2>
+		<div class="user">
+			<div class="usericon" ><img src="" alt="usericon" width="150" height="150"></div>
+			<div class="userprofile"><font color="black">mem.id</font></div>
+		</div>
+		<div class="user">
+			<div class="usericon" ><img src="" alt="usericon" width="150" height="150"></div>
+			<div class="userprofile"><font color="black">mem.id</font></div>
+	</div>
+</div>
 </div>
 </body>
 </html>
