@@ -49,6 +49,7 @@ import logic.Sale;
 import logic.SaleItem;
 import logic.ShopService;
 import logic.User;
+import logic.UserProfile;
 
 @Controller
 public class UserController {
@@ -102,17 +103,17 @@ public class UserController {
 		return loginForm();
 	}
 	
-	@RequestMapping("user/userEntryForm")
+	@RequestMapping("user/joinForm1")
 	public ModelAndView userEntryForm(){
-		ModelAndView mav = new ModelAndView("user/userEntry");
-		User user = new User();
+		ModelAndView mav = new ModelAndView();
+		UserProfile userProfile = new UserProfile();
 		DateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 		try{
-			user.setBirthDay(sf.parse("1980-01-01"));
+			userProfile.setM_birthday(sf.parse("1980-01-01"));
 		}catch(ParseException e){
 			e.printStackTrace();
 		}
-		mav.addObject(user);
+		/*mav.addObject(userProfile);*/
 		return mav;
 	}
 	
