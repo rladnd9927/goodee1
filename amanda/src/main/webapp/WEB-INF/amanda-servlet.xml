@@ -17,7 +17,8 @@
 <!-- 어노테이션 사용설정  -->
 <mvc:annotation-driven/>
 <!-- url과 Controller를 매핑 -->
-<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
+<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+</bean>
 <!-- 객체생성 영역 설정 -->
 <context:component-scan base-package="controller,dao,logic"/>
 <!-- 뷰 결정자 선택 -->
@@ -26,7 +27,7 @@
 		<value>org.springframework.web.servlet.view.JstlView</value>
 	</property>
 	<property name="prefix">
-		<value>/jsp/</value>
+		<value>/WEB-INF/jsp/</value>
 	</property>
 	<property name="suffix">
 		<value>.jsp</value>
@@ -43,14 +44,14 @@
 	p:maxUploadSize="104857600" p:maxInMemorySize="104857600"/>
 <!-- 예외 발생시 호출되는 뷰 설정 -->
 <bean id="exceptionHandler" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-	<property name="exceptionMappings">
+	<!-- <property name="exceptionMappings">
 		 <value>
-      	<!-- exception.LoginRequiredException=dummyLogin
+      	exception.LoginRequiredException=dummyLogin
       	exception.AdminRequiredException=adminLogin
       	exception.CartEmptyException=cartEmpty
       	exception.PasswordFailException=passwordFail
-      	exception.MailEmptyException=mailEmpty -->
+      	exception.MailEmptyException=mailEmpty
       </value>
-   	</property>
+   	</property> -->
 </bean>
 </beans>
