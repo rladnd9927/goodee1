@@ -2,7 +2,7 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-<!-- <typeAliases>
+<typeAliases>
 		<typeAlias type="logic.Item" alias="Item"/>
  		<typeAlias type="logic.User" alias="User"/>
 		<typeAlias type="logic.Board" alias="Board"/>
@@ -16,5 +16,5 @@
 		<mapper resource="dao/mapper/SaleItemMapper.xml"/>
 		<mapper resource="dao/mapper/BoardMapper.xml"/>
 	</mappers>
-	 -->	
+		
 </configuration>
