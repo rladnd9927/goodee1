@@ -107,16 +107,10 @@ public class UserController {
 		return loginForm();
 	}
 	
-	@RequestMapping("user/userEntryForm")
+	@RequestMapping("user/joinForm1")
 	public ModelAndView userEntryForm(){
-		ModelAndView mav = new ModelAndView("user/userEntry");
+		ModelAndView mav = new ModelAndView();
 		User user = new User();
-		DateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-		try{
-			user.setBirthDay(sf.parse("1980-01-01"));
-		}catch(ParseException e){
-			e.printStackTrace();
-		}
 		mav.addObject(user);
 		return mav;
 	}
