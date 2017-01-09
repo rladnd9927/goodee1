@@ -5,6 +5,7 @@ public class User {
     private String m_email;
     private String m_password;
     private String m_name;
+    
 	public int getM_number() {
 		return m_number;
 	}

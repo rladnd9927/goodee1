@@ -53,8 +53,8 @@ import logic.User;
 @Controller
 public class UserController {
 	
-	private final String naverid ="wlstjswn0412@naver.com";
-	private final String naverpw = "controll4577";
+	private final String naverid = "";
+	private final String naverpw = "";
 	@Autowired
 	private ShopService shopService;
 	
