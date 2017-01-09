@@ -60,26 +60,6 @@
 		</nav>		
 	</header>
 	
-	<!--  -->
-	<div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<h1>Here is body area you know??</h1>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-	</div>
 	<decorator:body/>
 	<footer>
 		<div class="last-div">
