@@ -59,7 +59,6 @@
 			</div>	
 		</nav>		
 	</header>
-	
 	<decorator:body/>
 	<footer>
 		<div class="last-div">

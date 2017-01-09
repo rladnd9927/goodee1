@@ -53,7 +53,7 @@ import logic.User;
 @Controller
 public class UserController {
 	
-	private final String naverid = "";
+	private final String naverid ="";
 	private final String naverpw = "";
 	@Autowired
 	private ShopService shopService;
@@ -63,6 +63,12 @@ public class UserController {
 	
 	@RequestMapping("user/loginForm")
 	public ModelAndView loginForm(){
+		ModelAndView mav = new ModelAndView();
+		//mav.addObject(new User());
+		return mav;
+	}
+	@RequestMapping("user/userList")
+	public ModelAndView userList(){
 		ModelAndView mav = new ModelAndView();
 		/*mav.addObject(new User());*/
 		return mav;
@@ -82,7 +88,7 @@ public class UserController {
 			return mav;
 		}
 		session.setAttribute("USER", loginUser);
-		List<Sale> salelist = shopService.saleList(user.getM_email());
+		List<Sale> salelist = shopService.saleList(user.getUserId());
 		for(Sale sale : salelist){
 			List<SaleItem> saleItemList = shopService.saleItemList(sale.getSaleId());
 			for(SaleItem sitem : saleItemList){
@@ -102,13 +108,15 @@ public class UserController {
 		return loginForm();
 	}
 	
-	@RequestMapping("user/userEntryForm")
+	@RequestMapping("user/joinForm1")
 	public ModelAndView userEntryForm(){
-		ModelAndView mav = new ModelAndView("user/userEntry");
+		ModelAndView mav = new ModelAndView();
 		User user = new User();
+		UserProfile userProfile = new UserProfile();
+
 		DateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 		try{
-			user.setBirthDay(sf.parse("1980-01-01"));
+			userProfile.setM_birthday(sf.parse("1980-01-01"));
 		}catch(ParseException e){
 			e.printStackTrace();
 		}

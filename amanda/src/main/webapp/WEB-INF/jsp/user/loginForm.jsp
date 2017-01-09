@@ -25,7 +25,7 @@
 			</td></tr>
 
 </table>
-<input type="button" class="jb" value="회원가입" onclick="location.href='JoinForm1.do'">
+<input type="button" class="jb" value="회원가입" onclick="location.href='joinForm1.do'">
 <input type="submit" class="jb" value="로그인">
 </div>
 </form:form>
