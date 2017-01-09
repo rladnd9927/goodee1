@@ -3,11 +3,11 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper  namespace="dao.mapper.UserMapper">
 	<select id="getUser" parameterType="map" resultType="User">
-		select * from useraccount
+		select * from member
 		<where>
 			<if test="idchks != null">userid in<foreach collection="idchks" open="(" close=")" item="id" separator=",">#{id}</foreach></if>
-			<if test="userId != null">userId=#{userId}</if>
-			<if test="password != null">and password=#{password}</if>
+			<if test="userId != null">userId=#{m_email}</if>
+			<if test="password != null">and password=#{m_password}</if>
 		</where>
 	</select>
 </mapper>

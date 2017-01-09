@@ -53,8 +53,8 @@ import logic.User;
 @Controller
 public class UserController {
 	
-	private final String naverid ="wlstjswn0412@naver.com";
-	private final String naverpw = "controll4577";
+	private final String naverid ="";
+	private final String naverpw = "";
 	@Autowired
 	private ShopService shopService;
 	
@@ -63,8 +63,13 @@ public class UserController {
 	
 	@RequestMapping("user/loginForm")
 	public ModelAndView loginForm(){
-		ModelAndView mav = new ModelAndView("user/login");
-		mav.addObject(new User());
+		ModelAndView mav = new ModelAndView();
+		//mav.addObject(new User());
+		return mav;
+	}
+	@RequestMapping("user/userList")
+	public ModelAndView userList(){
+		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
 	
