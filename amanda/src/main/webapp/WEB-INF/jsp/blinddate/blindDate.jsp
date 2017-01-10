@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ include file="/WEB-INF/jsp/jspHeader.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,25 +9,60 @@
 <title>Amanda</title>
 </head>
 <body>
+<form:form modelAttribute="user" method="post" action="list.do">
 <div class="blindDate_wrap"><!-- 가장 바깥쪽 wrap -->
-	<h2>소개팅 페이지</h2><!-- 해당 페이지 이름(표시용) -> 나중에 생략 -->
-	<div class="blindUser"><!-- 소개팅으로 소개되는 유저 -->
-		<div class="blindUser_picture">
-			<img src="${UserProfile.m_picture1}">
-		</div><!-- 유저의 사진 -->
-		<div class="blindUser_profile">
-			닉네임 : ${UserProfile.m_nickname}<br>
-			키 : ${UserProfile.m_height}<br>
-			체형 : ${UserProfile.m_bodytype}<br>
-			성격 : ${UserProfile.m_character}<br>
-			종교 : ${UserProfile.m_religion}<br>
-			흡연 : ${UserProfile.m_smoking}<br>
-			음주 : ${UserProfile.m_drinking}
-		</div><!-- 유저의  -->
-		<div class="blindUser_like" align="center">
-			<input type="button" value="♡">
-		</div><!-- 좋아요 -->
+	<div class="blindDate_userInfo">
+		<table class="join02" border="1">
+			<tr>
+				<td colspan="2" width="200" height="200">사진자리</td>
+				<td>
+					<table>
+					<!-- 키 체형 성격 종교 흡연 음주 -->
+					<thead>
+					<tr>
+						<th colspan="2">...님의 프로필</th>
+					</tr>
+					</thead>
+						<tr>
+							<th>닉네임</th>
+							<td>칸수 확인을 위한 무의미한 텍스트${userProfile.m_nickname}</td>
+						</tr>
+						<tr>
+							<th>키</th>
+							<td>${userProfile.m_height}</td>
+						</tr>
+						<tr>
+							<th>체형</th>
+							<td>${userProfile.m_bodytype}</td>
+						</tr>
+						<tr>
+							<th>성격</th>
+							<td>${userProfile.m_character}</td>
+						</tr>
+						<tr>
+							<th>종교</th>
+							<td>${userProfile.m_religion}</td>
+						</tr>
+						<tr>
+							<th>흡연</th>
+							<td>${userProfile.m_smoking}</td>
+						</tr>
+						<tr>
+							<th>음주</th>
+							<td>${userProfile.m_drinking}</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" align="right">
+					<input type="submit" value="♡" class="jb">
+					<input type="reset" value="새로고침" class="jb">
+				</td>
+			</tr>
+		</table>
 	</div>
 </div>
+</form:form>
 </body>
 </html>

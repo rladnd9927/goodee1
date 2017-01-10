@@ -935,35 +935,22 @@ a.scrollup:hover{
 	color:#fff;;	
 }
 
-/* blindDate CSS - YoungHoon */
+/* 
+=================================
+	blindDate CSS - YoungHoon
+=================================	
+ */
 .blindDate_wrap{
-	display : inline-block;
-	width : 100%;
-	height : 800px;
+	width: 100%;
 }
-.blindUser{
-	display : inline-block;
-	border : 1px solid #FF5D76;
-	width : 15%;
-	height : 80%;
+.blindDate_userInfo{
+	display: inline-block;
 }
-.blindUser_picture{
-	display : inline-block;
-	border : 1px solid #FF5D76;
-	width : 100%;
-	height : 50%;
+.appraisal_wrap{
+	width: 100%;
 }
-.blindUser_profile{
-	display : inline-block;
-	border : 1px solid #FF5D76;
-	width : 100%;
-	height : 30%;
-}
-.blindUser_like{
-	display : inline-block;
-	border : 1px solid #FF5D76;
-	width : 100%;
-	height : 20%;
+.appraisal_userInfo{
+	display: inline-block;
 }
 
 /* ========================================
