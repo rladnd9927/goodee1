@@ -1,3 +1,3 @@
 <script>
-	location.href='blinddate/blindDate.do';
+	location.href='user/loginForm.do';
 </script>

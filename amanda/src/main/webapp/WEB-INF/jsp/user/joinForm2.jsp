@@ -17,6 +17,11 @@ function win_open() {
 </head>
 <body>
 <form:form modelAttribute="user" method="post" action=".do">
+	<input type="text" name="s_num" value="${User.m_num }">
+	<input type="text" name="s_email" value="${User.m_email }">
+	<input type="text" name="s_password" value="${User.m_password }">
+	<input type="text" name="s_name" value="${User.m_name }">
+	<input type="text" name="gender" value="${User.gender }">
 	<spring:hasBindErrors name="user">
 		<font color="red">
 			<c:forEach items="${errors.globalErrors}" var="error">
@@ -41,70 +46,99 @@ function win_open() {
 </div>	
 	<table class="join02">
 	<tr><th>닉네임</th>
-		<td><input type="text" id="nickname"/>
+		<td><form:input path="m_nickname"/>
 			</td>
 	</tr>
 	<tr><th>학교</th>
-		<td><input type="text" id="school"/>
+		<td><form:input path="m_school"/>
 			</td>
 	</tr>
 	<tr><th>전공</th>
-		<td><input type="text" id="major"/>
+		<td><form:input path="m_major"/>
 			</td>
 	</tr>
 	<tr><th>직업</th>
-		<td><input type="text" id="job"/>
+		<td><form:input path="m_job"/>
 			</td>
 	</tr>
 	<tr><th>지역</th>
-		<td><input type="text" id="area"/>
+		<td><form:input path="m_area"/>
 			</td>
 	</tr>
 	<tr><th>생년월일</th>
-		<td><input type="text" id="birthday"/>
+		<td><form:input path="m_birthday"/>
 			</td>
 	</tr>
 	<tr><th>키</th>
-		<td><input type="text" id="height"/>
+		<td><form:input path="m_height"/>
 			</td>
 	</tr>
 	<tr><th>혈액형</th>
-		<td><select>
-				<option selected="selected">A</option>
-				<option>B</option>
-				<option>AB</option>
-				<option>O</option>
-			</select>
+		<td><form:select path="m_bloodtype">
+				<form:option value="0">A</form:option>
+				<form:option value="1">B</form:option>
+				<form:option value="2">AB</form:option>
+				<form:option value="3">O</form:option>
+			</form:select>
 		</td>
 	</tr>
 	<tr><th>종교</th>
-		<td><select>
-				<option selected="selected">기독교</option>
-				<option>불교</option>
-			</select>
+		<td><form:select path="m_religion">
+				<form:option value="0">종교없음</form:option>
+				<form:option value="1">기독교</form:option>
+				<form:option value="2">불교</form:option>
+				<form:option value="3">천주교</form:option>
+				<form:option value="4">원불교</form:option>
+				<form:option value="5">이슬람교</form:option>
+				<form:option value="6">유교</form:option>
+			</form:select>
 			</td>
 	</tr>
 	<tr><th>흡연</th>
-		<td><input type="text" id="smoking"/>
+		<td><form:radiobutton path="m_smoking" value="0" label="비흡연"/>
+			<form:radiobutton path="m_smoking" value="1" label="흡연"/>
 			</td>
 	</tr>
 	<tr><th>음주</th>
-		<td><input type="text" id="drinking"/>
+		<td><form:select path="m_drinking">
+				<form:option value="0">마시지 않음</form:option>
+				<form:option value="1">가끔 마심</form:option>
+				<form:option value="2">어느정도 즐기는편</form:option>
+				<form:option value="3">술자리를 즐김</form:option>
+			</form:select>
 			</td>
 	</tr>
 	<tr><th>체형</th>
-		<td><input type="text" id=bodytype/>
+		<td><form:select path="m_bodytype">
+				<form:option value="0">마름</form:option>
+				<form:option value="1">슬림탄탄</form:option>
+				<form:option value="2">보통</form:option>
+				<form:option value="3">통통한</form:option>
+				<form:option value="4">살짝볼륨</form:option>
+				<form:option value="5">글레머</form:option>
+			</form:select>
 			</td>
 	</tr>
 	<tr><th>성격</th>
-		<td><input type="text" id="character"/>
-			</td>
+		<td><form:checkbox path="m_character" value="0" label="지적인"/>
+			<form:checkbox path="m_character" value="1" label="차분한"/>
+			<form:checkbox path="m_character" value="2" label="유머있는"/>
+			<form:checkbox path="m_character" value="3" label="낙천적인"/>
+			<form:checkbox path="m_character" value="4" label="내향적인"/>
+			<form:checkbox path="m_character" value="5" label="외향적인"/>
+			<form:checkbox path="m_character" value="6" label="감성적인"/>
+			<form:checkbox path="m_character" value="7" label="상냥한"/>
+			<form:checkbox path="m_character" value="8" label="귀여운"/>
+			<form:checkbox path="m_character" value="9" label="열정적인"/>
+			<form:checkbox path="m_character" value="10" label="듬직한"/>
+			<form:checkbox path="m_character" value="11" label="개성있는"/>
+		</td>
 	</tr>
 </table>
 <br/>
 <div class="joinbutton">
 <input type="reset" class="jb" value="리셋">
-<input type="button" class="jb" value="회원가입">
+<input type="submit" class="jb" value="회원가입">
 </div>
 </div>
 </form:form>

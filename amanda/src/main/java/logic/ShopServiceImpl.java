@@ -50,9 +50,9 @@ public class ShopServiceImpl implements ShopService{
 
 	//@Override
 	public void createUser(User user) {
-		userDao.create(user);
+		//userDao.create(user);
 	}
-
+		
 	//@Override
 	public User getUserById(String id) {
 		return userDao.getUser(id, null);

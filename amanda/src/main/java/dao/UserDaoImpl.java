@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dao.mapper.UserMapper;
+import logic.SemiUser;
 import logic.User;
+import logic.UserProfile;
 
 @Repository
 public class UserDaoImpl implements UserDao{
@@ -25,10 +27,10 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectOne(NS + "getUser",param);
 	}
 
-	//@Override
+/*	//@Override
 	public void create(User user) {
 		sqlSession.getMapper(UserMapper.class).create(user);
-	}
+	}*/
 
 	//@Override
 	public List<User> getUser() {
@@ -40,6 +42,14 @@ public class UserDaoImpl implements UserDao{
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("idchks", idchks);
 		return sqlSession.selectList(NS+"getUser",map);
+	}
+
+	public void create(SemiUser semiuser) {
+		sqlSession.getMapper(UserMapper.class).create(semiuser);
+	}
+
+	public void create(UserProfile userprofile) {
+		//sqlSession.getMapper(UserMapper.class).create(userprofile);
 	}
 
 }

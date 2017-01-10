@@ -1,10 +1,11 @@
 package logic;
-
+//member
 public class User {
     private int m_number;
     private String m_email;
     private String m_password;
     private String m_name;
+    private int gender;
     
 	public int getM_number() {
 		return m_number;
@@ -30,9 +31,16 @@ public class User {
 	public void setM_name(String m_name) {
 		this.m_name = m_name;
 	}
+	public int getGender() {
+		return gender;
+	}
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
 	@Override
 	public String toString() {
 		return "User [m_number=" + m_number + ", m_email=" + m_email + ", m_password=" + m_password + ", m_name="
-				+ m_name + "]";
-	}  
+				+ m_name + ", gender=" + gender + "]";
+	}
+	
 }

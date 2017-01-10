@@ -51,14 +51,19 @@ import logic.SemiUser;
 import logic.ShopService;
 import logic.User;
 import logic.UserProfile;
+import logic.UserService;
 
 @Controller
 public class UserController {
 	
 	private final String naverid ="";
 	private final String naverpw = "";
+	
 	@Autowired
 	private ShopService shopService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private ItemService itemService;
@@ -109,20 +114,43 @@ public class UserController {
 		session.invalidate();
 		return loginForm();
 	}
-	
 	@RequestMapping("user/joinForm1")
 	public ModelAndView joinForm1(){
 		ModelAndView mav = new ModelAndView();
 		SemiUser semiuser = new SemiUser();
-		mav.addObject(semiuser);
+		mav.addObject("user",semiuser);		
+		return mav;
+	}
+	@RequestMapping("user/join1")
+	public ModelAndView join1(@Valid SemiUser semiuser){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("user/joinForm2");
+		mav.addObject("user",semiuser);
+		System.out.println(mav);
 		return mav;
 	}
 	
 	@RequestMapping("user/joinForm2")
-	public ModelAndView joinFrom2(){
+	public ModelAndView join2(){
 		ModelAndView mav = new ModelAndView();
 		UserProfile userprofile = new UserProfile();
 		mav.addObject(userprofile);
+		return mav;
+	}
+	
+	@RequestMapping("user/join2")
+	public ModelAndView join2(@Valid SemiUser semiuser, @Valid UserProfile userprofile, BindingResult bindingResult){
+		ModelAndView mav = new ModelAndView();
+		try{
+			userService.createUser1(semiuser);
+			userService.createUser2(userprofile);
+		}catch(DuplicateKeyException e){
+			bindingResult.reject("error.duplicate.user");
+			return mav;
+		}
+		mav.addObject(semiuser);
+		mav.addObject(userprofile);
+		System.out.println(mav);
 		return mav;
 	}
 	
@@ -132,7 +160,7 @@ public class UserController {
       binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
    }
    
-   @RequestMapping("user/userEntry")
+/*   @RequestMapping("user/userEntry")
    public ModelAndView userEntry(@Valid User user, BindingResult bindingResult){
 	   ModelAndView mav = new ModelAndView();
 	   if(bindingResult.hasErrors()){
@@ -149,7 +177,7 @@ public class UserController {
 	   mav.setViewName("user/login");
 	   mav.addObject("user",user);
 	   return mav;
-   }
+   }*/
    
    @RequestMapping("user/mypage")
    public ModelAndView mypage(String id){

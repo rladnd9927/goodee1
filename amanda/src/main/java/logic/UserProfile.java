@@ -139,15 +139,13 @@ public class UserProfile {
 	public void setS_number(int s_number) {
 		this.s_number = s_number;
 	}
+	
 	@Override
 	public String toString() {
-		return "UserProfile [m_number=" + m_number + ", m_picture1=" + m_picture1 + ", m_picture2=" + m_picture2
-				+ ", m_picture3=" + m_picture3 + ", m_nickname=" + m_nickname + ", m_school=" + m_school + ", m_major="
-				+ m_major + ", m_job=" + m_job + ", m_area=" + m_area + ", m_birthday=" + m_birthday + ", m_height="
-				+ m_height + ", m_bloodtype=" + m_bloodtype + ", m_religion=" + m_religion + ", m_smoking=" + m_smoking
-				+ ", m_drinking=" + m_drinking + ", m_bodytype=" + m_bodytype + ", m_character=" + m_character
-				+ ", m_score=" + m_score + ", s_number=" + s_number + "]";
+		return "UserProfile [m_number=" + m_number + ", m_nickname=" + m_nickname + ", m_school=" + m_school
+				+ ", m_major=" + m_major + ", m_job=" + m_job + ", m_area=" + m_area + ", m_birthday=" + m_birthday
+				+ ", m_height=" + m_height + ", m_bloodtype=" + m_bloodtype + ", m_religion=" + m_religion
+				+ ", m_smoking=" + m_smoking + ", m_drinking=" + m_drinking + ", m_bodytype=" + m_bodytype
+				+ ", m_character=" + m_character + ", m_score=" + m_score + ", s_number=" + s_number + "]";
 	}
-	
-	
 }

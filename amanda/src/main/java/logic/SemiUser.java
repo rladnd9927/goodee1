@@ -1,13 +1,14 @@
 package logic;
-
+//semiuser
 public class SemiUser {
 	private int s_number;
 	private String s_email;
 	private String s_password;
 	private String s_name;
 	private int s_score;
-	 
-	 //getter,setter,toString
+	private int gender;
+	
+	//getter,setter,toString
 	public int getS_number() {
 		return s_number;
 	}
@@ -38,10 +39,16 @@ public class SemiUser {
 	public void setS_score(int s_score) {
 		this.s_score = s_score;
 	}
-	
+	public int getGender() {
+		return gender;
+	}
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
 	@Override
 	public String toString() {
 		return "SemiUser [s_number=" + s_number + ", s_email=" + s_email + ", s_password=" + s_password + ", s_name="
-				+ s_name + ", s_score=" + s_score + "]";
+				+ s_name + ", s_score=" + s_score + ", gender=" + gender + "]";
 	}
+	
 }

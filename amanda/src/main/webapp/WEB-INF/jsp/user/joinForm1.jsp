@@ -9,7 +9,7 @@
 <title>회원가입</title>
 </head>
 <body>
-<form:form modelAttribute="user" method="post" action="joinForm2.do">
+<form:form modelAttribute="user" method="post" action="join1.do">
 	<spring:hasBindErrors name="user">
 		<font color="red">
 			<c:forEach items="${errors.globalErrors}" var="error">
@@ -21,17 +21,22 @@
 <div class="joinimg">
 </div>	
 	<table class="join02">
-	<tr><th >email</th>
-		<td><input type="text" id="email"/>
+	<tr><th>email</th>
+		<td><form:input path="s_email"/>
 			</td>
 	</tr>
 	<tr><th>비밀번호</th>
-		<td><input type="password" id="password"/>
+		<td><form:password path="s_password"/>
 			</td>
 	</tr>
 	<tr><th>이름</th>
-		<td><input type="text" id="name"/>
+		<td><form:input path="s_name"/>
 			</td>
+	</tr>
+	<tr><th>성별</th>
+		<td><form:radiobutton path="gender" value="0" label="남자"/>
+			<form:radiobutton path="gender" value="1" label="여자"/>
+		</td>
 	</tr>
 </table>
 <br/>
