@@ -25,6 +25,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -42,6 +43,7 @@ import org.springframework.web.servlet.ModelAndView;
 import exception.AdminRequiredException;
 import exception.LoginRequiredException;
 import exception.MailEmptyException;
+import logic.Board;
 import logic.Item;
 import logic.ItemService;
 import logic.Mail;
@@ -74,12 +76,56 @@ public class UserController {
 		//mav.addObject(new User());
 		return mav;
 	}
+	
 	@RequestMapping("user/userList")
 	public ModelAndView userList(){
 		ModelAndView mav = new ModelAndView();
-		/*mav.addObject(new User());*/
+		User user = new User();
+		mav.addObject(user);
 		return mav;
 	}
+	@RequestMapping("user/main")
+	public ModelAndView main(){
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
+	
+	/*@RequestMapping("user/listsearch")
+	public ModelAndView listsearch(Integer pageNum, String column, String find, HttpServletRequest request){
+		if(column == null || column.equals("")) column = null;
+		if(find == null || find.equals("")) find = null;
+		if(column == null) find = null;
+		if(find == null) column = null;
+		if(find != null && request.getMethod().equalsIgnoreCase("GET")){
+			try{
+				find = new String(find.getBytes("8859_1"),"euc-kr");
+			}catch(UnsupportedEncodingException e){
+				e.printStackTrace();
+			}
+		}
+		
+		ModelAndView mav = new ModelAndView();
+//		int limit = 10;
+//		int listcount = boardService.boardCount(column,find);
+//		List<Board> boardlist = boardService.list(pageNum,limit,column,find);
+//		int maxpage = (int)((double)listcount/limit + 0.95);
+//		int startpage=(((int)(pageNum/10.0 + 0.9)) -1) *10 +1;
+//		int endpage = startpage + limit -1;
+//		if(endpage > maxpage) endpage = maxpage;
+//		int boardnum = listcount - ((pageNum - 1) * limit);
+//		SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd");
+//		String today = sdate.format(new Date());
+//		mav.addObject("today",today);
+//		mav.addObject("pageNum",pageNum);
+//		mav.addObject("maxpage",maxpage);
+//		mav.addObject("startpage",startpage);
+//		mav.addObject("endpage",endpage);
+//		mav.addObject("listcount",listcount);
+//		mav.addObject("boardlist",boardlist);
+//		mav.addObject("boardnum",boardnum);
+//		mav.addObject("find",find);
+		return mav;
+	}*/
 	
 	@RequestMapping("user/login")
 	public ModelAndView login(@Valid User user, BindingResult bindingResult, HttpSession session){

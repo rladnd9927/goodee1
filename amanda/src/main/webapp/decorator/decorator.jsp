@@ -46,8 +46,8 @@
 					<div class="navbar-collapse collapse">							
 						<div class="menu">
 							<ul class="nav nav-tabs" role="tablist">
-								<li role="presentation"><a href="index.html" class="active">HOME</a></li>
-								<li role="presentation"><a href="services.html">List</a></li>
+								<li role="presentation"><a href="main.do" class="active">HOME</a></li>
+								<li role="presentation"><a href="userList.do">List</a></li>
 								<li role="presentation"><a href="blindDate.do">BlindDate</a></li>
 								<li role="presentation"><a href="portfolio.html">SNS</a></li>
 								<li role="presentation"><a href="contact.html">MyPage</a></li>		

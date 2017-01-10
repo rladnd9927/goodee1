@@ -9,7 +9,7 @@
 <title>·Î±×ÀÎ</title>
 </head>
 <body>
-<form:form modelAttribute="user" method="post" action=".do">
+<form:form modelAttribute="user" method="post" action="main.do">
 <div class="loginwrapper">
 <div id="loginlogo"><img alt="logo" src=""></div>
 <table class ="join02">

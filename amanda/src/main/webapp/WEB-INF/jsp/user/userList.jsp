@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ include file="/WEB-INF/jsp/jspHeader.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,39 +11,49 @@
 <body>
 <div class="container">
 	<div class="searchuser">
-		<select>
-			<option selected="selected">카테고리</option>
-			<option>성격</option>
-			<option>지역</option>
-			<option>나이</option>
-			<option>키</option>
-		</select>
-		<input type="text">
-		<input type="button" value="찾기" class="search">
+		<form action="listsearch.do" method = "post" name="f">
+		 회원 검색:
+			<select name="column">
+				<option value="">선택하세요</option>
+				<option value="region">지역</option>
+				<option value="age">나이</option>
+				<option value="height">키</option>
+			</select>
+			<script type="text/javascript">
+				document.f.column.value="${param.column}";
+			</script>
+			<input type="text" name="find" size="50" value="${find}">
+			<input type="submit" value="검색" class="search">
+		</form>
 	</div>
+
 	<h2>명예의 전당</h2>
 	<div class="userwrapper">
-		<div class="user">
+		<div class="user">		
+			<div class="usericon" ><img src="" alt="usericon" width="150" height="150"></div>
+			<div class="userprofile"></div>
+		</div>
+<!-- 		<div class="user">
 			<div class="usericon" ><img src="" alt="usericon" width="150" height="150"></div>
 			<div class="userprofile"><font color="black">mem.id</font></div>
-		</div>
-		<div class="user">
-			<div class="usericon" ><img src="" alt="usericon" width="150" height="150"></div>
-			<div class="userprofile"><font color="black">mem.id</font></div>
-		</div>
+		</div> -->
 	</div>
 	<hr/>
 	<div class="userwrapper">
 		<h2>회원리스트</h2>
+		<c:forEach items="${userList}" var="user"></c:forEach>
 		<div class="user">
 			<div class="usericon" ><img src="" alt="usericon" width="150" height="150"></div>
-			<div class="userprofile"><font color="black">mem.id</font></div>
+			<div class="userprofile">
+				<font color="black">이름:${user.m_name}</font><br>
+				<font color="black">성별${user.gender}</font>
+			</div>
 		</div>
 		<div class="user">
 			<div class="usericon" ><img src="" alt="usericon" width="150" height="150"></div>
 			<div class="userprofile"><font color="black">mem.id</font></div>
 	</div>
 </div>
-</div>
+</div> 
 </body>
 </html>
