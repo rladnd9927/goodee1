@@ -9,7 +9,6 @@
 <script type="text/javascript">
 	function disp_div(id){
 		document.getElementById("minfo").style.display="none";
-		document.getElementById("oinfo").style.display="none";
 		document.getElementById(id).style.display="block";
 	}
 	function list_disp(id){
@@ -25,7 +24,6 @@
 <body>
 <table>
 	<tr><td><a href="javascript:disp_div('minfo')">회원정보보기</a></td>
-		<td><a href="javascript:disp_div('oinfo')">주문정보보기</a></td>
 	</tr>
 </table>
 <div id="minfo" style="display: block; width:100%">
@@ -36,33 +34,6 @@
 		<tr><td>전화번호</td><td>${user.phoneNo}</td></tr>
 		<tr><td>이메일</td><td>${user.email}</td></tr>
 		<tr><td>생년월일</td><td>${user.birthDay}</td></tr>
-	</table>
-</div>
-<div id="oinfo" style="display: none; width:100%">
-	<table border="1" cellpadding="0" cellspacing="0">
-		<tr><td colspan="2">주문목록</td></tr>
-		<tr><td>주문번호</td><td>주문일자</td></tr>
-		<c:forEach items="${salelist}" var="sale" varStatus="stat">
-			<tr><td align="center"><a href="javascript:list_disp('saleLine${stat.index}')">${sale.saleId}</a></td>
-				<td><f:formatDate value="${sale.updateTime}" pattern="yyyy-MM-dd"/></td>
-			</tr>
-			<tr><td colspan="2" align="center">
-				<div id="saleLine${stat.index}" style="display:none;">
-					<table border="1" cellpadding="0" cellspacing="0">
-						<tr><th width="25%">상품명</th>
-							<th width="25%">상품가격</th>
-							<th width="25%">주문수량</th>
-							<th width="25%">합계</th>
-						</tr>
-						<c:forEach items="${sale.saleItemList}" var="saleItem">
-							<tr><td>${saleItem.item.name}</td>
-								<td>${saleItem.item.price}</td>
-								<td>${saleItem.quantity}</td>
-								<td>${saleItem.quantity * saleItem.item.price}</td>
-							</tr>
-						</c:forEach>
-					</table></div></td></tr>
-		</c:forEach>
 	</table>
 </div>
 </body>
