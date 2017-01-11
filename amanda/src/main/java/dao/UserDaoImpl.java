@@ -44,14 +44,6 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectList(NS+"getUser",map);
 	}
 
-	public void create(SemiUser semiuser) {
-		sqlSession.getMapper(UserMapper.class).create(semiuser);
-	}
-
-	public void create(UserProfile userprofile) {
-		//sqlSession.getMapper(UserMapper.class).create(userprofile);
-	}
-
 	public User getUser(String id) {
 		// TODO Auto-generated method stub
 		return null;
@@ -61,5 +53,11 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.getMapper(UserMapper.class).getUserbyNum(m_number);
 	}
 
+	public void createSemi(UserProfile userprofile) {
+		sqlSession.getMapper(UserMapper.class).createsemi(userprofile);
+	}
 
+	public void createProfile(UserProfile userprofile) {
+		sqlSession.getMapper(UserMapper.class).createprofile(userprofile);
+	}
 }

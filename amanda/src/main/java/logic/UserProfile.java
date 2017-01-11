@@ -9,6 +9,9 @@ public class UserProfile {
 	private MultipartFile m_picture1;
 	private MultipartFile m_picture2;
 	private MultipartFile m_picture3;
+	private String m_pictureUrl1;
+	private String m_pictureUrl2;
+	private String m_pictureUrl3;
 	private String m_nickname;
 	private String m_school;
 	private String m_major;
@@ -24,7 +27,32 @@ public class UserProfile {
 	private String m_character;
 	private int m_score;
 	private int s_number;
+	private SemiUser semiuser;
 	
+	public String getM_pictureUrl1() {
+		return m_pictureUrl1;
+	}
+	public void setM_pictureUrl1(String m_pictureUrl1) {
+		this.m_pictureUrl1 = m_pictureUrl1;
+	}
+	public String getM_pictureUrl2() {
+		return m_pictureUrl2;
+	}
+	public void setM_pictureUrl2(String m_pictureUrl2) {
+		this.m_pictureUrl2 = m_pictureUrl2;
+	}
+	public String getM_pictureUrl3() {
+		return m_pictureUrl3;
+	}
+	public void setM_pictureUrl3(String m_pictureUrl3) {
+		this.m_pictureUrl3 = m_pictureUrl3;
+	}
+	public SemiUser getSemiuser() {
+		return semiuser;
+	}
+	public void setSemiuser(SemiUser semiuser) {
+		this.semiuser = semiuser;
+	}
 	public int getM_number() {
 		return m_number;
 	}

@@ -2,9 +2,10 @@ package logic;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface UserService {
 	List<Integer> getOthersNum(int m_number);
-	void createUser1(SemiUser semiuser);
-	void createUser2(UserProfile userprofile);
 	User getUserByIdPw(User user);
+	void createUser(UserProfile userprofile, HttpServletRequest request);
 }
