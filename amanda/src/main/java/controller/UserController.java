@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -132,7 +133,6 @@ public class UserController {
 	@RequestMapping("user/login")
 	public ModelAndView login(@Valid User user, BindingResult bindingResult, HttpSession session){
 		ModelAndView mav = new ModelAndView();
-		System.out.println(1234);
 		if(bindingResult.hasErrors()){
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
@@ -147,7 +147,6 @@ public class UserController {
 		session.setAttribute("USER", loginUser);
 		
 		mav.addObject("user",loginUser);
-		System.out.println(mav);
 		mav.setViewName("user/main");
 
 		return mav;
@@ -172,6 +171,9 @@ public class UserController {
 	@RequestMapping("user/join1")
 	public ModelAndView join1(@Valid SemiUser semiuser){
 		ModelAndView mav = new ModelAndView();
+		UserProfile userprofile = new UserProfile();
+		userprofile.setSemiuser(semiuser);
+		mav.addObject("userprofile",userprofile);
 		mav.setViewName("user/joinForm2");
 		return mav;
 	}
@@ -189,12 +191,11 @@ public class UserController {
 		userprofile.setSemiuser(semiuser);
 		/*mav.addObject("semiuser",semiuser);*/
 		mav.addObject("userprofile",userprofile);
-		System.out.println(mav);
 		return mav;
 	}
 	
 	@RequestMapping("user/join2")
-	public ModelAndView join2(@Valid SemiUser semiuser, @Valid UserProfile userprofile, BindingResult bindingResult){
+	public ModelAndView join2(@Valid UserProfile userprofile, BindingResult bindingResult,HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()){
 			bindingResult.reject("error.input.user");
@@ -209,7 +210,6 @@ public class UserController {
 		}
 		mav.setViewName("redirect:loginForm.do");
 		mav.addObject("userprofile",userprofile);
-		System.out.println(mav);
 		return mav;
 	}
 	
