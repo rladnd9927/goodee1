@@ -50,7 +50,7 @@
 								<li role="presentation"><a href="userList.do">List</a></li>
 								<li role="presentation"><a href="blindDate.do">BlindDate</a></li>
 								<li role="presentation"><a href="portfolio.html">SNS</a></li>
-								<li role="presentation"><a href="contact.html">MyPage</a></li>		
+								<li role="presentation"><a href="mypage11.do">MyPage</a></li>		
 								<li role="presentation"><a href="contact.html">Chat</a></li>						
 							</ul>
 						</div>
