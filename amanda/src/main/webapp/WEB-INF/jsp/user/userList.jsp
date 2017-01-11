@@ -42,7 +42,11 @@
 	<div class="userwrapper">
 		<h2>회원리스트</h2>
 		<c:forEach items="${userList}" var="user"></c:forEach>
-		<div class="user">
+		<table>
+			<tr><td>${USER.m_email}</td></tr>
+		</table>
+
+<%-- 		<div class="user">
 			<div class="usericon" ><img src="" alt="usericon" width="150" height="150"></div>
 			<div class="userprofile">
 				<font color="black">이름:${user.m_name}</font><br>
@@ -52,7 +56,7 @@
 		<div class="user">
 			<div class="usericon" ><img src="" alt="usericon" width="150" height="150"></div>
 			<div class="userprofile"><font color="black">mem.id</font></div>
-	</div>
+	</div> --%>
 </div>
 </div> 
 </body>

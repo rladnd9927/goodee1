@@ -33,5 +33,9 @@ public class UserServiceImpl implements UserService{
 	public void createUser2(UserProfile userprofile) {
 		userDao.create(userprofile);
 	}
+	
+	public User getUserByIdPw(User user) {
+		return userDao.getUser(user.getM_email(),user.getM_password());
+	}
 
 }

@@ -25,7 +25,7 @@
 	<header>
 		<nav div class="navbar navbar-default navbar-static-top" role="navigation">
 			<div class="navbar-brand">
-							<a href="index.html"><h1><span>A</span>manda</h1></a>
+							<a href="main.do"><h1><span>A</span>manda</h1></a>
 						</div>
 			<div class="container">
 				<div class="userlogin">
@@ -63,7 +63,7 @@
 							<span class="icon-bar"></span>
 						</button>
 					</div>
-					
+
 					<div class="navbar-collapse collapse">							
 						<div class="menu">
 							<ul class="nav nav-tabs" role="tablist">

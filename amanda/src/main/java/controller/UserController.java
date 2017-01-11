@@ -70,13 +70,6 @@ public class UserController {
 	@Autowired
 	private ItemService itemService;
 	
-	@RequestMapping("user/loginForm")
-	public ModelAndView loginForm(){
-		ModelAndView mav = new ModelAndView();
-		//mav.addObject(new User());
-		return mav;
-	}
-	
 	@RequestMapping("user/userList")
 	public ModelAndView userList(){
 		ModelAndView mav = new ModelAndView();
@@ -127,39 +120,48 @@ public class UserController {
 		return mav;
 	}*/
 	
+/////login/////////
+	@RequestMapping("user/loginForm")
+	   public ModelAndView loginForm(){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject(new User());
+	      return mav;
+	   }
+	
 	@RequestMapping("user/login")
 	public ModelAndView login(@Valid User user, BindingResult bindingResult, HttpSession session){
 		ModelAndView mav = new ModelAndView();
+		System.out.println(1234);
 		if(bindingResult.hasErrors()){
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}
-		User loginUser = shopService.getUserByIdPw(user);
+		
+		User loginUser = userService.getUserByIdPw(user);
 		if(loginUser == null){
-			bindingResult.reject("error.login.id");
+			bindingResult.reject("error.login.userId");
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}
 		session.setAttribute("USER", loginUser);
-		List<Sale> salelist = shopService.saleList(user.getUserId());
-		for(Sale sale : salelist){
-			List<SaleItem> saleItemList = shopService.saleItemList(sale.getSaleId());
-			for(SaleItem sitem : saleItemList){
-				Item item = itemService.getItem(sitem.getItemId());
-			}
-			sale.setSaleItemList(saleItemList);
-		}
-		mav.setViewName("user/mypage");
+		
 		mav.addObject("user",loginUser);
-		mav.addObject("salelist",salelist);
+		System.out.println(mav);
+		mav.setViewName("user/main");
+
 		return mav;
 	}
-	
+	///////////
 	@RequestMapping("user/logout")
 	public ModelAndView logout(HttpSession session){
+		ModelAndView mav = new ModelAndView();
 		session.invalidate();
-		return loginForm();
+		mav.setViewName("redirect:loginForm.do");
+		return mav;
+		//return loginForm();
 	}
+
+	
 	@RequestMapping("user/joinForm1")
 	public ModelAndView joinForm1(){
 		ModelAndView mav = new ModelAndView();
@@ -250,7 +252,7 @@ public class UserController {
 		mav.addObject("user", user);
 		return mav;
 	}
-	@RequestMapping("user/admin")
+	/*@RequestMapping("user/admin")
 	public ModelAndView admin(HttpSession session){
 		User loginUser = (User)session.getAttribute("USER");
 		if(loginUser == null){
@@ -263,7 +265,7 @@ public class UserController {
 		List<User>userList = shopService.getUser();
 		mav.addObject("userList", userList);
 		return mav;
-	}
+	}*/
    
    @RequestMapping("user/mailForm")
    public ModelAndView mailForm(String[] idchks){
@@ -286,7 +288,7 @@ public class UserController {
    /*================================================================*/
    @RequestMapping("user/mypage21")
 	public ModelAndView mypage21(String id){
-		ModelAndView mav = new ModelAndView()g;
+		ModelAndView mav = new ModelAndView();
 		User user = shopService.getUserById(id);
 		List<Sale> salelist = shopService.saleList(id);
 		for(Sale sale : salelist){
