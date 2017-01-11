@@ -173,30 +173,42 @@ public class UserController {
 	public ModelAndView join1(@Valid SemiUser semiuser){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("user/joinForm2");
-		mav.addObject("user",semiuser);
 		return mav;
 	}
 	
 	@RequestMapping("user/joinForm2")
-	public ModelAndView join2(){
+	public ModelAndView joinForm2(SemiUser semiuser){
 		ModelAndView mav = new ModelAndView();
 		UserProfile userprofile = new UserProfile();
-		mav.addObject(userprofile);
+		DateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		try{
+			userprofile.setM_birthday(sf.parse("1980-01-01"));
+		}catch(ParseException e){
+			e.printStackTrace();
+		}
+		userprofile.setSemiuser(semiuser);
+		/*mav.addObject("semiuser",semiuser);*/
+		mav.addObject("userprofile",userprofile);
+		System.out.println(mav);
 		return mav;
 	}
 	
 	@RequestMapping("user/join2")
 	public ModelAndView join2(@Valid SemiUser semiuser, @Valid UserProfile userprofile, BindingResult bindingResult){
 		ModelAndView mav = new ModelAndView();
+		if(bindingResult.hasErrors()){
+			bindingResult.reject("error.input.user");
+			mav.getModel().putAll(bindingResult.getModel());
+			return mav;
+		}
 		try{
-			userService.createUser1(semiuser);
-			userService.createUser2(userprofile);
+			userService.createUser(userprofile,request);
 		}catch(DuplicateKeyException e){
 			bindingResult.reject("error.duplicate.user");
 			return mav;
 		}
-		mav.addObject(semiuser);
-		mav.addObject(userprofile);
+		mav.setViewName("redirect:loginForm.do");
+		mav.addObject("userprofile",userprofile);
 		System.out.println(mav);
 		return mav;
 	}
