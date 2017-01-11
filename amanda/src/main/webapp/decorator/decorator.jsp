@@ -34,7 +34,7 @@
 				<c:when test="${not empty USER}">
 					<%-- 관리자 로그인 --%>
 					<c:if test="${USER.m_email == 'admin'}">
-						<a href="${path}/user/admin.do">관리자</a>
+						<a href="${path}/amanda/user/admin.do">관리자</a>
 					</c:if>
 					<%-- 일반사용자 로그인 --%>
 					<c:if test="${USER.m_email != 'admin'}">
@@ -45,7 +45,7 @@
 				</c:when>
 				<%-- 로그인 안된 경우 --%>
 				<c:otherwise>
-					<a href="${path}/user/loginForm.do">로그인</a>
+					<a href="${path}/amanda/user/loginForm.do">로그인</a>
 				</c:otherwise>
 			</c:choose>
 				</div>
