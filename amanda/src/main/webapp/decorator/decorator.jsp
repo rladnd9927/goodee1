@@ -45,7 +45,7 @@
 				</c:when>
 				<%-- 로그인 안된 경우 --%>
 				<c:otherwise>
-					<a href="${path}/user/loginForm.do">로그인</a>
+					<a href="${path}/amanda/user/loginForm.do">로그인</a>
 				</c:otherwise>
 			</c:choose>
 				</div>
