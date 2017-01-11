@@ -5,50 +5,86 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<link rel="stylesheet" href="../decorator/css/style.css">
-<title>님의 SNS</title>
+<link rel="stylesheet" href="./css/sns.css">
+<script type="text/javascript" src="./js/sns.js"></script>
+<title>${loginUser.M_nickname}님의 SNS</title>
 </head>
 <body>
-<div class="mainWrapper"> <%--가장 바깥 wrapper --%>
-  <div class="wrapper"><%-- 한 게시물 wrapper --%>
-    <div class="header"><%--본 게시물의 헤더 (프로필, 프사), 등록시간 --%>
-    	<div id = "profilePhoto"> <%--프사부분 --%>
-    		<a href=""><img src=""/></a>
-    	</div>
-    	<div id = "userId"> <%--사용자 아이디 노출 부분 --%>
-    		<a href="">사용자아이디</a>
-    	</div>
-    	<div id="uploadTime"> <%--게시물 업로드 시간 표시 --%>
-    	</div>
-    </div>
-    <div class="body"> <%--본 게시물  --%>
-    a
-    </div>
-    <div class="reply"><%--본 게시물의 댓글부분--%>
-    
-    <!-- 이 부분은 댓글을 표시하는 부분임. 이부분은 게시물 댓글이 하나도 없는경우 div 표시하지 않고, 댓글이 달린경우에 한해서 표시하도록 할것. (if 문을 이용해 hidden속성을 이용)
-    
-    	<div id = "reply"> 
-    		<div id = "replyCount"> <%--댓글 갯수 표시하는 부분 --%>
-    		</div>
-    		<ul id = "replyList">
-    			댓글 갯수가 5개를 넘어갈 경우, 아코디언 스타일로 구현 
-    			<li> <%--실제 댓글 1줄 -> 이 안에 댓글 단사람 아이디와, 댓글이 표시될 것 --%>
-    				<a href="">댓글 단 사람 아이디</a>
-    				<span>댓글 내용</span>
-    			</li>
-    		</ul>
-    	</div>
-     -->	
-    	
-    	<div id = "writeReply"> <%--댓글 다는 댓글창 부분  input 텍스트창으로 할 것. placeholder속성에 댓글입력하라고 표시해 줄것--%>
-    	a
-    	</div>
-    </div>
+
+
+<div class="container">
+  <div class="row">
+    <h2>Pinterest Responsive Grid</h2>
+
+    <p>Best viewed <a href="http://bootsnipp.com/iframe/Zkk0O" target="_blank">full screen</a>
+    </p>
+    <hr>
+    <section id="pinBoot">
+
+      <article class="white-panel"><img src="http://i.imgur.com/sDLIAZD.png" alt="">
+        <h4><a href="#">Title 1</a></h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </article>
+
+      <article class="white-panel"> <img src="http://i.imgur.com/8lhFhc1.gif" alt="">
+        <h4><a href="#">Title 2</a></h4>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </article>
+
+      <article class="white-panel"> <img src="http://i.imgur.com/xOIMvAe.jpg" alt="">
+        <h4><a href="#">Title 3</a></h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+      </article>
+
+
+      <article class="white-panel"> <img src="http://i.imgur.com/3gXW3L3.jpg" alt="">
+        <h4><a href="#">Title 4</a></h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </article>
+
+      <article class="white-panel"> <img src="http://i.imgur.com/o2RVMqm.jpg" alt="">
+        <h4><a href="#">Title 5</a></h4>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </article>
+
+      <article class="white-panel"> <img src="http://i.imgur.com/kFFpuKA.jpg" alt="">
+        <h4><a href="#">Title 6</a></h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+      </article>
+
+
+
+      <article class="white-panel"><img src="http://i.imgur.com/E9RmLPA.jpg" alt="">
+        <h4><a href="#">Title 7</a></h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </article>
+
+      <article class="white-panel"> <img src="http://i.imgur.com/8lhFhc1.gif" alt="">
+        <h4><a href="#">Title 8</a></h4>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </article>
+
+    </section>
+
+
+    <hr>
+
+
   </div>
-<br><br>
+  <p>
+    <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fbootsnipp.com%2Fiframe%2FZkk0O" target="_blank"><small>HTML</small><sup>5</sup></a>
+    <br>
+    <br>
+
+  </p>
 
 </div>
+
 
 </body>
 </html>

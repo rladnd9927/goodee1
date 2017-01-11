@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="dao.mapper.SnsMapper">
+	<select id="list" parameterType="map" resultType="Sns">
+		select * from sns where m_number = #{m_number} order by SNS_DATE desc
+	</select>
+	
+	<select id = "replyList" parameterType="map" resultType="Reply">
+		select * from reply where sns_no = #{sns_no}
+	</select>
+</mapper>
