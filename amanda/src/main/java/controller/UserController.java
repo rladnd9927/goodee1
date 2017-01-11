@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -70,6 +69,8 @@ public class UserController {
 	@Autowired
 	private ItemService itemService;
 	
+
+	 
 	@RequestMapping("user/userList")
 	public ModelAndView userList(){
 		ModelAndView mav = new ModelAndView();
@@ -120,7 +121,7 @@ public class UserController {
 		return mav;
 	}*/
 	
-/////login/////////
+	/////login/////////
 	@RequestMapping("user/loginForm")
 	   public ModelAndView loginForm(){
 	      ModelAndView mav = new ModelAndView();
@@ -160,24 +161,21 @@ public class UserController {
 		return mav;
 		//return loginForm();
 	}
-
+	
 	@RequestMapping("user/joinForm1")
 	public ModelAndView joinForm1(){
 		ModelAndView mav = new ModelAndView();
 		SemiUser semiuser = new SemiUser();
-		mav.addObject("semiuser",semiuser);		
+		mav.addObject("user",semiuser);		
 		return mav;
 	}
 	@RequestMapping("user/join1")
 	public ModelAndView join1(@Valid SemiUser semiuser){
 		ModelAndView mav = new ModelAndView();
-		UserProfile userprofile = new UserProfile();
-		userprofile.setSemiuser(semiuser);
-		mav.addObject("userprofile",userprofile);
 		mav.setViewName("user/joinForm2");
 		return mav;
 	}
-
+	
 	@RequestMapping("user/joinForm2")
 	public ModelAndView joinForm2(SemiUser semiuser){
 		ModelAndView mav = new ModelAndView();
@@ -194,9 +192,9 @@ public class UserController {
 		System.out.println(mav);
 		return mav;
 	}
-
+	
 	@RequestMapping("user/join2")
-	public ModelAndView join2(@Valid UserProfile userprofile, BindingResult bindingResult, HttpServletRequest request){
+	public ModelAndView join2(@Valid SemiUser semiuser, @Valid UserProfile userprofile, BindingResult bindingResult){
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()){
 			bindingResult.reject("error.input.user");
@@ -240,45 +238,38 @@ public class UserController {
 	   return mav;
    }*/
    
-   @RequestMapping("user/mypage11")
-   public ModelAndView mypage11(){
+   @RequestMapping("user/mypage")
+   public ModelAndView mypage(String id){
 	   ModelAndView mav = new ModelAndView();
-	   mav.setViewName("user/mypage11");
+	   User user = shopService.getUserById(id);
+	   List<Sale> salelist = shopService.saleList(id);
+	   for(Sale sale : salelist){
+		   List<SaleItem> saleItemList = shopService.saleItemList(sale.getSaleId());
+		   for(SaleItem sitem : saleItemList){
+			   Item item = itemService.getItemList(sitem.getItemId());
+			   sitem.setItem(item);
+		   }
+		   sale.setSaleItemList(saleItemList);
+	   }
+	   mav.addObject("salelist",salelist);
+	   mav.addObject("user",user);
 	   return mav;
    }
-   @RequestMapping("user/mypage")
-	public ModelAndView mypage(String id){
-		ModelAndView mav = new ModelAndView();
-		User user = shopService.getUserById(id);
-		List<Sale> salelist = shopService.saleList(id);
-		for(Sale sale : salelist){
-			List<SaleItem> saleItemList = shopService.saleItemList(sale.getSaleId());
-			for(SaleItem sitem : saleItemList){
-				System.out.println(sitem);
-				Item item = itemService.getItemList(sitem.getItemId());
-				sitem.setItem(item);
-				System.out.println(sitem);
-			}
-			sale.setSaleItemList(saleItemList);
-		}
-		mav.addObject("salelist", salelist);
-		mav.addObject("user", user);
-		return mav;
-	}
-	/*@RequestMapping("user/admin")
-	public ModelAndView admin(HttpSession session){
-		User loginUser = (User)session.getAttribute("USER");
-		if(loginUser == null){
-			throw new LoginRequiredException();
-		}
-		if(!loginUser.getUserId().equals("admin")){
-			throw new AdminRequiredException();
-		}
-		ModelAndView mav = new ModelAndView();
-		List<User>userList = shopService.getUser();
-		mav.addObject("userList", userList);
-		return mav;
-	}*/
+   
+/*   @RequestMapping("user/admin")
+   public ModelAndView admin(HttpSession session){
+	   User loginUser = (User)session.getAttribute("USER");
+	   if(loginUser == null){
+		   throw new LoginRequiredException();
+	   }
+	   if(!loginUser.getUserId().equals("admin")){
+		   throw new AdminRequiredException();
+	   }
+	   ModelAndView mav = new ModelAndView();
+	   List<User> userList = shopService.getUser();
+	   mav.addObject("userList",userList);
+	   return mav;
+   }*/
    
    @RequestMapping("user/mailForm")
    public ModelAndView mailForm(String[] idchks){
@@ -297,26 +288,7 @@ public class UserController {
 	   adminMailSend(mail);
 	   return mav;
    }
-   
-   /*================================================================*/
-   @RequestMapping("user/mypage21")
-	public ModelAndView mypage21(String id){
-		ModelAndView mav = new ModelAndView();
-		User user = shopService.getUserById(id);
-		List<Sale> salelist = shopService.saleList(id);
-		for(Sale sale : salelist){
-			List<SaleItem> saleItemList = shopService.saleItemList(sale.getSaleId());
-			for(SaleItem sitem : saleItemList){
-				Item item = itemService.getItemList(sitem.getItemId());
-				sitem.setItem(item);
-			}
-			sale.setSaleItemList(saleItemList);
-		}
-		mav.addObject("salelist",salelist);
-		mav.addObject("user",user);
-		return mav;
-	}
-   /*================================================================*/
+
 	private void adminMailSend(Mail mail) {
 		MyAuthenticator auth = new MyAuthenticator(naverid,naverpw);
 		Properties prop = new Properties();

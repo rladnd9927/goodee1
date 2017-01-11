@@ -25,16 +25,16 @@
 	<header>
 		<nav div class="navbar navbar-default navbar-static-top" role="navigation">
 			<div class="navbar-brand">
-							<a href="index.html"><h1><span>A</span>manda</h1></a>
+							<a href="main.do"><h1><span>A</span>manda</h1></a>
 						</div>
 			<div class="container">
 				<div class="userlogin">
-									<c:choose>
+			<c:choose>
 				<%-- 로그인 된 경우 --%>
 				<c:when test="${not empty USER}">
 					<%-- 관리자 로그인 --%>
 					<c:if test="${USER.m_email == 'admin'}">
-						<a href="${path}/user/admin.do">관리자</a>
+						<a href="${path}/amanda/user/admin.do">관리자</a>
 					</c:if>
 					<%-- 일반사용자 로그인 --%>
 					<c:if test="${USER.m_email != 'admin'}">
@@ -63,14 +63,14 @@
 							<span class="icon-bar"></span>
 						</button>
 					</div>
-					
+
 					<div class="navbar-collapse collapse">							
 						<div class="menu">
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation"><a href="main.do" class="active">HOME</a></li>
 								<li role="presentation"><a href="userList.do">List</a></li>
 								<li role="presentation"><a href="blindDate.do">BlindDate</a></li>
-								<li role="presentation"><a href="portfolio.html">SNS</a></li>
+								<li role="presentation"><a href="${ContextPath}/amanda/sns/snsmain.do">SNS</a></li>
 								<li role="presentation"><a href="mypage11.do">MyPage</a></li>		
 								<li role="presentation"><a href="contact.html">Chat</a></li>						
 							</ul>
