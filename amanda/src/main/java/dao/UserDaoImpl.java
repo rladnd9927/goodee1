@@ -20,9 +20,9 @@ public class UserDaoImpl implements UserDao{
 	private final String NS = "dao.mapper.UserMapper.";
 
 	//@Override
-	public User getUser(String userId, String password) {
+	public User getUser(String email, String password) {
 		Map<String, String> param = new HashMap<String,String>();
-		param.put("userId", userId);
+		param.put("email", email);
 		param.put("password", password);
 		return sqlSession.selectOne(NS + "getUser",param);
 	}
@@ -51,5 +51,11 @@ public class UserDaoImpl implements UserDao{
 	public void create(UserProfile userprofile) {
 		//sqlSession.getMapper(UserMapper.class).create(userprofile);
 	}
+
+	public User getUser(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
