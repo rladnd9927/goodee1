@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import exception.LoginRequiredException;
+import exception.PasswordFailException;
 import logic.Reply;
 import logic.Sns;
 import logic.SnsService;
@@ -64,7 +65,7 @@ public class SnsController {
 		return mav;
 	}
 	@RequestMapping("sns/snsdetail")
-	public ModelAndView snsdetail(HttpSession session, Integer sns_no){
+	public ModelAndView snsdetail(HttpSession session, int sns_no){
 		ModelAndView mav = new ModelAndView();
 		User loginUser = (User)session.getAttribute("USER");
 		Sns snsdetail = snsService.detail(sns_no);
@@ -102,20 +103,23 @@ public class SnsController {
 	public ModelAndView snsmodify(@Valid Sns sns, BindingResult bindingResult, HttpServletRequest request, HttpSession session){
 		ModelAndView mav = new ModelAndView("sns/snsmodifyForm");
 		User loginUser = (User)session.getAttribute("USER");
+		List<Reply> replyList = snsService.replyList(sns.getSns_no());
+		
 		if(bindingResult.hasErrors()){
 			mav.getModel().putAll(bindingResult.getModel());
-			mav.addObject("board",snsService.detail(sns.getSns_no()));
+			mav.addObject("snsdetail",snsService.detail(sns.getSns_no()));
+			mav.addObject("replyList",replyList);
 			return mav;
 		}
-//		String pass = snsService.getPassword(sns.getSns_no());
-//		if(!pass.equals(sns.getPass())){
-//			mav.setViewName("board/updateForm");
-//			bindingResult.rejectValue("pass", "error.board.password");
-//			mav.getModel().putAll(bindingResult.getModel());
-//			mav.addObject("board",snsService.detail(sns.getSns_no()));
-//			return mav;
-//		} 로그인 유저와, sns유저가 같아야 수정가능하도록. (loginUser == sns.getM_num
-		
+
+		if(!loginUser.getM_email().equals((snsService.getUserbyNum(sns.getM_number())).getM_email())){ //로그인 유저와 sns유저가 다르다면? -> 수정 불가하게..
+			mav.setViewName("sns/snsmodifyForm");
+			bindingResult.reject("error.update.sns");
+			mav.getModel().putAll(bindingResult.getModel());
+			mav.addObject("snsdetail",snsService.detail(sns.getSns_no()));
+			mav.addObject("replyList",replyList);
+			return mav;
+		}
 		//수정시 새로 업로드 된 파일이 없음
 		if(sns.getSns_file().isEmpty()){
 			sns.setFileUrl(request.getParameter("file2"));
@@ -138,12 +142,21 @@ public class SnsController {
 		return mav;
 	}
 	
-	@RequestMapping("sns/snsdelete") //하루가 지나면 디비에서 삭제.
-	public ModelAndView snsdelete(HttpSession session){
+	@RequestMapping("sns/snsdelete")
+	public ModelAndView snsdelete(int sns_no, HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		User loginUser = (User)session.getAttribute("USER");
+		List<Reply> replyList = snsService.replyList(sns_no);
 		
-		mav.addObject("loginUser",loginUser);
+		if(!loginUser.getM_email().equals((snsService.getUserbyNum(sns_no)).getM_email())){ //로그인 유저와 sns유저가 다르다면? -> 삭제 불가하게..
+			mav.setViewName("sns/snsdetail");
+			mav.addObject("snsdetail",snsService.detail(sns_no));
+			mav.addObject("replyList",replyList);
+			return mav;
+		}
+		
+		snsService.delete(sns_no);
+		mav.setViewName("redirect:snsmain.do");
 		return mav;
 	}
 }

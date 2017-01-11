@@ -80,9 +80,19 @@ public class SnsServiceImpl implements SnsService {
 			}
 		}
 	}
-
+	//@Override
+	public void update(Sns sns, HttpServletRequest request) {
+		if(!sns.getSns_file().isEmpty()){
+			updateFileCreate(sns.getSns_file(),request);
+		}
+		snsDao.update(sns);
+	}
 	public User getUserbyNum(int m_number) {
 		User snsUser = userDao.getUserbyNum(m_number);
 		return snsUser;
+	}
+
+	public void delete(int sns_no) {
+		snsDao.delete(sns_no);
 	}
 }

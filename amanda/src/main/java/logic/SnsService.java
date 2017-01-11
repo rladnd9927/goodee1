@@ -19,4 +19,8 @@ public interface SnsService {
 
 	User getUserbyNum(int m_number);
 
+	void update(Sns sns, HttpServletRequest request);
+
+	void delete(int sns_no);
+
 }

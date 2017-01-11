@@ -15,4 +15,8 @@ public interface SnsDao {
 	List<Reply> reply(Integer sns_no);
 
 	void insert(Sns sns);
+
+	void update(Sns sns);
+
+	void delete(int sns_no);
 }

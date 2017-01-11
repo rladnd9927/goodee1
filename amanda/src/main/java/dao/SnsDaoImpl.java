@@ -40,4 +40,12 @@ public class SnsDaoImpl implements SnsDao {
 		sqlSession.getMapper(SnsMapper.class).insert(sns);		
 	}
 
+	public void update(Sns sns) {
+		sqlSession.getMapper(SnsMapper.class).update(sns);
+	}
+
+	public void delete(int sns_no) {
+		sqlSession.getMapper(SnsMapper.class).delete(sns_no);
+	}
+
 }
