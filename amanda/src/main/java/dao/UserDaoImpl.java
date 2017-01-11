@@ -57,5 +57,9 @@ public class UserDaoImpl implements UserDao{
 		return null;
 	}
 
+	public User getUserbyNum(int m_number) {
+		return sqlSession.getMapper(UserMapper.class).getUserbyNum(m_number);
+	}
+
 
 }

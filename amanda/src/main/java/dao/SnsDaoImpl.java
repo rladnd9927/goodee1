@@ -30,7 +30,7 @@ public class SnsDaoImpl implements SnsDao {
 		return sqlSession.getMapper(SnsMapper.class).detail(sns_no);
 	}
 
-	public List<Reply> reply(Integer sns_no) {
+	public List<Reply> reply(Integer sns_no) { //SnsMApper에서 쿼리결과인 Reply객체를 리턴받을수 있는지 잘 모르겠음. 에러시 수정할것.
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("sns_no", sns_no);
 		return sqlSession.selectList(NS+"replyList",map);

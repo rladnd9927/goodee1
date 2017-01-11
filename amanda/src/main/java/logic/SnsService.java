@@ -17,6 +17,6 @@ public interface SnsService {
 
 	void write(Sns sns, HttpServletRequest request);
 
-	User getUserbyNum(String m_number);
+	User getUserbyNum(int m_number);
 
 }

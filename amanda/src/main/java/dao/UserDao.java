@@ -13,5 +13,5 @@ public interface UserDao {
 	List<User> getUser(String[] idchks);
 	User getUser(String id);
 	User getUser(String m_email, String m_password);
-	
+	User getUserbyNum(int m_number);
 }

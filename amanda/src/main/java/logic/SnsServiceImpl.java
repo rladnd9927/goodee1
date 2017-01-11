@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import dao.LikeUserDao;
 import dao.SnsDao;
+import dao.UserDao;
 
 @Service
 public class SnsServiceImpl implements SnsService {
@@ -23,6 +24,8 @@ public class SnsServiceImpl implements SnsService {
 	private SnsDao snsDao;
 	@Autowired
 	private LikeUserDao	likeUserDao;
+	@Autowired
+	private UserDao userDao;
 	
 	public List<Sns> getList(int m_number) {
 		List<Sns> snsList = snsDao.list(m_number);
@@ -78,8 +81,8 @@ public class SnsServiceImpl implements SnsService {
 		}
 	}
 
-	public User getUserbyNum(String m_number) {
-		User snsUser = snsDao.getUserbyNum(m_number);
+	public User getUserbyNum(int m_number) {
+		User snsUser = userDao.getUserbyNum(m_number);
 		return snsUser;
 	}
 }

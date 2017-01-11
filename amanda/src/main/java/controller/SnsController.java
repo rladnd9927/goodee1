@@ -114,7 +114,7 @@ public class SnsController {
 //			mav.getModel().putAll(bindingResult.getModel());
 //			mav.addObject("board",snsService.detail(sns.getSns_no()));
 //			return mav;
-//		}
+//		} 로그인 유저와, sns유저가 같아야 수정가능하도록. (loginUser == sns.getM_num
 		
 		//수정시 새로 업로드 된 파일이 없음
 		if(sns.getSns_file().isEmpty()){

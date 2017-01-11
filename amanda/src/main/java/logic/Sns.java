@@ -21,7 +21,7 @@ public class Sns {
 	private String sns_subject;//글 제목
 	private String fileUrl;
 	
-	private String m_number; //유저번호
+	private int m_number; //유저번호
 	private MultipartFile sns_file; //파일
 	public String toString() {
 		return "Sns [sns_picture=" + sns_picture + ", sns_date=" + sns_date + ", sns_content=" + sns_content
@@ -64,10 +64,10 @@ public class Sns {
 	public void setSns_subject(String sns_subject) {
 		this.sns_subject = sns_subject;
 	}
-	public String getM_number() {
+	public int getM_number() {
 		return m_number;
 	}
-	public void setM_number(String m_number) {
+	public void setM_number(int m_number) {
 		this.m_number = m_number;
 	}
 	public MultipartFile getSns_file() {
