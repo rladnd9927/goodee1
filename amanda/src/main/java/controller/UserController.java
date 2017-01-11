@@ -74,9 +74,10 @@ public class UserController {
 	 
 	@RequestMapping("user/userList")
 	public ModelAndView userList(){
-		ModelAndView mav = new ModelAndView();
-		User user = new User();
-		mav.addObject(user);
+	   ModelAndView mav = new ModelAndView();
+	   List<User> userList = userService.getUser();
+	   mav.addObject("userList",userList);
+		mav.addObject(userList);
 		return mav;
 	}
 	@RequestMapping("user/main")
@@ -241,18 +242,18 @@ public class UserController {
    @RequestMapping("user/mypage")
    public ModelAndView mypage(String id){
 	   ModelAndView mav = new ModelAndView();
-	   User user = shopService.getUserById(id);
-	   List<Sale> salelist = shopService.saleList(id);
-	   for(Sale sale : salelist){
+	   List<User> userList = userService.getUser();
+	   mav.addObject("userList",userList);
+/*	   for(Sale sale : salelist){
 		   List<SaleItem> saleItemList = shopService.saleItemList(sale.getSaleId());
 		   for(SaleItem sitem : saleItemList){
 			   Item item = itemService.getItemList(sitem.getItemId());
 			   sitem.setItem(item);
 		   }
 		   sale.setSaleItemList(saleItemList);
-	   }
-	   mav.addObject("salelist",salelist);
-	   mav.addObject("user",user);
+	   }*/
+	   //mav.addObject("salelist",salelist);
+	   //mav.addObject("userList",userList);
 	   return mav;
    }
    

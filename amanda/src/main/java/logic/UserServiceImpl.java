@@ -114,4 +114,10 @@ public class UserServiceImpl implements UserService{
 		return userDao.getUser(user.getM_email(),user.getM_password());
 	}
 
+	public List<User> getUser() {
+		System.out.println("z");
+		return userDao.getUser();
+	}
+
+
 }

@@ -29,23 +29,44 @@
 
 	<h2>명예의 전당</h2>
 	<div class="userwrapper">
-		<div class="user">		
-			<div class="usericon" ><img src="" alt="usericon" width="150" height="150"></div>
-			<div class="userprofile"></div>
-		</div>
-<!-- 		<div class="user">
-			<div class="usericon" ><img src="" alt="usericon" width="150" height="150"></div>
-			<div class="userprofile"><font color="black">mem.id</font></div>
-		</div> -->
+		<table class="join02">
+			<thead>
+			<tr><th colspan="7">회원목록</th></tr>
+			<tr>
+				<td>아이디</td>
+				<td>이름</td>
+				<td>나이</td>
+			</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+
 	</div>
 	<hr/>
 	<div class="userwrapper">
 		<h2>회원리스트</h2>
-		<c:forEach items="${userList}" var="user"></c:forEach>
-		<table>
-			<tr><td>${USER.m_email}</td></tr>
-		</table>
+		<table class="join02">
+			<thead>
+			<tr><th colspan="7">회원목록</th></tr>
+			<tr>
+				<td>아이디</td>
+				<td>이름</td>
+				<td>나이</td>
+			</tr>
+			</thead>
+			<tbody>
 
+			<c:forEach items="${userList}" var="user">
+				<tr>
+					<td>${user.gender}</td>
+					<td>${user.m_email}</td>
+					<td>${user.m_email}</td>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
 <%-- 		<div class="user">
 			<div class="usericon" ><img src="" alt="usericon" width="150" height="150"></div>
 			<div class="userprofile">

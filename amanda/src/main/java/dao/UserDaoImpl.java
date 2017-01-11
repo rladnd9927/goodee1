@@ -34,6 +34,7 @@ public class UserDaoImpl implements UserDao{
 
 	//@Override
 	public List<User> getUser() {
+		System.out.println("2");
 		return sqlSession.selectList(NS + "getUser" );
 	}
 
@@ -42,11 +43,6 @@ public class UserDaoImpl implements UserDao{
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("idchks", idchks);
 		return sqlSession.selectList(NS+"getUser",map);
-	}
-
-	public User getUser(String id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public User getUserbyNum(int m_number) {
@@ -60,4 +56,7 @@ public class UserDaoImpl implements UserDao{
 	public void createProfile(UserProfile userprofile) {
 		sqlSession.getMapper(UserMapper.class).createprofile(userprofile);
 	}
+
+
+
 }
