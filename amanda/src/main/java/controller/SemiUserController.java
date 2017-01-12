@@ -23,4 +23,13 @@ public class SemiUserController {
 			mav.addObject(semiuserList);
 			return mav;
 	 	}
+	 
+	 @RequestMapping("user/semiDetail")
+	   public ModelAndView semiDetail(){
+			ModelAndView mav = new ModelAndView();
+			List<SemiUser> semiuserList = semiuserService.getSemiUser();
+			mav.addObject("semiuserList",semiuserList);
+			mav.addObject(semiuserList);
+			return mav;
+	 	}
 }
