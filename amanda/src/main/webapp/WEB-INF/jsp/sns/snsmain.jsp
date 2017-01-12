@@ -17,13 +17,13 @@
           <div class="col-md-12">
             <ul class="lead nav nav-justified nav-pills">
               <li class="active">
-                <a href="#">Home</a>
+                <a href="snsmain.do">나의 SNS</a>
               </li>
               <li>
-                <a href="#">Profile</a>
+                <a href="snsreg.do">글쓰기</a>
               </li>
               <li>
-                <a href="#">Messages</a>
+                <a href="othersns.do">내가 좋아요한 회원</a>
               </li>
             </ul>
           </div>
