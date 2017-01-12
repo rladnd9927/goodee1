@@ -34,7 +34,6 @@ public class UserDaoImpl implements UserDao{
 
 	//@Override
 	public List<User> getUser() {
-		System.out.println("2");
 		return sqlSession.selectList(NS + "getUser" );
 	}
 
@@ -57,6 +56,9 @@ public class UserDaoImpl implements UserDao{
 		sqlSession.getMapper(UserMapper.class).createprofile(userprofile);
 	}
 
+	public UserProfile getUserProfile() {
+		return sqlSession.getMapper(UserMapper.class).getUserProfile();
+	}
 
 
 }

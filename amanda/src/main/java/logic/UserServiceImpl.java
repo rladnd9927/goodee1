@@ -115,8 +115,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public List<User> getUser() {
-		System.out.println("z");
 		return userDao.getUser();
+	}
+
+	public UserProfile getUserProfile() {
+		return userDao.getUserProfile();
 	}
 
 

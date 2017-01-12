@@ -13,4 +13,5 @@ public interface UserDao {
 	User getUserbyNum(int m_number);
 	void createSemi(UserProfile userprofile);
 	void createProfile(UserProfile userprofile);
+	UserProfile getUserProfile();
 }

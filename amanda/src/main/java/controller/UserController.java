@@ -76,9 +76,10 @@ public class UserController {
 	public ModelAndView userList(){
 	   ModelAndView mav = new ModelAndView();
 	   List<User> userList = userService.getUser();
+	   UserProfile userProfile = userService.getUserProfile();
 	   mav.addObject("userList",userList);
-		mav.addObject(userList);
-		return mav;
+	   mav.addObject("userProfile",userProfile);
+	   return mav;
 	}
 	@RequestMapping("user/main")
 	public ModelAndView main(){
@@ -256,21 +257,6 @@ public class UserController {
 	   //mav.addObject("userList",userList);
 	   return mav;
    }
-   
-/*   @RequestMapping("user/admin")
-   public ModelAndView admin(HttpSession session){
-	   User loginUser = (User)session.getAttribute("USER");
-	   if(loginUser == null){
-		   throw new LoginRequiredException();
-	   }
-	   if(!loginUser.getUserId().equals("admin")){
-		   throw new AdminRequiredException();
-	   }
-	   ModelAndView mav = new ModelAndView();
-	   List<User> userList = shopService.getUser();
-	   mav.addObject("userList",userList);
-	   return mav;
-   }*/
    
    @RequestMapping("user/mailForm")
    public ModelAndView mailForm(String[] idchks){

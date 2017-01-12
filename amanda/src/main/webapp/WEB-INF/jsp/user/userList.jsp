@@ -53,18 +53,18 @@
 			<tr>
 				<td>사진</td>
 				<td>닉네임</td>
-				<td>이름</td>
-				<td>나이</td>
+				<td>성별</td>
 			</tr>
 			</thead>
 			<tbody>
 
 			<c:forEach items="${userList}" var="user">
 				<tr>
-					<td><img src=""></td>
-					<td>${user.m_nickname}</td>
+					<td>${userProfile.m_picture1}</td>
 					<td>${user.m_name}</td>
-					<td>${user.m_age}</td>
+					<td><c:if test="${user.gender == 0 }">남</c:if>
+						<c:if test="${user.gender == 1 }">여</c:if>
+					</td>
 				</tr>
 			</c:forEach>
 			</tbody>

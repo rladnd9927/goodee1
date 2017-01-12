@@ -9,4 +9,5 @@ public interface UserService {
 	User getUserByIdPw(User user);
 	void createUser(UserProfile userprofile, HttpServletRequest request);
 	List<User> getUser();
+	UserProfile getUserProfile();
 }
