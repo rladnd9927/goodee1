@@ -8,30 +8,28 @@
 <title>Amanda</title>
 </head>
 <body>
-	<!-- 블라인드 데이트 페이지 -->
+	<h2>디테일페이지 Test</h2>
 	<table border="1" cellpadding="0" cellspacing="0">
 		<tr>
-			<td colspan="5">${USER.m_name}님을 위한 추천 회원</td>
+			<td>사진</td>
+			<td>닉네임</td>
+			<td>키</td>
+			<td>체형</td>
+			<td>성격</td>
+			<td>종교</td>
+			<td>흡연</td>
+			<td>음주</td>
 		</tr>
 		<tr>
 			<td>사진</td>
-			<td>아이디</td>
 			<td>닉네임</td>
+			<td>키</td>
+			<td>체형</td>
 			<td>성격</td>
 			<td>종교</td>
-			<td>좋아요</td>
+			<td>흡연</td>
+			<td>음주</td>
 		</tr>
-		<c:forEach items="${userList}" var="user">
-			<tr>
-				<td>${userprofile.m_picture1}</td>
-				<td>${user.m_email}</td>
-				<td>${userprofile.m_nickname}</td>
-				<td>${userprofile.m_character}</td>
-				<td>${userprofile.m_religion}</td>
-				<td align="center">♡</td>
-			</tr>
-		</c:forEach>
 	</table>
-	<br>
 </body>
 </html>
