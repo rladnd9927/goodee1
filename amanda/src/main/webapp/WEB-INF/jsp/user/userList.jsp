@@ -51,7 +51,8 @@
 			<thead>
 			<tr><th colspan="7">회원목록</th></tr>
 			<tr>
-				<td>아이디</td>
+				<td>사진</td>
+				<td>닉네임</td>
 				<td>이름</td>
 				<td>나이</td>
 			</tr>
@@ -60,9 +61,10 @@
 
 			<c:forEach items="${userList}" var="user">
 				<tr>
-					<td>${user.gender}</td>
-					<td>${user.m_email}</td>
-					<td>${user.m_email}</td>
+					<td><img src=""></td>
+					<td>${user.m_nickname}</td>
+					<td>${user.m_name}</td>
+					<td>${user.m_age}</td>
 				</tr>
 			</c:forEach>
 			</tbody>
