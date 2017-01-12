@@ -50,6 +50,7 @@ import logic.Mail;
 import logic.Sale;
 import logic.SaleItem;
 import logic.SemiUser;
+import logic.SemiUserService;
 import logic.ShopService;
 import logic.User;
 import logic.UserProfile;

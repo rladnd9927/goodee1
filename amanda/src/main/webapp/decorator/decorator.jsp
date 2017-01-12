@@ -70,7 +70,7 @@
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation"><a href="main.do" class="active">HOME</a></li>
 								<li role="presentation"><a href="userList.do">List</a></li>
-								<li role="presentation"><a href="blindDate.do">BlindDate</a></li>
+								<li role="presentation"><a href="evaluate.do">evaluate</a></li>
 								<li role="presentation"><a href="${ContextPath}/amanda/sns/snsmain.do">SNS</a></li>
 								<li role="presentation"><a href="mypage11.do">MyPage</a></li>		
 								<li role="presentation"><a href="contact.html">Chat</a></li>						
