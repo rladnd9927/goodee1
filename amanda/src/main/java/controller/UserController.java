@@ -50,6 +50,7 @@ import logic.Mail;
 import logic.Sale;
 import logic.SaleItem;
 import logic.SemiUser;
+import logic.SemiUserService;
 import logic.ShopService;
 import logic.User;
 import logic.UserProfile;
@@ -66,6 +67,11 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	/*
+	@Autowired
+	private SemiUserService semiuserService;
+	*/
 	
 	@Autowired
 	private ItemService itemService;
@@ -271,6 +277,27 @@ public class UserController {
 	   mav.addObject("userList",userList);
 	   return mav;
    }*/
+   
+   /*
+   @RequestMapping("user/blindDate")
+   public ModelAndView blindDate(){
+	   ModelAndView mav = new ModelAndView();
+	   List<User> userList = userService.getUser();
+	   mav.addObject("userList",userList);
+	   mav.addObject(userList);
+	   return mav;
+	}
+   
+   
+   @RequestMapping("user/blindDate")
+   public ModelAndView blindDate(){
+	   ModelAndView mav = new ModelAndView();
+	   List<SemiUser> semiuserList = semiuserService.getSemiUser();
+	   mav.addObject("semiuserList",semiuserList);
+	   mav.addObject(semiuserList);
+	   return mav;
+	}
+	*/
    
    @RequestMapping("user/mailForm")
    public ModelAndView mailForm(String[] idchks){
