@@ -10,4 +10,8 @@
 			<if test="password != null">and m_password=#{password}</if>
 		</where>
 	</select>
+	
+	 <select id="userlist" parameterType="map" resultType="User">
+      SELECT * FROM member
+   </select>
 </mapper>

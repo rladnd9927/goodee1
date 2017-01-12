@@ -76,16 +76,40 @@ public class UserController {
 	@RequestMapping("user/userList")
 	public ModelAndView userList(){
 	   ModelAndView mav = new ModelAndView();
+	   List<UserProfile> userProfile = new ArrayList<UserProfile>();
 	   List<User> userList = userService.getUser();
+	   for(int i =0; i<userList.size(); i++){
+		   userProfile.add(userService.getUserProfile(userList.get(i).getM_number()));
+	   }
+	   System.out.println(userProfile.get(0).getM_nickname());
 	   mav.addObject("userList",userList);
-		mav.addObject(userList);
+	   mav.addObject("userProfile",userProfile);
+	   return mav;
+	}
+	
+	@RequestMapping("user/userDetail")
+	public ModelAndView userDetail(int m_number){
+		ModelAndView mav = new ModelAndView();
+		UserProfile userProfile = userService.getUserProfile(m_number);
+		mav.addObject(userProfile);
 		return mav;
 	}
+	
 	@RequestMapping("user/main")
 	public ModelAndView main(){
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
+	/*
+	 *    //유저리스트폼
+   @RequestMapping("chat/userlist")
+   public ModelAndView userlist(){
+      ModelAndView mav = new ModelAndView("chat/userlist");
+      List<ChatUser> chat = chatService.userlist();
+      mav.addObject("userlist", chat);
+      return mav;
+   }
+	 */
 	
 	/*@RequestMapping("user/listsearch")
 	public ModelAndView listsearch(Integer pageNum, String column, String find, HttpServletRequest request){
@@ -130,7 +154,7 @@ public class UserController {
 	      ModelAndView mav = new ModelAndView();
 	      mav.addObject(new User());
 	      return mav;
-	   }
+	}
 	
 	@RequestMapping("user/login")
 	public ModelAndView login(@Valid User user, BindingResult bindingResult, HttpSession session){
@@ -221,24 +245,6 @@ public class UserController {
       binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
    }
    
-/*   @RequestMapping("user/userEntry")
-   public ModelAndView userEntry(@Valid User user, BindingResult bindingResult){
-	   ModelAndView mav = new ModelAndView();
-	   if(bindingResult.hasErrors()){
-		   bindingResult.reject("error.input.user");
-		   mav.getModel().putAll(bindingResult.getModel());
-		   return mav;
-	   }
-	   try{
-		   shopService.createUser(user);
-	   }catch(DuplicateKeyException e){
-		   bindingResult.reject("error.duplicate.user");
-		   return mav;
-	   }
-	   mav.setViewName("user/login");
-	   mav.addObject("user",user);
-	   return mav;
-   }*/
    
    @RequestMapping("user/mypage")
    public ModelAndView mypage(String id){
@@ -257,6 +263,12 @@ public class UserController {
 	   //mav.addObject("userList",userList);
 	   return mav;
    }
+   
+//   @RequestMapping("user/userProfile")
+//   public ModelAndView userProfile(){
+//	   ModelAndView mav = new ModelAndView();
+//	   return mav;
+//   }
    
    @RequestMapping("user/mailForm")
    public ModelAndView mailForm(String[] idchks){
