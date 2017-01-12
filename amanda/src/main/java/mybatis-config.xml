@@ -9,6 +9,8 @@
 		<typeAlias type="logic.Sale" alias="Sale"/>		
 		<typeAlias type="logic.SaleItem" alias="SaleItem"/>	
 		<typeAlias type="logic.SemiUser" alias="SemiUser"/>
+		<typeAlias type="logic.Sns" alias="Sns"/>
+		<typeAlias type="logic.LikeUser" alias="Likeuser"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="dao/mapper/ItemMapper.xml"/>
@@ -17,5 +19,7 @@
 		<mapper resource="dao/mapper/SaleMapper.xml"/>
 		<mapper resource="dao/mapper/SaleItemMapper.xml"/>
 		<mapper resource="dao/mapper/BoardMapper.xml"/>
+		<mapper resource="dao/mapper/SnsMapper.xml"/>
+		<mapper resource="dao/mapper/LikeUserMapper.xml"/>
 	</mappers>
 </configuration>
