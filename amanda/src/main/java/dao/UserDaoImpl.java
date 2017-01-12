@@ -56,9 +56,14 @@ public class UserDaoImpl implements UserDao{
 		sqlSession.getMapper(UserMapper.class).createprofile(userprofile);
 	}
 
-	public UserProfile getUserProfile() {
-		return sqlSession.getMapper(UserMapper.class).getUserProfile();
+	public UserProfile getUserProfile(int m_number) {
+		return sqlSession.getMapper(UserMapper.class).getUserProfile(m_number);
 	}
+
+	public List<User> userlist() {
+		return sqlSession.selectList(NS + "userlist"); 
+	}
+
 
 
 }

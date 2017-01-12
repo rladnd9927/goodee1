@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="${contextPath}/decorator/css/animate.css">
 	<link rel="stylesheet" href="${contextPath}/decorator/js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="${contextPath}/decorator/css/style.css">	
+  	<decorator:head/>
   </head>
   <body>
 	<header>
