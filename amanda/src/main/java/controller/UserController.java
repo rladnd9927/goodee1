@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,6 +50,7 @@ import logic.Mail;
 import logic.Sale;
 import logic.SaleItem;
 import logic.SemiUser;
+import logic.SemiUserService;
 import logic.ShopService;
 import logic.User;
 import logic.UserProfile;
@@ -73,16 +75,41 @@ public class UserController {
 	 
 	@RequestMapping("user/userList")
 	public ModelAndView userList(){
+	   ModelAndView mav = new ModelAndView();
+	   List<UserProfile> userProfile = new ArrayList<UserProfile>();
+	   List<User> userList = userService.getUser();
+	   for(int i =0; i<userList.size(); i++){
+		   userProfile.add(userService.getUserProfile(userList.get(i).getM_number()));
+	   }
+	   System.out.println(userProfile.get(0).getM_nickname());
+	   mav.addObject("userList",userList);
+	   mav.addObject("userProfile",userProfile);
+	   return mav;
+	}
+	
+	@RequestMapping("user/userDetail")
+	public ModelAndView userDetail(int m_number){
 		ModelAndView mav = new ModelAndView();
-		User user = new User();
-		mav.addObject(user);
+		UserProfile userProfile = userService.getUserProfile(m_number);
+		mav.addObject(userProfile);
 		return mav;
 	}
+	
 	@RequestMapping("user/main")
 	public ModelAndView main(){
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
+	/*
+	 *    //유저리스트폼
+   @RequestMapping("chat/userlist")
+   public ModelAndView userlist(){
+      ModelAndView mav = new ModelAndView("chat/userlist");
+      List<ChatUser> chat = chatService.userlist();
+      mav.addObject("userlist", chat);
+      return mav;
+   }
+	 */
 	
 	/*@RequestMapping("user/listsearch")
 	public ModelAndView listsearch(Integer pageNum, String column, String find, HttpServletRequest request){
@@ -127,12 +154,11 @@ public class UserController {
 	      ModelAndView mav = new ModelAndView();
 	      mav.addObject(new User());
 	      return mav;
-	   }
+	}
 	
 	@RequestMapping("user/login")
 	public ModelAndView login(@Valid User user, BindingResult bindingResult, HttpSession session){
 		ModelAndView mav = new ModelAndView();
-		System.out.println(1234);
 		if(bindingResult.hasErrors()){
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
@@ -147,7 +173,6 @@ public class UserController {
 		session.setAttribute("USER", loginUser);
 		
 		mav.addObject("user",loginUser);
-		System.out.println(mav);
 		mav.setViewName("user/main");
 
 		return mav;
@@ -172,6 +197,9 @@ public class UserController {
 	@RequestMapping("user/join1")
 	public ModelAndView join1(@Valid SemiUser semiuser){
 		ModelAndView mav = new ModelAndView();
+		UserProfile userprofile = new UserProfile();
+		userprofile.setSemiuser(semiuser);
+		mav.addObject("userprofile",userprofile);
 		mav.setViewName("user/joinForm2");
 		return mav;
 	}
@@ -189,12 +217,11 @@ public class UserController {
 		userprofile.setSemiuser(semiuser);
 		/*mav.addObject("semiuser",semiuser);*/
 		mav.addObject("userprofile",userprofile);
-		System.out.println(mav);
 		return mav;
 	}
 	
 	@RequestMapping("user/join2")
-	public ModelAndView join2(@Valid SemiUser semiuser, @Valid UserProfile userprofile, BindingResult bindingResult){
+	public ModelAndView join2(@Valid UserProfile userprofile, BindingResult bindingResult,HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()){
 			bindingResult.reject("error.input.user");
@@ -209,7 +236,6 @@ public class UserController {
 		}
 		mav.setViewName("redirect:loginForm.do");
 		mav.addObject("userprofile",userprofile);
-		System.out.println(mav);
 		return mav;
 	}
 	
@@ -219,57 +245,30 @@ public class UserController {
       binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
    }
    
-/*   @RequestMapping("user/userEntry")
-   public ModelAndView userEntry(@Valid User user, BindingResult bindingResult){
-	   ModelAndView mav = new ModelAndView();
-	   if(bindingResult.hasErrors()){
-		   bindingResult.reject("error.input.user");
-		   mav.getModel().putAll(bindingResult.getModel());
-		   return mav;
-	   }
-	   try{
-		   shopService.createUser(user);
-	   }catch(DuplicateKeyException e){
-		   bindingResult.reject("error.duplicate.user");
-		   return mav;
-	   }
-	   mav.setViewName("user/login");
-	   mav.addObject("user",user);
-	   return mav;
-   }*/
    
    @RequestMapping("user/mypage")
    public ModelAndView mypage(String id){
 	   ModelAndView mav = new ModelAndView();
-	   User user = shopService.getUserById(id);
-	   List<Sale> salelist = shopService.saleList(id);
-	   for(Sale sale : salelist){
+	   List<User> userList = userService.getUser();
+	   mav.addObject("userList",userList);
+/*	   for(Sale sale : salelist){
 		   List<SaleItem> saleItemList = shopService.saleItemList(sale.getSaleId());
 		   for(SaleItem sitem : saleItemList){
 			   Item item = itemService.getItemList(sitem.getItemId());
 			   sitem.setItem(item);
 		   }
 		   sale.setSaleItemList(saleItemList);
-	   }
-	   mav.addObject("salelist",salelist);
-	   mav.addObject("user",user);
+	   }*/
+	   //mav.addObject("salelist",salelist);
+	   //mav.addObject("userList",userList);
 	   return mav;
    }
    
-/*   @RequestMapping("user/admin")
-   public ModelAndView admin(HttpSession session){
-	   User loginUser = (User)session.getAttribute("USER");
-	   if(loginUser == null){
-		   throw new LoginRequiredException();
-	   }
-	   if(!loginUser.getUserId().equals("admin")){
-		   throw new AdminRequiredException();
-	   }
-	   ModelAndView mav = new ModelAndView();
-	   List<User> userList = shopService.getUser();
-	   mav.addObject("userList",userList);
-	   return mav;
-   }*/
+//   @RequestMapping("user/userProfile")
+//   public ModelAndView userProfile(){
+//	   ModelAndView mav = new ModelAndView();
+//	   return mav;
+//   }
    
    @RequestMapping("user/mailForm")
    public ModelAndView mailForm(String[] idchks){
