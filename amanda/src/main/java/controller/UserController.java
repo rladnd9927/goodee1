@@ -182,7 +182,7 @@ public class UserController {
 	}
 	 
 	@RequestMapping("user/joinForm2")
-	public ModelAndView joinForm2(SemiUser semiuser, UserProfile userprofile,  BindingResult bindingResult, HttpServletRequest request){
+	public ModelAndView joinForm2(SemiUser semiuser, @Valid UserProfile userprofile, BindingResult bindingResult, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		DateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 		try{
@@ -204,13 +204,12 @@ public class UserController {
 		try{
 			System.out.println("DBÁ¢¼Ó");
 			userService.createUser(userprofile,request);
-			
 		}catch(DuplicateKeyException e){
 			bindingResult.reject("error.duplicate.user");
 			return mav;
 		}
 		mav.addObject("userprofile",userprofile);
-		mav.setViewName("user/loginForm.do");
+		mav.setViewName("redirect:loginForm.do");
 		System.out.println(mav);
 		return mav;
 	}

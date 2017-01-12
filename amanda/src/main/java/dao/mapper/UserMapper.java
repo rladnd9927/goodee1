@@ -13,7 +13,7 @@ public interface UserMapper {
 	User getUserbyNum(int m_number);
 	
 	@Insert("insert into semi_member (s_number, s_email, s_password, s_name, gender) "
-			+ "values(#{s_number},#{s_email},#{s_password}, #{s_name}, #{gender})")
+			+ "values(#{semiuser.s_number},#{semiuser.s_email},#{semiuser.s_password}, #{semiuser.s_name}, #{semiuser.gender})")
 	void createsemi(UserProfile userprofile);
 	
 	@Insert("insert into member_profile (m_number, m_picture1, m_picture2, m_picture3, "
