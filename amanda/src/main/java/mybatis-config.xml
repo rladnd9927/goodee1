@@ -7,7 +7,8 @@
  		<typeAlias type="logic.User" alias="User"/>
 		<typeAlias type="logic.Board" alias="Board"/>
 		<typeAlias type="logic.Sale" alias="Sale"/>		
-		<typeAlias type="logic.SaleItem" alias="SaleItem"/>		 
+		<typeAlias type="logic.SaleItem" alias="SaleItem"/>
+		<typeAlias type="logic.Sns" alias = "Sns"/>		 
 	</typeAliases>
 	<mappers>
 		<mapper resource="dao/mapper/ItemMapper.xml"/>
@@ -15,6 +16,7 @@
 		<mapper resource="dao/mapper/SaleMapper.xml"/>
 		<mapper resource="dao/mapper/SaleItemMapper.xml"/>
 		<mapper resource="dao/mapper/BoardMapper.xml"/>
+		<mapper resource="dao/mapper/SnsMapper.xml"/>
 	</mappers>
 		
 </configuration>
