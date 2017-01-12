@@ -165,7 +165,8 @@ public class UserController {
 	public ModelAndView joinForm1(){
 		ModelAndView mav = new ModelAndView();
 		SemiUser semiuser = new SemiUser();
-		mav.addObject("user",semiuser);		
+		mav.addObject("semiuser",semiuser);		
+		System.out.println("폼1 끝");
 		return mav;
 	}
 	@RequestMapping("user/join1")
@@ -173,15 +174,16 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		UserProfile userprofile = new UserProfile();
 		userprofile.setSemiuser(semiuser);
+		System.out.println("조인1 시작");
 		mav.addObject("userprofile",userprofile);
 		mav.setViewName("user/joinForm2");
+		System.out.println(mav);
 		return mav;
 	}
-	
+	 
 	@RequestMapping("user/joinForm2")
-	public ModelAndView joinForm2(SemiUser semiuser){
+	public ModelAndView joinForm2(SemiUser semiuser, UserProfile userprofile,  BindingResult bindingResult, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
-		UserProfile userprofile = new UserProfile();
 		DateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 		try{
 			userprofile.setM_birthday(sf.parse("1980-01-01"));
@@ -191,28 +193,49 @@ public class UserController {
 		userprofile.setSemiuser(semiuser);
 		/*mav.addObject("semiuser",semiuser);*/
 		mav.addObject("userprofile",userprofile);
-		return mav;
-	}
-	
-	@RequestMapping("user/join2")
-	public ModelAndView join2(@Valid UserProfile userprofile, BindingResult bindingResult,HttpServletRequest request){
-		ModelAndView mav = new ModelAndView();
-		if(bindingResult.hasErrors()){
-			bindingResult.reject("error.input.user");
-			mav.getModel().putAll(bindingResult.getModel());
-			return mav;
-		}
+		System.out.println(userprofile);
+
+//		if(bindingResult.hasErrors()){
+//			bindingResult.reject("error.input.user");
+//			System.out.println("에러셋팅");
+//			mav.getModel().putAll(bindingResult.getModel());
+//			return mav;
+//		}
 		try{
+			System.out.println("DB접속");
 			userService.createUser(userprofile,request);
+			
 		}catch(DuplicateKeyException e){
 			bindingResult.reject("error.duplicate.user");
 			return mav;
 		}
-		mav.setViewName("redirect:loginForm.do");
 		mav.addObject("userprofile",userprofile);
+		mav.setViewName("user/loginForm.do");
+		System.out.println(mav);
 		return mav;
 	}
 	
+//	@RequestMapping("user/join2")
+//	public ModelAndView join2(@Valid UserProfile userprofile, BindingResult bindingResult,HttpServletRequest request){
+//		System.out.println("gg");
+//		ModelAndView mav = new ModelAndView();
+//		if(bindingResult.hasErrors()){
+//			bindingResult.reject("error.input.user");
+//			mav.getModel().putAll(bindingResult.getModel());
+//			return mav;
+//		}
+//		try{
+//			userService.createUser(userprofile,request);
+//		}catch(DuplicateKeyException e){
+//			bindingResult.reject("error.duplicate.user");
+//			return mav;
+//		}
+//		mav.setViewName("user/loginForm.do");
+//		mav.addObject("userprofile",userprofile);
+//		System.out.println(mav);
+//		return mav;
+//	}
+//	
    @InitBinder
    public void initBinder(WebDataBinder binder) {
       DateFormat dateFormat =  new SimpleDateFormat("yyyy-MM-dd");
@@ -256,20 +279,20 @@ public class UserController {
 	   return mav;
    }
    
-/*   @RequestMapping("user/admin")
+   @RequestMapping("user/admin")
    public ModelAndView admin(HttpSession session){
 	   User loginUser = (User)session.getAttribute("USER");
 	   if(loginUser == null){
 		   throw new LoginRequiredException();
 	   }
-	   if(!loginUser.getUserId().equals("admin")){
+	   if(!loginUser.getM_email().equals("admin")){
 		   throw new AdminRequiredException();
 	   }
 	   ModelAndView mav = new ModelAndView();
-	   List<User> userList = shopService.getUser();
+	   List<User> userList = userService.getUser();
 	   mav.addObject("userList",userList);
 	   return mav;
-   }*/
+   }
    
    @RequestMapping("user/mailForm")
    public ModelAndView mailForm(String[] idchks){

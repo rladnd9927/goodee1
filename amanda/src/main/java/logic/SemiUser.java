@@ -5,8 +5,8 @@ public class SemiUser {
 	private String s_email;
 	private String s_password;
 	private String s_name;
-	private int s_score;
 	private int gender;
+	private int s_score;
 	
 	//getter,setter,toString
 	public int getS_number() {

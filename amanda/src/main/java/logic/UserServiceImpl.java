@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService{
 			uploadFileCreate(userprofile.getM_picture1(),request);
 		}
 		if(userprofile.getM_picture2() != null && !userprofile.getM_picture2().isEmpty()) {
-			uploadFileCreate(userprofile.getM_picture1(),request);
+			uploadFileCreate(userprofile.getM_picture2(),request);
 		}
 		if(userprofile.getM_picture3() != null && !userprofile.getM_picture3().isEmpty()) {
 			uploadFileCreate(userprofile.getM_picture3(),request);
@@ -70,6 +70,10 @@ public class UserServiceImpl implements UserService{
 	
 	public User getUserByIdPw(User user) {
 		return userDao.getUser(user.getM_email(),user.getM_password());
+	}
+
+	public List<User> getUser() {
+		return userDao.getUser();
 	}
 
 }

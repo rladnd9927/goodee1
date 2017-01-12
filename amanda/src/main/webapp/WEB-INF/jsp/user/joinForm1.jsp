@@ -35,7 +35,7 @@
 				<tr>
 					<th>失紺</th>
 					<td><form:radiobutton path="gender" value="0" label="害切" /> 
-					<form:radiobutton path="gender" value="1" label="食切" /></td>
+						<form:radiobutton path="gender" value="1" label="食切" /></td>
 				</tr>
 			</table>
 			<br />
