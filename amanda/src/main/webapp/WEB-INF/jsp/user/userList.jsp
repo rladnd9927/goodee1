@@ -8,7 +8,13 @@
 <link rel="stylesheet" href="../decorator/css/style.css">
 <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
-
+/* function win_open(){
+	var url = "userDtail.do?m_email="+document.f.m_email.value";
+	var name="win_open";
+	window.oepn(url,"회원 상세 정보","width=300,height=300,tollbar=no,location=no,resizable=yes,left=50,right=50");
+    /* var op="width=300, height=250, scrollbars=yes, resizeable=no, left=50, top=10";
+    window.open("userDetail.do?m_number="+document.f.m_number.value,"m_number",op) */
+} */
 
 $(document).ready(function(){
 $('.user_btn').on('click',function(){
@@ -61,19 +67,21 @@ $('.in_table').toggle();
 		<thead>
 			<tr><th colspan="7">회원목록</th></tr>
 			<tr>
-				<td>사진</td>
 				<td>성별</td>
 				<td>이름</td>
+				<td>상세정보</td>
 			</tr>
 		</thead>
 		<tbody >
+			
 			<c:forEach items="${userList}" var = "user">
 				<tr >
-					<td>${user.m_email}</td>
-					<td><a href="userDetail.do?m_number=${user.m_number}"> ${user.m_name}</a></td>
 					<td><c:if test="${user.gender == 0}">남자</c:if>
 						<c:if test="${user.gender == 1}">여자</c:if>
 					</td>
+					<td >${user.m_name}</td>
+					<td><a href="userDetail.do?m_number=${user.m_number}">상세정보 보기</a></td>
+					<!-- <td><input type="button" name="m_email" onclick="win_oepn()" value="상세정보 보기"></td> -->
 				</tr> 
 <%-- 				<tr>
 				<c:forEach items="${userProfile}" var="userProfile">

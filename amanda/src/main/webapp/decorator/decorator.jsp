@@ -7,6 +7,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <style>
+
+</style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -82,6 +85,20 @@
 		</nav>		
 	</header>
 	<decorator:body/>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<footer>
 		<div class="last-div">
 			<div class="container">
@@ -96,9 +113,8 @@
 				</div>
 			</div>
 			<a href="" class="scrollup"><i class="fa fa-chevron-up"></i></a>	
-		</div>		
-	</footer>
-   
+		</div>	
+   </footer>
 	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->	
     <script src="${contextPath}/decorator/js/jquery-2.1.1.min.js"></script>	

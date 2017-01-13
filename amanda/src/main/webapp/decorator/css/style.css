@@ -22,12 +22,10 @@ body {
 	color:#333;
 	background-color:#fff;
 }
-
 hi,h2,h3,h4,h5,h6 {
 	color:#333;
 	line-height:1.1em;
 }
-
 p {
 	color:#333;
 }
@@ -795,9 +793,12 @@ textarea.form-control {
 /*=========================
   Footer
  ================= */
-
+.last-div{
+	margin-bottom: -20px;
+	vertical-align: bottom;
+}
 footer {
-  background: #232425;
+  background: #fff;
 }
 .widgetheading {
   font-size: 24px;
