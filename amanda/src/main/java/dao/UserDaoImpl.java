@@ -44,6 +44,11 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectList(NS+"getUser",map);
 	}
 
+	public User getUser(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public User getUserbyNum(int m_number) {
 		return sqlSession.getMapper(UserMapper.class).getUserbyNum(m_number);
 	}

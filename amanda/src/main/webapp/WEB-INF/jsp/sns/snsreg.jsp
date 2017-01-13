@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="./css/snsreg.css">
 <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
 <script type="text/javascript" src="./js/snsreg.js"></script>
-<title>${loginUser.M_nickname}¥‘¿« SNS</title>
+<title>${loginUser.m_name}¥‘¿« SNS</title>
 </head>
 <body>
 

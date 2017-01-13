@@ -44,14 +44,13 @@
 	p:maxUploadSize="104857600" p:maxInMemorySize="104857600"/>
 <!-- 예외 발생시 호출되는 뷰 설정 -->
 <bean id="exceptionHandler" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-	<!-- <property name="exceptionMappings">
+	<property name="exceptionMappings">
 		 <value>
       	exception.LoginRequiredException=dummyLogin
       	exception.AdminRequiredException=adminLogin
-      	exception.CartEmptyException=cartEmpty
       	exception.PasswordFailException=passwordFail
       	exception.MailEmptyException=mailEmpty
       </value>
-   	</property> -->
+   	</property>
 </bean>
 </beans>
