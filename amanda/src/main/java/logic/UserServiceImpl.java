@@ -15,23 +15,26 @@ import org.springframework.web.multipart.MultipartFile;
 
 /*import dao.SnsDao;*/
 import dao.UserDao;
+import dao.MemberDao;
 //import dao.SnsDao;
 @Service
 public class UserServiceImpl implements UserService{ 
 	@Autowired
 	private UserDao userDao;
+
+	@Autowired
+	private MemberDao MemberDao;
 	
 	/*@Autowired
 	private SnsDao snsDao;*/
 
 	/*@Autowired
 	public SnsDao snsDao;*/
-
+	@Override
 	public List<Integer> getOthersNum(int m_number) { //m_number는 현재 로그인 유저의 회원번호
 		List<Integer> othersNum = new ArrayList<Integer>();
 		return othersNum;
 	}
-
 	public void createUser(UserProfile userprofile, HttpServletRequest request) {
 		if(userprofile.getM_picture1() != null && !userprofile.getM_picture1().isEmpty()) {
 			uploadFileCreate1(userprofile.getM_picture1(),request);
@@ -45,7 +48,7 @@ public class UserServiceImpl implements UserService{
 		userDao.createSemi(userprofile);
 		userDao.createProfile(userprofile);
 	}
-
+	
 	private void uploadFileCreate1(MultipartFile m_picture1, HttpServletRequest request) {
 		String uploadPath = request.getServletContext().getRealPath("/") + "/fileupload/";
 		FileOutputStream fos = null;
@@ -109,7 +112,7 @@ public class UserServiceImpl implements UserService{
 			} catch(IOException e) {}
 		}
 	}
-	
+
 	public User getUserByIdPw(User user) {
 		return userDao.getUser(user.getM_email(),user.getM_password());
 	}
@@ -117,7 +120,6 @@ public class UserServiceImpl implements UserService{
 	public List<User> getUser() {
 		return userDao.getUser();
 	}
-<<<<<<< HEAD
 
 	public UserProfile getUserProfile(int m_number) {
 		return userDao.getUserProfile(m_number);
@@ -127,10 +129,41 @@ public class UserServiceImpl implements UserService{
 		return userDao.userlist();
 	}
 
+	   public List<User> likelist(String userId, User User, int c_number) {
+	      return userDao.likelist(userId,User,c_number);
+	   }
 
 
+	   public List<Member> mypage(User User) {
+	      return MemberDao.mypage(User); 
+	   }
 
+	   public List<Member> youpage(User User) {
+	      return MemberDao.youpage(User);
+	   }
+	   
 
-=======
->>>>>>> branch 'master' of https://github.com/rladnd9927/goodee1.git
+	   public List<User> likelist2(String userId, User User) {
+	      return userDao.likelist2(userId,User);
+	   }
+
+	   public String ser(String userId, User User) {
+	      System.out.println(User+"ser로 여기까진옴"); 
+	      return userDao.ser(userId, User);
+	   }
+
+	   public String aer(String userId, User User) {
+	      System.out.println(User+"aer로 여기까진옴"); 
+	      return userDao.aer(userId, User);
+	   }
+		@Override
+	   public List<User> likelist(String userId, User User) {
+	      return userDao.likelist(userId,User);
+	   }
+		@Override
+	   public List<User> nolist(String userId, User User) {
+	      return userDao.nolist(userId,User);
+
+	   }
+
 }
