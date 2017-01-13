@@ -42,6 +42,9 @@ public class UserServiceImpl implements UserService{
 		if(userprofile.getM_picture3() != null && !userprofile.getM_picture3().isEmpty()) {
 			uploadFileCreate(userprofile.getM_picture3(),request);
 		}
+		userprofile.setM_pictureUrl1(userprofile.getM_picture1().getOriginalFilename());
+		userprofile.setM_pictureUrl2(userprofile.getM_picture2().getOriginalFilename());
+		userprofile.setM_pictureUrl3(userprofile.getM_picture3().getOriginalFilename());
 		userDao.createSemi(userprofile);
 		userDao.createProfile(userprofile);
 	}
@@ -74,6 +77,14 @@ public class UserServiceImpl implements UserService{
 
 	public List<User> getUser() {
 		return userDao.getUser();
+	}
+
+	public int getNum() {
+		return userDao.getNum();
+	}
+
+	public void delete(int num) {
+		userDao.delete(num);
 	}
 
 }
