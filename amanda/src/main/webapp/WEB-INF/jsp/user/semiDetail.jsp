@@ -13,37 +13,37 @@
 		<tr>
 			<td width="100" height="100">
 				여기에 semi_member의 사진
-				<!-- <td>${userprofile.m_picture1}</td> -->
+				${semiuserProfile.m_picture1}
 			</td>
 			<td>
 				<table border="1">
 					<tr>
 						<td>닉네임</td>
-						<td>${userprofile.m_nickname}</td>
+						<td>${semiuserProfile.m_nickname}</td>
 					</tr>
 					<tr>
 						<td>키</td>
-						<td>${userprofile.m_height}</td>
+						<td>${semiuserProfile.m_height}</td>
 					</tr>
 					<tr>
 						<td>체형</td>
-						<td>${userprofile.m_bodytype}</td>
+						<td>${semiuserProfile.m_bodytype}</td>
 					</tr>
 					<tr>
 						<td>성격</td>
-						<td>${userprofile.m_character}</td>
+						<td>${semiuserProfile.m_character}</td>
 					</tr>
 					<tr>
 						<td>종교</td>
-						<td>${userprofile.m_religion}</td>
+						<td>${semiuserProfile.m_religion}</td>
 					</tr>
 					<tr>
 						<td>흡연</td>
-						<td>${userprofile.m_smoking}</td>
+						<td>${semiuserProfile.m_smoking}</td>
 					</tr>
 					<tr>
 						<td>음주</td>
-						<td>${userprofile.m_drinking}</td>
+						<td>${semiuserProfile.m_drinking}</td>
 					</tr>
 				</table>
 			</td>

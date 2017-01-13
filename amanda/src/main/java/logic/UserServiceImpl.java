@@ -117,7 +117,6 @@ public class UserServiceImpl implements UserService{
 	public List<User> getUser() {
 		return userDao.getUser();
 	}
-<<<<<<< HEAD
 
 	public UserProfile getUserProfile(int m_number) {
 		return userDao.getUserProfile(m_number);
@@ -127,10 +126,4 @@ public class UserServiceImpl implements UserService{
 		return userDao.userlist();
 	}
 
-
-
-
-
-=======
->>>>>>> branch 'master' of https://github.com/rladnd9927/goodee1.git
 }

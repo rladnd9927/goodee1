@@ -20,7 +20,7 @@
 		</tr>
 		<c:forEach items="${semiuserList}" var="semiuser">
 			<tr>
-				<td><a href="semiDetail.do?id=${semiuser.s_number}">${semiuser.s_email}</a></td>
+				<td><a href="semiDetail.do?s_number=${semiuser.s_number}">${semiuser.s_email}</a></td>
 				<td>${semiuser.s_name}</td>
 				<td>${semiuser.gender}</td>
 				<td>${semiuser.s_score}</td>
