@@ -7,8 +7,8 @@ import logic.User;
 
 public interface MemberDao {
 	
-    List<Member> mypage(User chatUser);
+    List<Member> mypage(User myNum);
 
-    List<Member> youpage(User chatUser);
+    List<Member> youpage(User myNum);
 
 }

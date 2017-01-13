@@ -14,17 +14,19 @@ public interface UserDao {
 	User getUserbyNum(int m_number);
 	void createSemi(UserProfile userprofile);
 	void createProfile(UserProfile userprofile);
+	int getNum();
+	void delete(int num);
 	UserProfile getUserProfile(int m_number);
 	List<User> userlist();
-	   List<User> likelist(String userId, User User,  int c_number);
+	   List<User> likelist(int userNum, User myNum,  int c_number);
 
-	   String ser(String userId, User User);
+	   String ser(int userNum, User myNum);
 
-	   List<User> likelist2(String userId, User User);
+	   String aer(int userNum, User myNum);
 
-	   String aer(String userId, User User);
+	   List<User> likelist2(int userNum, User myNum);
 
-	   List<User> likelist(String userId, User User);
+	   List<User> likelist(int userNum, User myNum);
 
-	   List<User> nolist(String userId, User User);
+	   List<User> nolist(int userNum, User myNum);
 }

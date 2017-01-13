@@ -65,6 +65,16 @@ $('.in_table').toggle();
 				<td>성별</td>
 				<td>이름</td>
 			</tr>
+			</thead>
+			<tbody>
+
+			<c:forEach items="${userList}" var="user">
+				<tr>
+					<td><img src=""></td>
+					<td>${user.m_gender}</td>
+					<td>${user.m_name}</td>
+					<td>${user.m_email}</td>
+				</tr>
 		</thead>
 		<tbody >
 			<c:forEach items="${userList}" var = "user">

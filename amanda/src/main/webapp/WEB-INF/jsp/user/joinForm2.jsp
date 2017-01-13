@@ -16,7 +16,7 @@
 <title>회원가입</title>
 </head>
 <body>
-	<form:form modelAttribute="userprofile" method="post" action="join2.do" enctype="multipart/form-data">
+	<form:form modelAttribute="userprofile" method="post" action="joinForm2.do" enctype="multipart/form-data">
 		<spring:hasBindErrors name="userprofile">
 			<font color="red"> <c:forEach items="${errors.globalErrors}" var="error">
 					<spring:message code="${error.code}" />
