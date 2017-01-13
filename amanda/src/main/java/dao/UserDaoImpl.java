@@ -124,6 +124,4 @@ public class UserDaoImpl implements UserDao{
 	      return sqlSession.selectList(NS + "nolist", param);
 	   }
 
-
-
 }

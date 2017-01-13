@@ -48,10 +48,11 @@
 				</table>
 			</td>
 		</tr>
-		<form:form modelAttribute="semiuserProfile" method="post" action="semi1.do" enctype="multipart/form-data">
+		<form:form modelAttribute="semiuser" method="post" action="semi1.do">
 			<tr>
 				<td>
-					<form:select path="m_score">
+				<input type="hidden" name="s_number" value="${semiuser.s_number}">
+					<form:select path="s_score">
 						<form:option value="1">�ڡ١١١�</form:option>
 						<form:option value="2">�ڡڡ١١�</form:option>
 						<form:option value="3">�ڡڡڡ١�</form:option>

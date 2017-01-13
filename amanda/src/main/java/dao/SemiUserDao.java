@@ -12,4 +12,6 @@ public interface SemiUserDao {
 	SemiUser getSemiUser(String s_email, String s_password);
 	SemiUser getSemiUserbyNum(int s_number);
 	UserProfile getsemiUserProfile(int s_number);
+	//void pointUp(int s_number, SemiUser semiuser);
+	void pointUp(int s_number, int s_score);
 }

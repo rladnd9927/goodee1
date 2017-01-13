@@ -45,4 +45,26 @@ public class SemiUserDaoImpl implements SemiUserDao{
 		return sqlSession.getMapper(SemiUserMapper.class).getsemiUserProfile(s_number);
 	}
 
+	/*@Override
+	public void pointUp(int s_number,SemiUser semiuser) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("s_number", s_number);
+		map.put("semiuser", semiuser.getS_score());
+		//int s_score = semiuser.getS_score();
+		//System.out.println(s_score);
+		//sqlSession.getMapper(SemiUserMapper.class).pointUp(s_score,s_number);
+		sqlSession.getMapper(SemiUserMapper.class).pointUp(map);
+	}*/
+
+	@Override
+	public void pointUp(int s_number, int s_score) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("s_number", s_number);
+		map.put("s_score", s_score);
+		//int s_score = semiuser.getS_score();
+		//System.out.println(s_score);
+		//sqlSession.getMapper(SemiUserMapper.class).pointUp(s_score,s_number);
+		sqlSession.getMapper(SemiUserMapper.class).pointUp(map);
+		
+	}
 }
