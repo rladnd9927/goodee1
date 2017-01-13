@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import logic.SemiUser;
 import logic.SemiUserService;
+import logic.UserProfile;
 
 @Controller
 public class SemiUserController {
@@ -23,4 +24,14 @@ public class SemiUserController {
 			mav.addObject(semiuserList);
 			return mav;
 	 	}
+	 
+	 @RequestMapping("user/semiDetail")
+	 public ModelAndView semiDetail(int s_number){
+			ModelAndView mav = new ModelAndView();
+			UserProfile semiuserProfile = semiuserService.getsemiUserProfile(s_number);
+			mav.addObject("semiuserProfile",semiuserProfile);
+			return mav;
+		}
+	 
+	 
 }

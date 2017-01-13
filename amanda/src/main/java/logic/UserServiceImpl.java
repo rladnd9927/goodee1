@@ -30,11 +30,12 @@ public class UserServiceImpl implements UserService{
 
 	/*@Autowired
 	public SnsDao snsDao;*/
-	@Override
+
 	public List<Integer> getOthersNum(int m_number) { //m_number는 현재 로그인 유저의 회원번호
 		List<Integer> othersNum = new ArrayList<Integer>();
 		return othersNum;
 	}
+
 	public void createUser(UserProfile userprofile, HttpServletRequest request) {
 		if(userprofile.getM_picture1() != null && !userprofile.getM_picture1().isEmpty()) {
 			uploadFileCreate1(userprofile.getM_picture1(),request);
@@ -48,7 +49,7 @@ public class UserServiceImpl implements UserService{
 		userDao.createSemi(userprofile);
 		userDao.createProfile(userprofile);
 	}
-	
+
 	private void uploadFileCreate1(MultipartFile m_picture1, HttpServletRequest request) {
 		String uploadPath = request.getServletContext().getRealPath("/") + "/fileupload/";
 		FileOutputStream fos = null;
@@ -112,7 +113,7 @@ public class UserServiceImpl implements UserService{
 			} catch(IOException e) {}
 		}
 	}
-
+	
 	public User getUserByIdPw(User user) {
 		return userDao.getUser(user.getM_email(),user.getM_password());
 	}
@@ -128,6 +129,8 @@ public class UserServiceImpl implements UserService{
 	public List<User> userlist() {
 		return userDao.userlist();
 	}
+
+
 
 
 
