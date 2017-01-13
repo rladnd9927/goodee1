@@ -7,7 +7,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <style>
+<script>
+$(function() {
+	$('a').click(function(){
+		$('a').removeClass()
+		$(this).addClass('on')
+	})
+})
+</script>
+ <style>
 
 </style>
     <meta charset="utf-8">
@@ -27,7 +35,7 @@
   </head>
   <body>
 	<header>
-		<nav div class="navbar navbar-default navbar-static-top" role="navigation">
+		<nav class="navbar navbar-default navbar-static-top" role="navigation">
 			<div class="navbar-brand">
 							<a href="main.do"><h1><span>A</span>manda</h1></a>
 						</div>
@@ -42,10 +50,10 @@
 					</c:if>
 					<%-- 일반사용자 로그인 --%>
 					<c:if test="${USER.m_email != 'admin'}">
-						환영합니다.${USER.m_name}님
-						<a href="${path}/user/mypage.do?id=${USER.m_email}">마이페이지</a>
+						<a href="${path}/amanda/user/mypage2.do">${USER.m_name}</a>님 환영합니다
+						<%-- <a href="${path}/user/mypage.do?id=${USER.m_email}">마이페이지</a> --%>
 					</c:if>
-					<a href="${path}/amanda/user/logout.do">로그아웃</a>
+					<b>| </b><a href="${path}/amanda/user/logout.do">로그아웃</a>
 				</c:when>
 				<%-- 로그인 안된 경우 --%>
 				<c:otherwise>
@@ -71,11 +79,11 @@
 					<div class="navbar-collapse collapse">							
 						<div class="menu">
 							<ul class="nav nav-tabs" role="tablist">
-								<li role="presentation"><a href="main.do" class="active">HOME</a></li>
-								<li role="presentation"><a href="userList.do">List</a></li>
-								<li role="presentation"><a href="evaluate.do">evaluate</a></li>
-								<li role="presentation"><a href="${ContextPath}/amanda/sns/snsmain.do">SNS</a></li>
-								<li role="presentation"><a href="mypage11.do">MyPage</a></li>		
+								<li role="presentation"><a href="main.do">HOME</a></li>
+								<li role="presentation"><a href="userList.do" >List</a></li>
+								<li role="presentation"><a href="evaluate.do" >evaluate</a></li>
+								<li role="presentation"><a href="${ContextPath}/amanda/sns/snsmain.do" >SNS</a></li>
+								<li role="presentation"><a href="${path}/amanda/user/mypage2.do">MyPage</a></li>		
 								<li role="presentation"><a href="contact.html">Chat</a></li>						
 							</ul>
 						</div>

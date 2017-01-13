@@ -12,21 +12,24 @@
 <form:form modelAttribute="user" method="post" action="login.do">
 <div class="loginwrapper">
 <div id="loginlogo"><img alt="logo" src=""></div>
-<table class ="join02">
+<table class="logintab">
    <thead>
-      <tr><th>로그인</th><th></th>
+      <tr><th>LOGIN</th><th></th>
    </thead>
    <tr><th>아이디</th>
-      <td><form:input path="m_email"/><font color="red"><form:errors path="m_email"></form:errors></font>
+      <td><form:input path="m_email" class="input"/><font color="red"><form:errors path="m_email"></form:errors></font>
          </td>
    </tr>
+   <tr><br/></tr>
    <tr><th>비밀번호</th>
-      <td><form:password  path="m_password"/><font color="red"><form:errors path="m_password"></form:errors></font>
+      <td><form:password  path="m_password" class="input"/><font color="red"><form:errors path="m_password"></form:errors></font>
          </td></tr>
 
 </table>
-<input type="button" class="jb" value="회원가입" onclick="location.href='joinForm1.do'">
-<input type="submit" class="jb" value="로그인">
+<br>
+<input type="button" class="btn1" value="Join" onclick="location.href='joinForm1.do'">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="submit" class="btn1" value="Login">
 </div>
 </form:form>
 </body>

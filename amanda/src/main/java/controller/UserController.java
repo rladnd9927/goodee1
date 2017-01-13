@@ -166,10 +166,10 @@ public class UserController {
 		public ModelAndView nolist(int userNum, HttpSession session){
 			User myNum = (User)session.getAttribute("USER");
 			ModelAndView mav = new ModelAndView();
-					List<User> chat = userService.nolist(userNum, myNum);
-					mav.addObject("userlist", chat);
-					mav.setViewName("redirect:/user/mypage2.do");
-					return new ModelAndView("chat/alert");
+			List<User> chat = userService.nolist(userNum, myNum);
+			mav.addObject("userlist", chat);
+			mav.setViewName("redirect:/user/mypage2.do");
+			return new ModelAndView("chat/alert");
 		} 
 		
 	   
@@ -181,8 +181,8 @@ public class UserController {
 	      User myNum = (User)session.getAttribute("USER");
 	      List<Member> chat = userService.mypage(myNum);
 	      List<Member> chat2 = userService.youpage(myNum);
-	         
-	      System.out.println(chat);
+	      List<User> userList = userService.getUser();
+	      mav.addObject("userList",userList);
 	      mav.addObject("mypage", chat); 
 	      mav.addObject("youpage", chat2);   
 	      return mav; 

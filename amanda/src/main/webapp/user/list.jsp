@@ -5,25 +5,22 @@
 <head>
 <link rel="stylesheet" href="../decorator/css/style.css">
 <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<style type="text/css">
+li.on{color:red}
+</style>
 <script>
-$(document).ready(function(){
-$('.left_btn').on('click',function(){
-$('.in_table').toggle();
-});
-});
+$(function() {
+	$('li').click(function(){
+		$('li').removeClass()
+		$(this).addClass('on')
+	})
+})
 </script>
 </head>
 <body>
-<div class="left_btn">sssssssss</div>
-<table border='1px' cellspacing='0' width='100%'>
-	<tbody class="left_btn">
-   <tr><th colspan='2' bgcolor='lightblue'>Left Document</th>
-   </tbody>
-   <tr bgcolor='lightblue'><th width='25%'>Attribute</th><th>Value</th>
-   <table border='1px' cellspacing='0' width='100%' class="in_table">
-      
-    <tr align='center'><th bgcolor='lightblue'>emptyFlag</th><td id="L21"></td>
-   </table>
-   </table>
+<ul>
+	<li>sdfsdfdsfd</li>
+	<li>sdfsdfdsfd</li>
+</ul>
 </body>
 </html>
