@@ -2,8 +2,13 @@ package controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,7 +28,7 @@ public class SemiUserController {
 			mav.addObject("semiuserList",semiuserList);
 			mav.addObject(semiuserList);
 			return mav;
-	 	}
+	 }
 	 
 	 @RequestMapping("user/semiDetail")
 	 public ModelAndView semiDetail(int s_number){
@@ -31,7 +36,5 @@ public class SemiUserController {
 			UserProfile semiuserProfile = semiuserService.getsemiUserProfile(s_number);
 			mav.addObject("semiuserProfile",semiuserProfile);
 			return mav;
-		}
-	 
-	 
+	 }
 }
