@@ -30,7 +30,7 @@ public class SemiUserController {
 			mav.addObject("semiuserList",semiuserList);
 			mav.addObject(semiuserList);
 			return mav;
-	 }
+	 } 
 	 
 	 @RequestMapping("user/semiDetail")
 	 public ModelAndView semiDetail(int s_number, SemiUser semiuser){
