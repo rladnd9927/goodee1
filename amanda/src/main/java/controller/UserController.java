@@ -49,6 +49,7 @@ import logic.Board;
 import logic.Item;
 import logic.ItemService;
 import logic.Mail;
+import logic.Member;
 import logic.Sale;
 import logic.SaleItem;
 import logic.SemiUser;
@@ -85,9 +86,7 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		List<User> userList = userService.getUser();
 		mav.addObject("userList",userList);
-	   ModelAndView mav = new ModelAndView();
 	   List<UserProfile> userProfile = new ArrayList<UserProfile>();
-	   List<User> userList = userService.getUser();
 	   for(int i =0; i<userList.size(); i++){
 		   userProfile.add(userService.getUserProfile(userList.get(i).getM_number()));
 	   }
