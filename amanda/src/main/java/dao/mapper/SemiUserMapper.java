@@ -3,7 +3,6 @@ package dao.mapper;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -19,10 +18,7 @@ public interface SemiUserMapper {
 	
 	@Select("select * from member_profile where s_number = #{s_number}")
 	UserProfile getsemiUserProfile(int s_number);
-/*
-	@Update("update semi_member set s_score=#{s_score} where s_number=#{s_number} ")
-	void pointUp(int s_score, int s_number);
-	*/
-	@Update("update semi_member set s_score=#{s_score} where s_number=#{s_number} ")
+
+	@Update("update semi_member set s_score=s_score + #{s_score} where s_number=#{s_number} ")
 	void pointUp(Map<Object, Object> map);
 }

@@ -35,11 +35,6 @@ public class SemiUserServiceImpl implements SemiUserService{
 		return test;
 	}
 
-	/*@Override
-	public void pointUp(int s_number,SemiUser semiuser) {
-		semiuserDao.pointUp(s_number,semiuser);
-	}*/
-
 	@Override
 	public void pointUp(int s_number, int s_score) {
 		semiuserDao.pointUp(s_number,s_score);
