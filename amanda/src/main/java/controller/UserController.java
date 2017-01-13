@@ -74,27 +74,27 @@ public class UserController {
 	private ItemService itemService;
 	
 
-//	 
-//	@RequestMapping("user/userList")
-//	public ModelAndView userList(){
-//	   ModelAndView mav = new ModelAndView();
-//	   List<UserProfile> userProfile = new ArrayList<UserProfile>();
-//	   List<User> userList = userService.getUser();
-//	   for(int i =0; i<userList.size(); i++){
-//		   userProfile.add(userService.getUserProfile(userList.get(i).getM_number()));
-//	   }
-//	   System.out.println(userProfile.get(0).getM_nickname());
-//	   mav.addObject("userList",userList);
-//	   mav.addObject("userProfile",userProfile);
-//	   return mav;
-//	}
-	   @RequestMapping("user/userlist2")
-	   public ModelAndView userlist2(){
-	      ModelAndView mav = new ModelAndView("user/userlist2");
-	      List<User> chat = userService.userlist();
-	      mav.addObject("userlist", chat);
-	      return mav;
+	 
+	@RequestMapping("user/userList")
+	public ModelAndView userList(){
+	   ModelAndView mav = new ModelAndView();
+	   List<UserProfile> userProfile = new ArrayList<UserProfile>();
+	   List<User> userList = userService.getUser();
+	   for(int i =0; i<userList.size(); i++){
+		   userProfile.add(userService.getUserProfile(userList.get(i).getM_number()));
 	   }
+	   System.out.println(userProfile.get(0).getM_nickname());
+	   mav.addObject("userList",userList);
+	   mav.addObject("userProfile",userProfile);
+	   return mav;
+	}
+    @RequestMapping("user/userlist2")
+    public ModelAndView userlist2(){
+       ModelAndView mav = new ModelAndView("user/userlist2");
+       List<User> chat = userService.userlist();
+       mav.addObject("userlist", chat);
+       return mav;
+    }
 	   
 	@RequestMapping("user/userDetail")
 	public ModelAndView userDetail(int m_number){
