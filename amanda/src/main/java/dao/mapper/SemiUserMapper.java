@@ -1,9 +1,19 @@
 package dao.mapper;
 
-import org.apache.ibatis.annotations.Insert;
+import java.util.List;
 
-import logic.User;
+import org.apache.ibatis.annotations.Select;
 
-public class SemiUserMapper {
+import logic.SemiUser;
+import logic.UserProfile;
 
+public interface SemiUserMapper {
+	@Select("select * from semi_member where s_number = #{s_number}")
+	SemiUser getSemiUserbyNum(int s_number);
+
+	@Select("select * from semi_member")
+	List<SemiUser> getSemiUser();
+	
+	@Select("select * from member_profile where s_number = #{s_number}")
+	UserProfile getsemiUserProfile(int s_number);
 }

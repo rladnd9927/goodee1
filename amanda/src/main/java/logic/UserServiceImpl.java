@@ -15,11 +15,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 /*import dao.SnsDao;*/
 import dao.UserDao;
+import dao.MemberDao;
 //import dao.SnsDao;
 @Service
 public class UserServiceImpl implements UserService{ 
 	@Autowired
 	private UserDao userDao;
+
+	@Autowired
+	private MemberDao MemberDao;
 	
 	/*@Autowired
 	private SnsDao snsDao;*/
@@ -34,66 +38,27 @@ public class UserServiceImpl implements UserService{
 
 	public void createUser(UserProfile userprofile, HttpServletRequest request) {
 		if(userprofile.getM_picture1() != null && !userprofile.getM_picture1().isEmpty()) {
-			uploadFileCreate1(userprofile.getM_picture1(),request);
+			uploadFileCreate(userprofile.getM_picture1(),request);
 		}
 		if(userprofile.getM_picture2() != null && !userprofile.getM_picture2().isEmpty()) {
-			uploadFileCreate2(userprofile.getM_picture1(),request);
+			uploadFileCreate(userprofile.getM_picture2(),request);
 		}
 		if(userprofile.getM_picture3() != null && !userprofile.getM_picture3().isEmpty()) {
-			uploadFileCreate3(userprofile.getM_picture3(),request);
+			uploadFileCreate(userprofile.getM_picture3(),request);
 		}
+		userprofile.setM_pictureUrl1(userprofile.getM_picture1().getOriginalFilename());
+		userprofile.setM_pictureUrl2(userprofile.getM_picture2().getOriginalFilename());
+		userprofile.setM_pictureUrl3(userprofile.getM_picture3().getOriginalFilename());
 		userDao.createSemi(userprofile);
 		userDao.createProfile(userprofile);
 	}
 
-	private void uploadFileCreate1(MultipartFile m_picture1, HttpServletRequest request) {
+	private void uploadFileCreate(MultipartFile m_picture, HttpServletRequest request) {
 		String uploadPath = request.getServletContext().getRealPath("/") + "/fileupload/";
 		FileOutputStream fos = null;
 		try {
-			fos = new FileOutputStream(uploadPath + m_picture1.getOriginalFilename());
-			InputStream in = m_picture1.getInputStream();
-			int len;
-			byte[] buf = new byte[4096];
-			while((len = in.read(buf)) != -1) {
-				fos.write(buf,0,len);
-			}
-		} catch(IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(fos != null) {
-					fos.flush(); fos.close();
-				}
-			} catch(IOException e) {}
-		}
-	}
-	private void uploadFileCreate2(MultipartFile m_picture2, HttpServletRequest request) {
-		String uploadPath = request.getServletContext().getRealPath("/") + "/fileupload/";
-		FileOutputStream fos = null;
-		try {
-			fos = new FileOutputStream(uploadPath + m_picture2.getOriginalFilename());
-			InputStream in = m_picture2.getInputStream();
-			int len;
-			byte[] buf = new byte[4096];
-			while((len = in.read(buf)) != -1) {
-				fos.write(buf,0,len);
-			}
-		} catch(IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(fos != null) {
-					fos.flush(); fos.close();
-				}
-			} catch(IOException e) {}
-		}
-	}
-	private void uploadFileCreate3(MultipartFile m_picture3, HttpServletRequest request) {
-		String uploadPath = request.getServletContext().getRealPath("/") + "/fileupload/";
-		FileOutputStream fos = null;
-		try {
-			fos = new FileOutputStream(uploadPath + m_picture3.getOriginalFilename());
-			InputStream in = m_picture3.getInputStream();
+			fos = new FileOutputStream(uploadPath + m_picture.getOriginalFilename());
+			InputStream in = m_picture.getInputStream();
 			int len;
 			byte[] buf = new byte[4096];
 			while((len = in.read(buf)) != -1) {
@@ -122,9 +87,57 @@ public class UserServiceImpl implements UserService{
 		return userDao.getUserProfile(m_number);
 	}
 
+	public int getNum() {
+		return userDao.getNum();
+	}
+
+	public void delete(int num) {
+		userDao.delete(num);
+	}
+
+
 	public List<User> userlist() {
 		return userDao.userlist();
 	}
 
+
+
+
+
+	   public List<Member> mypage(User myNum) {
+	      return MemberDao.mypage(myNum); 
+	   }
+
+	   public List<Member> youpage(User myNum) {
+	      return MemberDao.youpage(myNum);
+	   }
+
+	   public String ser(int userNum, User myNum) {
+	      System.out.println(myNum+"ser로 여기까진옴"); 
+	      return userDao.ser(userNum, myNum);
+	   }
+
+	   public String aer(int userNum, User myNum) {
+	      System.out.println(myNum+"aer로 여기까진옴"); 
+	      return userDao.aer(userNum, myNum);
+	   }
+		@Override
+	   public List<User> likelist(int userNum, User myNum) {
+	      return userDao.likelist(userNum,myNum);
+	   }
+		
+		public List<User> likelist(int userNum, User myNum, int c_number) {
+			return userDao.likelist(userNum,myNum,c_number);
+		}
+		
+		public List<User> likelist2(int userNum, User myNum) {
+			return userDao.likelist2(userNum,myNum);
+		}
+		
+		@Override
+	   public List<User> nolist(int userNum, User myNum) { 
+	      return userDao.nolist(userNum,myNum); 
+
+	   }
 
 }

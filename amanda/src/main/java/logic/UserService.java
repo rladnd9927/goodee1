@@ -9,6 +9,16 @@ public interface UserService {
 	User getUserByIdPw(User user);
 	void createUser(UserProfile userprofile, HttpServletRequest request);
 	List<User> getUser();
+	int getNum();
+	void delete(int num);
 	UserProfile getUserProfile(int m_number);
 	List<User> userlist();
+   List<Member> mypage(User myNum);
+   List<Member> youpage(User myNum);
+   String ser(int userNum, User myNum);
+   String aer(int userNum, User myNum);
+   List<User> likelist(int userNum, User myNum);
+   List<User> likelist(int userNum, User myNum, int c_number);
+   List<User> likelist2(int userNum, User myNum);
+   List<User> nolist(int userNum, User myNum);
 }
