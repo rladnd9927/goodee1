@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="${contextPath}/decorator/css/animate.css">
 	<link rel="stylesheet" href="${contextPath}/decorator/js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="${contextPath}/decorator/css/style.css">	
+  	<decorator:head/>
   </head>
   <body>
 	<header>
@@ -70,7 +71,7 @@
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation"><a href="main.do" class="active">HOME</a></li>
 								<li role="presentation"><a href="userList.do">List</a></li>
-								<li role="presentation"><a href="blindDate.do">BlindDate</a></li>
+								<li role="presentation"><a href="evaluate.do">evaluate</a></li>
 								<li role="presentation"><a href="${ContextPath}/amanda/sns/snsmain.do">SNS</a></li>
 								<li role="presentation"><a href="mypage11.do">MyPage</a></li>		
 								<li role="presentation"><a href="contact.html">Chat</a></li>						

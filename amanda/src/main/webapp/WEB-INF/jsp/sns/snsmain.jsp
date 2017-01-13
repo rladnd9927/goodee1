@@ -1,90 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ include file="/WEB-INF/jsp/jspHeader.jsp" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<link rel="stylesheet" href="./css/sns.css">
-<script type="text/javascript" src="./js/sns.js"></script>
-<title>${loginUser.M_nickname}님의 SNS</title>
-</head>
-<body>
+    <%@ include file="/WEB-INF/jsp/jspHeader.jsp"%>
+<c:set var = "contextPath" value="${pageContext.request.contextPath}"/>
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+  </head><body data-spy="scroll">
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="lead nav nav-justified nav-pills">
+              <li class="active">
+                <a href="snsmain.do">나의 SNS</a>
+              </li>
+              <li>
+                <a href="snsreg.do">글쓰기</a>
+              </li>
+              <li>
+                <a href="othersns.do">내가 좋아요한 회원</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section"><div class="container"><div class="row"><div class="col-md-12"><hr></div></div></div></div>
+    
+    <div class="section"> <%--게시물 섹션 시작 (컨테이너) --%>
+    <c:forEach items="${snsList}" var="sns">
+      <div class="section"> <%--게시물섹션 반복구간 시작 --%>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="${sns.fileUrl}" class="img-circle img-responsive">
+            </div>
+            <div class="col-md-8">
+              <h1 class="text-primary">${sns.sns_subject}</h1>
+              
+              <p>${sns.sns_content}</p>
+              <a href="snsreply.do" class="reply"><i class="fa fa-3x fa-comments-o fa-fw text-success"></i></a>
+              <a href="snsmodifyForm.do"><i class="fa fa-3x fa-fw fa-undo s-o text-warning"></i></a>
+              <a href="snsdelete.do"><i class="fa fa-3x fa-fw text-muted fa-minus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container"> <%--문단구분선 --%>
+	      <div class="row">
+	     	 <div class="col-md-12"><hr></div>
+	      </div>
+	 </div>
+	 </c:forEach>
+	 </div>
+  
 
-
-<div class="container">
-  <div class="row">
-    <h2>Pinterest Responsive Grid</h2>
-
-    <p>Best viewed <a href="http://bootsnipp.com/iframe/Zkk0O" target="_blank">full screen</a>
-    </p>
-    <hr>
-    <section id="pinBoot">
-
-      <article class="white-panel"><img src="http://i.imgur.com/sDLIAZD.png" alt="">
-        <h4><a href="#">Title 1</a></h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </article>
-
-      <article class="white-panel"> <img src="http://i.imgur.com/8lhFhc1.gif" alt="">
-        <h4><a href="#">Title 2</a></h4>
-        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </article>
-
-      <article class="white-panel"> <img src="http://i.imgur.com/xOIMvAe.jpg" alt="">
-        <h4><a href="#">Title 3</a></h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-      </article>
-
-
-      <article class="white-panel"> <img src="http://i.imgur.com/3gXW3L3.jpg" alt="">
-        <h4><a href="#">Title 4</a></h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </article>
-
-      <article class="white-panel"> <img src="http://i.imgur.com/o2RVMqm.jpg" alt="">
-        <h4><a href="#">Title 5</a></h4>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </article>
-
-      <article class="white-panel"> <img src="http://i.imgur.com/kFFpuKA.jpg" alt="">
-        <h4><a href="#">Title 6</a></h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-      </article>
-
-
-
-      <article class="white-panel"><img src="http://i.imgur.com/E9RmLPA.jpg" alt="">
-        <h4><a href="#">Title 7</a></h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </article>
-
-      <article class="white-panel"> <img src="http://i.imgur.com/8lhFhc1.gif" alt="">
-        <h4><a href="#">Title 8</a></h4>
-        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </article>
-
-    </section>
-
-
-    <hr>
-
-
-  </div>
-  <p>
-    <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fbootsnipp.com%2Fiframe%2FZkk0O" target="_blank"><small>HTML</small><sup>5</sup></a>
-    <br>
-    <br>
-
-  </p>
-
-</div>
-
-
-</body>
-</html>
+</body></html>

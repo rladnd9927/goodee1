@@ -85,7 +85,30 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		List<User> userList = userService.getUser();
 		mav.addObject("userList",userList);
-		mav.addObject(userList);
+	   ModelAndView mav = new ModelAndView();
+	   List<UserProfile> userProfile = new ArrayList<UserProfile>();
+	   List<User> userList = userService.getUser();
+	   for(int i =0; i<userList.size(); i++){
+		   userProfile.add(userService.getUserProfile(userList.get(i).getM_number()));
+	   }
+	   System.out.println(userProfile.get(0).getM_nickname());
+	   mav.addObject("userList",userList);
+	   mav.addObject("userProfile",userProfile);
+	   return mav;
+	}
+    @RequestMapping("user/userlist2")
+    public ModelAndView userlist2(){
+       ModelAndView mav = new ModelAndView("user/userlist2");
+       List<User> chat = userService.userlist();
+       mav.addObject("userlist", chat);
+       return mav;
+    }
+	   
+	@RequestMapping("user/userDetail")
+	public ModelAndView userDetail(int m_number){
+		ModelAndView mav = new ModelAndView();
+		UserProfile userProfile = userService.getUserProfile(m_number);
+		mav.addObject(userProfile);
 		return mav;
 	}
 	@RequestMapping("user/main")
@@ -93,6 +116,94 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//알림창
+	   @RequestMapping("user/alert")
+	   public ModelAndView alert(){
+	      ModelAndView mav = new ModelAndView("user/alert");
+	      return mav;
+	   }
+	   
+	   //좋아요를 눌렀을때.
+	   @RequestMapping("user/likelist")
+	   public ModelAndView likelist(int userNum, HttpSession session){
+		   System.out.println(userNum+"유저아이디"); 
+		  User myNum = (User)session.getAttribute("USER");
+	      ModelAndView mav = new ModelAndView();  
+	      
+	      //내가 좋아요를 누르기 전에 내가 좋아요를 누르려는 사람이 이미 나를 좋아요를 눌렀는지 안눌렀는지 테스트.
+	      String bb = userService.aer(userNum, myNum);
+	      
+	      //이미 좋아요를 눌렀는지 테스트 1이 리턴되서 aa에 들어가면 이미 좋아요를 눌렀다는 뜻.
+	      String aa = userService.ser(userNum, myNum);
+	      //상대가 나를 좋아요 누르지 않았을때
+	      if(bb==null){
+	         //내가 상대를 이미 좋아요늘 눌렀는지 안눌렀는지 
+	         //널일경우 안눌렀음. 
+	         if(aa==null){   
+	         //고유번호 생성
+	            int c_number = (int)(Math.random() * 1000 + 1);
+	            System.out.println("ㄴㄴ");
+	            //좋아요 테이블에 상대추가.
+	            List<User> chat = userService.likelist(userNum, myNum,c_number);
+	            mav.addObject("userlist", chat);
+	            mav.setViewName("redirect:/user/userlist2.do");
+	            return new ModelAndView("chat/alert2"); 
+	             
+	         //내가 좋아요룰 이미 누른상태일때. 
+	         }else{
+	            System.out.println("ㅇㅇ");
+	            //likelist2는 좋아요 해제. 
+	            List<User> chat = userService.likelist2(userNum, myNum);
+	            mav.addObject("userlist", chat);
+	            mav.setViewName("redirect:/user/userlist2.do");
+	            return new ModelAndView("chat/alert");
+	         }
+	      //상대가 나를 좋아요 눌렀을때
+	      }else{
+	         List<User> chat = userService.likelist(userNum, myNum);
+	         mav.addObject("userlist", chat);
+	         mav.setViewName("redirect:/user/userlist2.do");
+	         return new ModelAndView("chat/alert2"); 
+	      }
+	   }
+
+		@RequestMapping("user/nolist")
+		public ModelAndView nolist(int userNum, HttpSession session){
+			User myNum = (User)session.getAttribute("USER");
+			ModelAndView mav = new ModelAndView();
+					List<User> chat = userService.nolist(userNum, myNum);
+					mav.addObject("userlist", chat);
+					mav.setViewName("redirect:/user/mypage2.do");
+					return new ModelAndView("chat/alert");
+		} 
+		
+	   
+	   //mypage 컨트롤러
+	   @RequestMapping("user/mypage2")
+	   public ModelAndView mypage2 (HttpSession session){
+	      
+	      ModelAndView mav = new ModelAndView("user/mypage2");
+	      User myNum = (User)session.getAttribute("USER");
+	      List<Member> chat = userService.mypage(myNum);
+	      List<Member> chat2 = userService.youpage(myNum);
+	         
+	      System.out.println(chat);
+	      mav.addObject("mypage", chat); 
+	      mav.addObject("youpage", chat2);   
+	      return mav; 
+	   }
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/*
+	 *    //유저리스트폼
+   @RequestMapping("user/userlist")
+   public ModelAndView userlist(){
+      ModelAndView mav = new ModelAndView("user/userlist");
+      List<ChatUser> chat = chatService.userlist();
+      mav.addObject("userlist", chat);
+      return mav;
+   }
+	 */
 
 	/*@RequestMapping("user/listsearch")
 	public ModelAndView listsearch(Integer pageNum, String column, String find, HttpServletRequest request){
@@ -138,7 +249,7 @@ public class UserController {
 		mav.addObject(new User());
 		return mav;
 	}
-
+	
 	@RequestMapping("user/login")
 	public ModelAndView login(@Valid User user, BindingResult bindingResult, HttpSession session){
 		ModelAndView mav = new ModelAndView();

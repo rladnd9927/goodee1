@@ -6,6 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <link rel="stylesheet" href="../decorator/css/style.css">
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>
+
+
+$(document).ready(function(){
+$('.user_btn').on('click',function(){
+$('.in_table').toggle();
+});
+});
+</script>
 <title>회원목록</title>
 </head>
 <body>
@@ -48,13 +58,12 @@
 	<div class="userwrapper">
 		<h2>회원리스트</h2>
 		<table class="join02">
-			<thead>
+		<thead>
 			<tr><th colspan="7">회원목록</th></tr>
 			<tr>
 				<td>사진</td>
-				<td>닉네임</td>
+				<td>성별</td>
 				<td>이름</td>
-				<td>나이</td>
 			</tr>
 			</thead>
 			<tbody>
@@ -66,20 +75,27 @@
 					<td>${user.m_name}</td>
 					<td>${user.m_email}</td>
 				</tr>
+		</thead>
+		<tbody >
+			<c:forEach items="${userList}" var = "user">
+				<tr >
+					<td>${user.m_email}</td>
+					<td><a href="userDetail.do?m_number=${user.m_number}"> ${user.m_name}</a></td>
+					<td><c:if test="${user.gender == 0}">남자</c:if>
+						<c:if test="${user.gender == 1}">여자</c:if>
+					</td>
+				</tr> 
+<%-- 				<tr>
+				<c:forEach items="${userProfile}" var="userProfile">
+					<c:if test="${userProfile.m_number == user.m_number}">
+					<td>${userProfile.m_nickname}</td>
+					<td>${userProfile.m_height}</td>
+					<td>${userProfile.m_nickname}</td>
+					</c:if>
+				</c:forEach>
+				</tr> --%>
 			</c:forEach>
-			</tbody>
-		</table>
-<%-- 		<div class="user">
-			<div class="usericon" ><img src="" alt="usericon" width="150" height="150"></div>
-			<div class="userprofile">
-				<font color="black">이름:${user.m_name}</font><br>
-				<font color="black">성별${user.gender}</font>
-			</div>
-		</div>
-		<div class="user">
-			<div class="usericon" ><img src="" alt="usericon" width="150" height="150"></div>
-			<div class="userprofile"><font color="black">mem.id</font></div>
-	</div> --%>
+	</table>
 </div>
 </div> 
 </body>

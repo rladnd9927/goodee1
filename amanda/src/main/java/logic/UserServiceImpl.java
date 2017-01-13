@@ -15,11 +15,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 /*import dao.SnsDao;*/
 import dao.UserDao;
+import dao.MemberDao;
 //import dao.SnsDao;
 @Service
 public class UserServiceImpl implements UserService{ 
 	@Autowired
 	private UserDao userDao;
+
+	@Autowired
+	private MemberDao MemberDao;
 	
 	/*@Autowired
 	private SnsDao snsDao;*/
@@ -79,6 +83,10 @@ public class UserServiceImpl implements UserService{
 		return userDao.getUser();
 	}
 
+	public UserProfile getUserProfile(int m_number) {
+		return userDao.getUserProfile(m_number);
+	}
+
 	public int getNum() {
 		return userDao.getNum();
 	}
@@ -86,5 +94,50 @@ public class UserServiceImpl implements UserService{
 	public void delete(int num) {
 		userDao.delete(num);
 	}
+
+
+	public List<User> userlist() {
+		return userDao.userlist();
+	}
+
+
+
+
+
+	   public List<Member> mypage(User myNum) {
+	      return MemberDao.mypage(myNum); 
+	   }
+
+	   public List<Member> youpage(User myNum) {
+	      return MemberDao.youpage(myNum);
+	   }
+
+	   public String ser(int userNum, User myNum) {
+	      System.out.println(myNum+"ser로 여기까진옴"); 
+	      return userDao.ser(userNum, myNum);
+	   }
+
+	   public String aer(int userNum, User myNum) {
+	      System.out.println(myNum+"aer로 여기까진옴"); 
+	      return userDao.aer(userNum, myNum);
+	   }
+		@Override
+	   public List<User> likelist(int userNum, User myNum) {
+	      return userDao.likelist(userNum,myNum);
+	   }
+		
+		public List<User> likelist(int userNum, User myNum, int c_number) {
+			return userDao.likelist(userNum,myNum,c_number);
+		}
+		
+		public List<User> likelist2(int userNum, User myNum) {
+			return userDao.likelist2(userNum,myNum);
+		}
+		
+		@Override
+	   public List<User> nolist(int userNum, User myNum) { 
+	      return userDao.nolist(userNum,myNum); 
+
+	   }
 
 }
