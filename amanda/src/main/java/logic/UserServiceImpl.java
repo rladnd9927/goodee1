@@ -129,40 +129,41 @@ public class UserServiceImpl implements UserService{
 		return userDao.userlist();
 	}
 
-	   public List<User> likelist(String userId, User User, int c_number) {
-	      return userDao.likelist(userId,User,c_number);
+
+
+	   public List<Member> mypage(User myNum) {
+	      return MemberDao.mypage(myNum); 
 	   }
 
-
-	   public List<Member> mypage(User User) {
-	      return MemberDao.mypage(User); 
+	   public List<Member> youpage(User myNum) {
+	      return MemberDao.youpage(myNum);
 	   }
 
-	   public List<Member> youpage(User User) {
-	      return MemberDao.youpage(User);
-	   }
-	   
-
-	   public List<User> likelist2(String userId, User User) {
-	      return userDao.likelist2(userId,User);
+	   public String ser(int userNum, User myNum) {
+	      System.out.println(myNum+"ser로 여기까진옴"); 
+	      return userDao.ser(userNum, myNum);
 	   }
 
-	   public String ser(String userId, User User) {
-	      System.out.println(User+"ser로 여기까진옴"); 
-	      return userDao.ser(userId, User);
-	   }
-
-	   public String aer(String userId, User User) {
-	      System.out.println(User+"aer로 여기까진옴"); 
-	      return userDao.aer(userId, User);
+	   public String aer(int userNum, User myNum) {
+	      System.out.println(myNum+"aer로 여기까진옴"); 
+	      return userDao.aer(userNum, myNum);
 	   }
 		@Override
-	   public List<User> likelist(String userId, User User) {
-	      return userDao.likelist(userId,User);
+	   public List<User> likelist(int userNum, User myNum) {
+	      return userDao.likelist(userNum,myNum);
 	   }
+		
+		public List<User> likelist(int userNum, User myNum, int c_number) {
+			return userDao.likelist(userNum,myNum,c_number);
+		}
+		
+		public List<User> likelist2(int userNum, User myNum) {
+			return userDao.likelist2(userNum,myNum);
+		}
+		
 		@Override
-	   public List<User> nolist(String userId, User User) {
-	      return userDao.nolist(userId,User);
+	   public List<User> nolist(int userNum, User myNum) { 
+	      return userDao.nolist(userNum,myNum); 
 
 	   }
 

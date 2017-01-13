@@ -18,11 +18,11 @@
    <tr>
    <c:if test="${chat.m_like!=1}">
       <td align="left">${chat.y_number}</td>
-      <td align="left"><a href="likelist.do?userId=${chat.y_number}">좋아요♥</a></td>
+      <td align="left"><a href="likelist.do?userNum=${chat.y_number}">좋아요♥</a></td>
    </c:if>
    <c:if test="${chat.m_like==1}">
       <td align="left">${chat.y_number}</td>
-      <td align="left"><a href="likelist.do?userId=${chat.y_number}">서로좋아요♥</a></td>
+      <td align="left"><a href="likelist.do?userNum=${chat.y_number}">서로좋아요♥</a></td>
    </c:if>
    </tr>
    </c:forEach> 
@@ -37,12 +37,12 @@
    <tr>
    <c:if test="${chat.m_like!=1}">
       <td align="left">${chat.m_number}</td>
-      <td align="left"><a href="likelist.do?userId=${chat.m_number}">좋아요♥</a></td>
+      <td align="left"><a href="likelist.do?userNum=${chat.m_number}">좋아요♥</a></td>
    </c:if>
    <c:if test="${chat.m_like==1}">
       <td align="left">${chat.m_number}</td>
-      <td align="left"><a href="nolist.do?userId=${chat.m_number}">서로좋아요♥</a></td>
-   </c:if>
+      <td align="left"><a href="nolist.do?userNum=${chat.m_number}">서로좋아요♥</a></td>
+   </c:if> 
    </tr>
    </c:forEach> 
 </table>

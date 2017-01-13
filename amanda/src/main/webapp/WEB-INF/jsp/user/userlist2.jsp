@@ -11,11 +11,11 @@
 <body>
 <table border="1" cellspacing="0" cellpadding="0" width="100%">
    <c:forEach items="${userlist}" var="chat">
-   <c:if test="${chat.m_email != USER.m_email}">
+   <c:if test="${chat.m_number != USER.m_number}">
    <tr>
-      <td align="left">${chat.m_email}</td>
-
-      <td align="left"><a href="likelist.do?m_email=${chat.m_email}">좋아요</a></td> 
+      <td align="left">${chat.m_email}</td>    
+      <td align="left">${chat.m_number}</td>
+      <td align="left"><a href="likelist.do?userNum=${chat.m_number}">좋아요</a></td> 
    </tr>
    </c:if> 
    </c:forEach>  

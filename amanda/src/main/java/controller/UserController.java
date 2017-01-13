@@ -45,6 +45,7 @@ import exception.AdminRequiredException;
 import exception.LoginRequiredException;
 import exception.MailEmptyException;
 import logic.Board;
+import logic.ChatUser;
 import logic.Item;
 import logic.ItemService;
 import logic.Mail;
@@ -119,17 +120,16 @@ public class UserController {
 	   
 	   //좋아요를 눌렀을때.
 	   @RequestMapping("user/likelist")
-	   public ModelAndView likelist(String m_email, HttpSession session){
-		   System.out.println(m_email+"유저아이디"); 
-		  User chatUser = (User)session.getAttribute("USER");
+	   public ModelAndView likelist(int userNum, HttpSession session){
+		   System.out.println(userNum+"유저아이디"); 
+		  User myNum = (User)session.getAttribute("USER");
 	      ModelAndView mav = new ModelAndView();  
 	      
 	      //내가 좋아요를 누르기 전에 내가 좋아요를 누르려는 사람이 이미 나를 좋아요를 눌렀는지 안눌렀는지 테스트.
-	      String bb = userService.aer(m_email, chatUser);
+	      String bb = userService.aer(userNum, myNum);
 	      
 	      //이미 좋아요를 눌렀는지 테스트 1이 리턴되서 aa에 들어가면 이미 좋아요를 눌렀다는 뜻.
-	      String aa = userService.ser(m_email, chatUser);
-	      
+	      String aa = userService.ser(userNum, myNum);
 	      //상대가 나를 좋아요 누르지 않았을때
 	      if(bb==null){
 	         //내가 상대를 이미 좋아요늘 눌렀는지 안눌렀는지 
@@ -139,42 +139,52 @@ public class UserController {
 	            int c_number = (int)(Math.random() * 1000 + 1);
 	            System.out.println("ㄴㄴ");
 	            //좋아요 테이블에 상대추가.
-	            List<User> chat = userService.likelist(m_email, chatUser,c_number);
+	            List<User> chat = userService.likelist(userNum, myNum,c_number);
 	            mav.addObject("userlist", chat);
-	            mav.setViewName("redirect:/chat/userlist.chat");
+	            mav.setViewName("redirect:/user/userlist2.do");
 	            return new ModelAndView("chat/alert2"); 
-	            
+	             
 	         //내가 좋아요룰 이미 누른상태일때. 
 	         }else{
 	            System.out.println("ㅇㅇ");
-	            //likelist2는 좋아요 해제.
-	            List<User> chat = userService.likelist2(m_email, chatUser);
+	            //likelist2는 좋아요 해제. 
+	            List<User> chat = userService.likelist2(userNum, myNum);
 	            mav.addObject("userlist", chat);
-	            mav.setViewName("redirect:/chat/userlist.chat");
+	            mav.setViewName("redirect:/user/userlist2.do");
 	            return new ModelAndView("chat/alert");
 	         }
 	      //상대가 나를 좋아요 눌렀을때
 	      }else{
-	         List<User> chat = userService.likelist(m_email, chatUser);
+	         List<User> chat = userService.likelist(userNum, myNum);
 	         mav.addObject("userlist", chat);
-	         mav.setViewName("redirect:/chat/userlist.chat");
+	         mav.setViewName("redirect:/user/userlist2.do");
 	         return new ModelAndView("chat/alert2"); 
 	      }
 	   }
 
+		@RequestMapping("user/nolist")
+		public ModelAndView nolist(int userNum, HttpSession session){
+			User myNum = (User)session.getAttribute("USER");
+			ModelAndView mav = new ModelAndView();
+					List<User> chat = userService.nolist(userNum, myNum);
+					mav.addObject("userlist", chat);
+					mav.setViewName("redirect:/user/mypage2.do");
+					return new ModelAndView("chat/alert");
+		} 
+		
 	   
 	   //mypage 컨트롤러
 	   @RequestMapping("user/mypage2")
 	   public ModelAndView mypage2 (HttpSession session){
 	      
-	      ModelAndView mav = new ModelAndView("user/mypage");
-	      User User = (User)session.getAttribute("User");
-	      List<Member> chat = userService.mypage(User);
-	      List<Member> chat2 = userService.youpage(User);
+	      ModelAndView mav = new ModelAndView("user/mypage2");
+	      User myNum = (User)session.getAttribute("USER");
+	      List<Member> chat = userService.mypage(myNum);
+	      List<Member> chat2 = userService.youpage(myNum);
 	         
 	      System.out.println(chat);
 	      mav.addObject("mypage", chat); 
-	      mav.addObject("youpage", chat2);  
+	      mav.addObject("youpage", chat2);   
 	      return mav; 
 	   }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
