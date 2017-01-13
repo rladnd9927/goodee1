@@ -37,6 +37,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -47,6 +48,7 @@ import logic.Board;
 import logic.Item;
 import logic.ItemService;
 import logic.Mail;
+import logic.Member;
 import logic.Sale;
 import logic.SaleItem;
 import logic.SemiUser;
@@ -86,7 +88,14 @@ public class UserController {
 	   mav.addObject("userProfile",userProfile);
 	   return mav;
 	}
-	
+    @RequestMapping("user/userlist2")
+    public ModelAndView userlist2(){
+       ModelAndView mav = new ModelAndView("user/userlist2");
+       List<User> chat = userService.userlist();
+       mav.addObject("userlist", chat);
+       return mav;
+    }
+	   
 	@RequestMapping("user/userDetail")
 	public ModelAndView userDetail(int m_number){
 		ModelAndView mav = new ModelAndView();
@@ -100,11 +109,80 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//알림창
+	   @RequestMapping("user/alert")
+	   public ModelAndView alert(){
+	      ModelAndView mav = new ModelAndView("user/alert");
+	      return mav;
+	   }
+	   
+	   //좋아요를 눌렀을때.
+	   @RequestMapping("user/likelist")
+	   public ModelAndView likelist(String m_email, HttpSession session){
+		   System.out.println(m_email+"유저아이디"); 
+		  User chatUser = (User)session.getAttribute("USER");
+	      ModelAndView mav = new ModelAndView();  
+	      
+	      //내가 좋아요를 누르기 전에 내가 좋아요를 누르려는 사람이 이미 나를 좋아요를 눌렀는지 안눌렀는지 테스트.
+	      String bb = userService.aer(m_email, chatUser);
+	      
+	      //이미 좋아요를 눌렀는지 테스트 1이 리턴되서 aa에 들어가면 이미 좋아요를 눌렀다는 뜻.
+	      String aa = userService.ser(m_email, chatUser);
+	      
+	      //상대가 나를 좋아요 누르지 않았을때
+	      if(bb==null){
+	         //내가 상대를 이미 좋아요늘 눌렀는지 안눌렀는지 
+	         //널일경우 안눌렀음. 
+	         if(aa==null){   
+	         //고유번호 생성
+	            int c_number = (int)(Math.random() * 1000 + 1);
+	            System.out.println("ㄴㄴ");
+	            //좋아요 테이블에 상대추가.
+	            List<User> chat = userService.likelist(m_email, chatUser,c_number);
+	            mav.addObject("userlist", chat);
+	            mav.setViewName("redirect:/chat/userlist.chat");
+	            return new ModelAndView("chat/alert2"); 
+	            
+	         //내가 좋아요룰 이미 누른상태일때. 
+	         }else{
+	            System.out.println("ㅇㅇ");
+	            //likelist2는 좋아요 해제.
+	            List<User> chat = userService.likelist2(m_email, chatUser);
+	            mav.addObject("userlist", chat);
+	            mav.setViewName("redirect:/chat/userlist.chat");
+	            return new ModelAndView("chat/alert");
+	         }
+	      //상대가 나를 좋아요 눌렀을때
+	      }else{
+	         List<User> chat = userService.likelist(m_email, chatUser);
+	         mav.addObject("userlist", chat);
+	         mav.setViewName("redirect:/chat/userlist.chat");
+	         return new ModelAndView("chat/alert2"); 
+	      }
+	   }
+
+	   
+	   //mypage 컨트롤러
+	   @RequestMapping("user/mypage2")
+	   public ModelAndView mypage2 (HttpSession session){
+	      
+	      ModelAndView mav = new ModelAndView("user/mypage");
+	      User User = (User)session.getAttribute("User");
+	      List<Member> chat = userService.mypage(User);
+	      List<Member> chat2 = userService.youpage(User);
+	         
+	      System.out.println(chat);
+	      mav.addObject("mypage", chat); 
+	      mav.addObject("youpage", chat2);  
+	      return mav; 
+	   }
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/*
 	 *    //유저리스트폼
-   @RequestMapping("chat/userlist")
+   @RequestMapping("user/userlist")
    public ModelAndView userlist(){
-      ModelAndView mav = new ModelAndView("chat/userlist");
+      ModelAndView mav = new ModelAndView("user/userlist");
       List<ChatUser> chat = chatService.userlist();
       mav.addObject("userlist", chat);
       return mav;
