@@ -1,6 +1,5 @@
 package logic;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
@@ -8,8 +7,6 @@ import javax.validation.constraints.NotNull;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Sns {
-	
-	private String sns_picture; //파일업로드
 	private Date sns_date; //등록일
 	
 	@NotNull
@@ -22,23 +19,20 @@ public class Sns {
 	private String fileUrl;
 	
 	private int m_number; //유저번호
-	private MultipartFile sns_file; //파일
-	public String toString() {
-		return "Sns [sns_picture=" + sns_picture + ", sns_date=" + sns_date + ", sns_content=" + sns_content
-				+ ", sns_no=" + sns_no + ", sns_subject=" + sns_subject + ", m_number=" + m_number + ", sns_file="
-				+ sns_file + "]";
+	private MultipartFile sns_picture; //파일
+	
+	
+	public MultipartFile getSns_picture() {
+		return sns_picture;
+	}
+	public void setSns_picture(MultipartFile sns_picture) {
+		this.sns_picture = sns_picture;
 	}
 	public String getFileUrl() {
 		return fileUrl;
 	}
 	public void setFileUrl(String fileUrl) {
 		this.fileUrl = fileUrl;
-	}
-	public String getSns_picture() {
-		return sns_picture;
-	}
-	public void setSns_picture(String sns_picture) {
-		this.sns_picture = sns_picture;
 	}
 	public Date getSns_date() {
 		return sns_date;
@@ -70,12 +64,5 @@ public class Sns {
 	public void setM_number(int m_number) {
 		this.m_number = m_number;
 	}
-	public MultipartFile getSns_file() {
-		return sns_file;
-	}
-	public void setSns_file(MultipartFile sns_file) {
-		this.sns_file = sns_file;
-	}
-	
 	
 }

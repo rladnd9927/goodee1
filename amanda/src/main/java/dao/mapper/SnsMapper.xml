@@ -5,8 +5,7 @@
 	<select id="list" parameterType="map" resultType="Sns">
 		select * from sns where m_number = #{m_number} order by SNS_DATE desc
 	</select>
-	
-	<!-- <select id = "replyList" parameterType="map" resultType="Reply">
-		select * from reply where sns_no = #{sns_no}
-	</select> -->
+	<select id = "detail" parameterType="map" resultType="Sns">
+		select * from sns where m_number=#{m_number} and sns_no=#{sns_no}
+	</select>
 </mapper>

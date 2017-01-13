@@ -11,6 +11,7 @@
 		<typeAlias type="logic.SemiUser" alias="SemiUser"/>
 		<typeAlias type="logic.Sns" alias="Sns"/>
 		<typeAlias type="logic.LikeUser" alias="Likeuser"/>
+		<typeAlias type="logic.Reply" alias="Reply"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="dao/mapper/ItemMapper.xml"/>
@@ -21,5 +22,6 @@
 		<mapper resource="dao/mapper/BoardMapper.xml"/>
 		<mapper resource="dao/mapper/SnsMapper.xml"/>
 		<mapper resource="dao/mapper/LikeUserMapper.xml"/>
+		<mapper resource="dao/mapper/ReplyMapper.xml"/>
 	</mappers>
 </configuration>
