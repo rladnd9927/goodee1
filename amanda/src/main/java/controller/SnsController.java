@@ -1,8 +1,10 @@
 package controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +32,8 @@ public class SnsController {
 	public ModelAndView snsmain(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		User loginUser = (User)session.getAttribute("USER");
+		SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd");
+		String today = sdate.format(new Date());
 		if(loginUser == null) {
 	         throw new LoginRequiredException();
 	    }
@@ -37,11 +41,12 @@ public class SnsController {
 		List<Sns> snsList = new ArrayList<Sns>();
 		snsList = snsService.getList(loginUser.getM_number()); //sns디비의 모든 게시물 정보를 가져올건데, 현재 로그인 유저의 유저번호를 이용하여, 좋아요 한사람의 게시물만 sns디비에서 가져온다.
 		
+		mav.addObject("today", today);
 		mav.addObject("snsList",snsList);
 		mav.addObject("loginUser",loginUser);
 		return mav;
 	}
-	@RequestMapping("sns/otherssns") //snsmain 뷰단에서 "내가좋아요 한 회원의 sns게시물"을 눌렀을 경우, 이 requestmapping으로 연결
+	@RequestMapping("sns/othersns") //snsmain 뷰단에서 "내가좋아요 한 회원의 sns게시물"을 눌렀을 경우, 이 requestmapping으로 연결
 	public ModelAndView otherssns(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		List<Integer> m_numberList = new ArrayList<Integer>(); //좋아요 한 회원의 m_number를 받아올 변수

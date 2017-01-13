@@ -13,7 +13,7 @@
 		<tr>
 			<td width="100" height="100">
 				여기에 semi_member의 사진
-				${semiuserProfile.m_picture1}
+				${semiuserProfile.m_pictureUrl1}
 			</td>
 			<td>
 				<table border="1">
@@ -49,6 +49,26 @@
 			</td>
 		</tr>
 		<tr>
+			<td colspan="2">
+				<form action="../user/evaluate.do">
+					<input type="hidden" name="s_number" value="${semiuserProfile.s_number}">
+					<table>
+						<tr>
+							<td>
+								<select name="m_score">
+									<c:forEach begin="1" end="5" var="idx">
+										<option>${idx}</option>
+									</c:forEach>
+								</select>
+							</td>
+							<td>
+								<input type="submit" value="점수주기">
+							</td>
+						</tr>
+					</table>
+				</form>
+			</td>
+			<!-- 
 			<td>
 				<select>
 					<option>★☆☆☆☆</option>
@@ -61,6 +81,7 @@
 			<td>
 				<input type="submit" value="점수주기">
 			</td>
+			-->
 		</tr>
 	</table>
 </body>

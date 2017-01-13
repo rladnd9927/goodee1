@@ -15,7 +15,6 @@
 			<td>이름</td>
 			<td>성별</td>
 			<td>점수</td>
-			<td>심사한 사람 수</td>
 			
 		</tr>
 		<c:forEach items="${semiuserList}" var="semiuser">
@@ -24,7 +23,6 @@
 				<td>${semiuser.s_name}</td>
 				<td>${semiuser.gender}</td>
 				<td>${semiuser.s_score}</td>
-				<td>${semiuser.s_usercount}명</td>
 			</tr>
 			<!-- 
 			<tr>
