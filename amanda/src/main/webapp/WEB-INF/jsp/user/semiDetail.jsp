@@ -11,24 +11,77 @@
 	<h2>디테일페이지 Test</h2>
 	<table border="1" cellpadding="0" cellspacing="0">
 		<tr>
-			<td>사진</td>
-			<td>닉네임</td>
-			<td>키</td>
-			<td>체형</td>
-			<td>성격</td>
-			<td>종교</td>
-			<td>흡연</td>
-			<td>음주</td>
+			<td width="100" height="100">
+				여기에 semi_member의 사진
+				${semiuserProfile.m_pictureUrl1}
+			</td>
+			<td>
+				<table border="1">
+					<tr>
+						<td>닉네임</td>
+						<td>${semiuserProfile.m_nickname}</td>
+					</tr>
+					<tr>
+						<td>키</td>
+						<td>${semiuserProfile.m_height}</td>
+					</tr>
+					<tr>
+						<td>체형</td>
+						<td>${semiuserProfile.m_bodytype}</td>
+					</tr>
+					<tr>
+						<td>성격</td>
+						<td>${semiuserProfile.m_character}</td>
+					</tr>
+					<tr>
+						<td>종교</td>
+						<td>${semiuserProfile.m_religion}</td>
+					</tr>
+					<tr>
+						<td>흡연</td>
+						<td>${semiuserProfile.m_smoking}</td>
+					</tr>
+					<tr>
+						<td>음주</td>
+						<td>${semiuserProfile.m_drinking}</td>
+					</tr>
+				</table>
+			</td>
 		</tr>
 		<tr>
-			<td>사진</td>
-			<td>닉네임</td>
-			<td>키</td>
-			<td>체형</td>
-			<td>성격</td>
-			<td>종교</td>
-			<td>흡연</td>
-			<td>음주</td>
+			<td colspan="2">
+				<form action="../user/evaluate.do">
+					<input type="hidden" name="s_number" value="${semiuserProfile.s_number}">
+					<table>
+						<tr>
+							<td>
+								<select name="m_score">
+									<c:forEach begin="1" end="5" var="idx">
+										<option>${idx}</option>
+									</c:forEach>
+								</select>
+							</td>
+							<td>
+								<input type="submit" value="점수주기">
+							</td>
+						</tr>
+					</table>
+				</form>
+			</td>
+			<!-- 
+			<td>
+				<select>
+					<option>★☆☆☆☆</option>
+					<option>★★☆☆☆</option>
+					<option>★★★☆☆</option>
+					<option>★★★★☆</option>
+					<option>★★★★★</option>
+				</select>
+			</td>
+			<td>
+				<input type="submit" value="점수주기">
+			</td>
+			-->
 		</tr>
 	</table>
 </body>

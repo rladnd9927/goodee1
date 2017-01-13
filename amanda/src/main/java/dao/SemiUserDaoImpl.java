@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import dao.mapper.SemiUserMapper;
 import dao.mapper.UserMapper;
 import logic.SemiUser;
+import logic.UserProfile;
 
 @Repository
 public class SemiUserDaoImpl implements SemiUserDao{
@@ -38,6 +39,10 @@ public class SemiUserDaoImpl implements SemiUserDao{
 
 	public SemiUser getSemiUserbyNum(int s_number) {
 		return sqlSession.getMapper(SemiUserMapper.class).getSemiUserbyNum(s_number);
+	}
+
+	public UserProfile getsemiUserProfile(int s_number) {
+		return sqlSession.getMapper(SemiUserMapper.class).getsemiUserProfile(s_number);
 	}
 
 }

@@ -18,16 +18,16 @@ public class MemberDaoImpl implements MemberDao {
 	   private SqlSessionTemplate sqlSession;
 	   private final String MS = "dao.mapper.MemberMapper.";
 	   
-	   public List<Member> mypage(User User) {
+	   public List<Member> mypage(User myNum) {
 	      Map<String, Object> param = new HashMap<String, Object>();
-	      param.put("User", User.getM_email());
+	      param.put("myNum", myNum.getM_number());
 	      System.out.println(param+"여기까지 오다");
 	      return sqlSession.selectList(MS + "mypage", param);
 	   }
 
-	   public List<Member> youpage(User User) {
+	   public List<Member> youpage(User myNum) {
 	      Map<String, Object> param = new HashMap<String, Object>();
-	      param.put("User", User.getM_email());
+	      param.put("myNum", myNum.getM_number());
 	      System.out.println(param+"2도 여기까지 오다");
 	      return sqlSession.selectList(MS + "youpage", param);
 	   }

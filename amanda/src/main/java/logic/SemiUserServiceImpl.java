@@ -27,4 +27,9 @@ public class SemiUserServiceImpl implements SemiUserService{
 	public SemiUser getSemiUserByIdPw(SemiUser semiuser) {
 		return semiuserDao.getSemiUser(semiuser.getS_email(),semiuser.getS_password());
 	}
+
+	public UserProfile getsemiUserProfile(int s_number) {
+		UserProfile test = semiuserDao.getsemiUserProfile(s_number);
+		return test;
+	}
 }
