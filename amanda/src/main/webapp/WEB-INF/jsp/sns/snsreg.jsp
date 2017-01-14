@@ -38,25 +38,23 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <form:form modelAttribute="sns" action = "snswrite.do" enctype="multipart/form-data" name ="snsform"  role="form" class="text-left">
+            <form:form modelAttribute="sns" action = "snswrite.do" enctype="multipart/form-data" role="form" class="text-left">
               <form:hidden path="m_number"/>
               <div class="form-group">
                 <label class="control-label" for="exampleInputEmail1">제목</label>
                 <form:input path="sns_subject" class="form-control" placeholder="제목을 입력하세요"/>
-				<span>
+				<br>
 					<font color="red">
 						<form:errors path="sns_subject"/>
 					</font>
-				</span>
               </div>
               <div class="form-group">
                 <label class="control-label" for="exampleInputEmail1">본문</label>
                 <form:textarea path="sns_content" cols="67" rows="15" class="form-control" placeholder="본문을 입력하세요"/>
-				<span>
+				<br>
 					<font color="red">
 						<form:errors path="sns_content"/>
 					</font>
-				</span>
               </div>
               <div class="form-group">
                 <label class="control-label" for="exampleInputEmail1">파일첨부</label>

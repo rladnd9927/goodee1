@@ -31,16 +31,12 @@ public class SnsController {
 	public ModelAndView snsmain(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		User loginUser = (User)session.getAttribute("USER");
-		SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd");
-		String today = sdate.format(new Date());
 		if(loginUser == null) {
 	         throw new LoginRequiredException();
 	    }
 		
 		List<Sns> snsList = new ArrayList<Sns>();
 		snsList = snsService.getList(loginUser.getM_number()); //sns디비의 모든 게시물 정보를 가져올건데, 현재 로그인 유저의 유저번호를 이용하여, 좋아요 한사람의 게시물만 sns디비에서 가져온다.
-		
-		mav.addObject("today", today);
 		mav.addObject("snsList",snsList);
 		mav.addObject("loginUser",loginUser);
 		return mav;
@@ -94,14 +90,14 @@ public class SnsController {
 	}
 
 	@RequestMapping("sns/snswrite")
-	public ModelAndView write(@Valid Sns sns, BindingResult bindingResult, HttpServletRequest request){
+	public ModelAndView snswrite(@Valid Sns sns, BindingResult bindingResult, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("sns/snsreg");
 		if(bindingResult.hasErrors()){
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}
 		snsService.write(sns,request);
-		mav.setViewName("redirect:/sns/snsmain.do");
+		mav.setViewName("redirect:snsmain.do");
 		return mav;
 	}
 	

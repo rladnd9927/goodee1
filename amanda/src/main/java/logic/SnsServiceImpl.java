@@ -42,9 +42,10 @@ public class SnsServiceImpl implements SnsService {
 			updateFileCreate(sns.getSns_picture(),request);
 			sns.setFileUrl(sns.getSns_picture().getOriginalFilename());
 		}else{
-			sns.setFileUrl(null);
+			sns.setFileUrl("nothing");
 		}
-		sns.setSns_no(snsDao.getMax(sns.getM_number())); //로그인 회원의 M_number에 해당하는 SNS목록들중, 최대 SNS_no를 불러옴
+		int snsMaxNum = snsDao.getMax(sns.getM_number());//로그인 회원의 M_number에 해당하는 SNS목록들중, 최대 SNS_no를 불러옴
+		sns.setSns_no(++snsMaxNum); 
 		snsDao.insert(sns);
 	}
 

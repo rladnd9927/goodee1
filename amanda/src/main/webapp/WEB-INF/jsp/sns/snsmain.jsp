@@ -94,11 +94,13 @@
       <div class="section"> <%--게시물섹션 반복구간 시작 --%>
         <div class="container">
           <div class="row">
-            <div class="col-md-4">
 	            <input type = "hidden" id="snsno" value="${sns.sns_no }"/>
 	   		 	<input type = "hidden" id="mnumber" value="${sns.m_number }"/>	
-              <img id = "clickforajax" src="${sns.fileUrl}" class="img-circle img-responsive">
-            </div>
+            <c:if test="${sns.fileUrl ne 'nothing'}">
+	            <div class="col-md-4">
+	              <img id = "clickforajax" src="../fileupload/${sns.fileUrl}" class="img-circle img-responsive">
+	            </div>
+            </c:if>
             <div class="col-md-8">
               <h1 id = "clickforajax" class="text-primary">${sns.sns_subject}</h1>
               

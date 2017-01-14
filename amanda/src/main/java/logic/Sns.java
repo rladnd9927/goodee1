@@ -2,22 +2,20 @@ package logic;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Sns {
-	private Date sns_date; //등록일
-	
-	@NotNull
+	@NotEmpty(message = "글 내용을 입력해 주세요")
 	private String sns_content; //글 내용
 	
-	private int sns_no; //글번호
-	
-	@NotNull
+	@NotEmpty(message = "글 제목을 입력해 주세요")
 	private String sns_subject;//글 제목
-	private String fileUrl;
 	
+	private Date sns_date; //등록일
+	private int sns_no; //글번호
+	private String fileUrl;
 	private int m_number; //유저번호
 	private MultipartFile sns_picture; //파일
 	
