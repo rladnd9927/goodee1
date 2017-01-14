@@ -71,11 +71,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	/*
-	@Autowired
-	private SemiUserService semiuserService;
-	 */
-
 	@Autowired
 	private ItemService itemService;
 
