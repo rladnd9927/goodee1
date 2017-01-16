@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,12 +38,22 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import dao.UserDao;
+import dao.mapper.UserMapper;
 import exception.AdminRequiredException;
 import exception.LoginRequiredException;
 import exception.MailEmptyException;
+import exception.PasswordFailException;
+import logic.Board;
+import logic.Item;
+import logic.ItemService;
 import logic.Mail;
 import logic.Member;
+import logic.Sale;
+import logic.SaleItem;
 import logic.SemiUser;
+import logic.SemiUserService;
 import logic.ShopService;
 import logic.User;
 import logic.UserProfile;
@@ -60,20 +71,45 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+//	@Autowired
+//	private ItemService itemService;
+
+
+
 	@RequestMapping("user/userList")
-	public ModelAndView userList(){
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView userList(String column, String find, HttpServletRequest request){
 		List<User> userList = userService.getUser();
-		mav.addObject("userList",userList);
+		
 	   List<UserProfile> userProfile = new ArrayList<UserProfile>();
 	   for(int i =0; i<userList.size(); i++){
 		   userProfile.add(userService.getUserProfile(userList.get(i).getM_number()));
 	   }
-	   System.out.println(userProfile.get(0).getM_nickname());
-	   mav.addObject("userList",userList);
+	   
+	   if(column == null || column.equals("")) column = null;
+	   if(find == null || find.equals("")) find = null;
+	   if(column == null) find = null;
+	   if(find == null) column = null;
+	   if(find != null && request.getMethod().equalsIgnoreCase("GET")){
+	   	try{
+	   		find = new String(find.getBytes("8859_1"),"euc-kr");
+	   	}catch(UnsupportedEncodingException e){
+	   		e.printStackTrace();
+	   	}
+	   }
+	   ModelAndView mav = new ModelAndView();
+       List<User> userCount = userService.listFind(column,find);
+       mav.addObject("userList",userList);
 	   mav.addObject("userProfile",userProfile);
-	   return mav;
+       mav.addObject("userCount",userCount);
+       mav.addObject("find",find);
+       System.out.println(column +", " +find);
+       System.out.println(userCount);
+       return mav;
 	}
+	
+	
+	
+	
     @RequestMapping("user/userlist2")
     public ModelAndView userlist2(){
        ModelAndView mav = new ModelAndView("user/userlist2");
@@ -105,7 +141,7 @@ public class UserController {
 	   //좋아요를 눌렀을때.
 	   @RequestMapping("user/likelist")
 	   public ModelAndView likelist(int userNum, HttpSession session){
-		   System.out.println(userNum+"유저아이디"); 
+		  //System.out.println(userNum+"유저아이디"); 
 		  User myNum = (User)session.getAttribute("USER");
 	      ModelAndView mav = new ModelAndView();  
 	      
@@ -121,7 +157,7 @@ public class UserController {
 	         if(aa==null){   
 	         //고유번호 생성
 	            int c_number = (int)(Math.random() * 1000 + 1);
-	            System.out.println("ㄴㄴ");
+	            //System.out.println("ㄴㄴ");
 	            //좋아요 테이블에 상대추가.
 	            List<User> chat = userService.likelist(userNum, myNum,c_number);
 	            mav.addObject("userlist", chat);
@@ -130,7 +166,6 @@ public class UserController {
 	             
 	         //내가 좋아요룰 이미 누른상태일때. 
 	         }else{
-	            System.out.println("ㅇㅇ");
 	            //likelist2는 좋아요 해제. 
 	            List<User> chat = userService.likelist2(userNum, myNum);
 	            mav.addObject("userlist", chat);
@@ -150,10 +185,10 @@ public class UserController {
 		public ModelAndView nolist(int userNum, HttpSession session){
 			User myNum = (User)session.getAttribute("USER");
 			ModelAndView mav = new ModelAndView();
-					List<User> chat = userService.nolist(userNum, myNum);
-					mav.addObject("userlist", chat);
-					mav.setViewName("redirect:/user/mypage2.do");
-					return new ModelAndView("chat/alert");
+			List<User> chat = userService.nolist(userNum, myNum);
+			mav.addObject("userlist", chat);
+			mav.setViewName("redirect:/user/mypage2.do");
+			return new ModelAndView("chat/alert");
 		} 
 		
 	   
@@ -165,8 +200,8 @@ public class UserController {
 	      User myNum = (User)session.getAttribute("USER");
 	      List<Member> chat = userService.mypage(myNum);
 	      List<Member> chat2 = userService.youpage(myNum);
-	         
-	      System.out.println(chat);
+	      List<User> userList = userService.getUser();
+	      mav.addObject("userList",userList);
 	      mav.addObject("mypage", chat); 
 	      mav.addObject("youpage", chat2);   
 	      return mav; 
@@ -183,8 +218,8 @@ public class UserController {
    }
 	 */
 
-	/*@RequestMapping("user/listsearch")
-	public ModelAndView listsearch(Integer pageNum, String column, String find, HttpServletRequest request){
+	@RequestMapping("user/listsearch")
+	public ModelAndView listsearch(String column, String find, HttpServletRequest request){
 		if(column == null || column.equals("")) column = null;
 		if(find == null || find.equals("")) find = null;
 		if(column == null) find = null;
@@ -198,27 +233,33 @@ public class UserController {
 		}
 
 		ModelAndView mav = new ModelAndView();
-//		int limit = 10;
-//		int listcount = boardService.boardCount(column,find);
-//		List<Board> boardlist = boardService.list(pageNum,limit,column,find);
-//		int maxpage = (int)((double)listcount/limit + 0.95);
-//		int startpage=(((int)(pageNum/10.0 + 0.9)) -1) *10 +1;
-//		int endpage = startpage + limit -1;
-//		if(endpage > maxpage) endpage = maxpage;
-//		int boardnum = listcount - ((pageNum - 1) * limit);
-//		SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd");
-//		String today = sdate.format(new Date());
-//		mav.addObject("today",today);
-//		mav.addObject("pageNum",pageNum);
-//		mav.addObject("maxpage",maxpage);
-//		mav.addObject("startpage",startpage);
-//		mav.addObject("endpage",endpage);
-//		mav.addObject("listcount",listcount);
-//		mav.addObject("boardlist",boardlist);
-//		mav.addObject("boardnum",boardnum);
-//		mav.addObject("find",find);
+		List<User> userCount = userService.listFind(column,find);
+/*		int limit = 10;
+		int listcount = boardService.boardCount(column,find);
+		int maxpage = (int)((double)listcount/limit + 0.95);
+		int startpage=(((int)(pageNum/10.0 + 0.9)) -1) *10 +1;
+		int endpage = startpage + limit -1;
+		if(endpage > maxpage) endpage = maxpage;
+		int boardnum = listcount - ((pageNum - 1) * limit);
+		SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd");
+		String today = sdate.format(new Date());*/
+/*		mav.addObject("today",today);
+		mav.addObject("pageNum",pageNum);
+		mav.addObject("maxpage",maxpage);
+		mav.addObject("startpage",startpage);
+		mav.addObject("endpage",endpage);
+		mav.addObject("listcount",listcount);
+		mav.addObject("boardlist",boardlist);
+		mav.addObject("boardnum",boardnum);
+*/
+		
+		mav.addObject("userCount",userCount);
+		mav.addObject("find",find);
+		System.out.println(column +", " +find);
+		System.out.println(userCount);
+		mav.setViewName("user/userList");
 		return mav;
-	}*/
+	}
 
 	/////login/////////
 	@RequestMapping("user/loginForm")
@@ -274,7 +315,6 @@ public class UserController {
 		userprofile.setSemiuser(semiuser);
 		mav.addObject("userprofile",userprofile);
 		mav.setViewName("user/joinForm2");
-		System.out.println(mav);
 		return mav;
 	}
 
@@ -289,7 +329,6 @@ public class UserController {
 		userprofile.setSemiuser(semiuser);
 		userprofile.setM_number(userService.getNum());
 		mav.addObject("userprofile",userprofile);
-		System.out.println(userprofile);
 
 		/*if(bindingResult.hasErrors()){
 			bindingResult.reject("error.input.user");
@@ -298,17 +337,17 @@ public class UserController {
 			return mav;
 		}*/
 		try{
-			System.out.println("DB접속");
-			System.out.println("유저다:"+userprofile);
+			//System.out.println("DB접속");
+			//System.out.println("유저다:"+userprofile);
 			userService.createUser(userprofile,request);
 		}catch(DuplicateKeyException e){
 			e.printStackTrace();
-			System.out.println("DB미접속");
+			//System.out.println("DB미접속");
 			bindingResult.reject("error.duplicate.user");
 			return mav;
 		}
 		mav.setViewName("redirect:loginForm.do");
-		System.out.println(mav);
+		//System.out.println(mav);
 		return mav;
 	}
 
@@ -361,6 +400,7 @@ public class UserController {
 	@RequestMapping("user/mypage")
 	public ModelAndView mypage(String id){
 		ModelAndView mav = new ModelAndView();
+		User user = shopService.getUserById(id);
 		List<User> userList = userService.getUser();
 		mav.addObject("userList",userList);
 		/*	   for(Sale sale : salelist){

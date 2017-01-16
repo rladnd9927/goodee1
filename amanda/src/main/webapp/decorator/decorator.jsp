@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var = "contextPath" value="${pageContext.request.contextPath}"/>
@@ -7,6 +7,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+<script>
+</script>
+ <style>
+
+</style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,30 +29,29 @@
   </head>
   <body>
 	<header>
-		<nav div class="navbar navbar-default navbar-static-top" role="navigation">
+		<nav class="navbar navbar-default navbar-static-top" role="navigation">
 			<div class="navbar-brand">
 							<a href="main.do"><h1><span>A</span>manda</h1></a>
 						</div>
 			<div class="container">
 				<div class="userlogin">
 			<c:choose>
-				<%-- 로그인 된 경우 --%>
+				<%-- �α��� �� ��� --%>
 				<c:when test="${not empty USER}">
-					<%-- 관리자 로그인 --%>
+					<%-- ������ �α��� --%>
 					<c:if test="${USER.m_email == 'admin'}">
-						환영합니다.${USER.m_name}님
-						<a href="${path}/amanda/user/admin.do">회원리스트</a>
+						<a href="${path}/amanda/user/admin.do">������</a>
 					</c:if>
-					<%-- 일반사용자 로그인 --%>
+					<%-- �Ϲݻ���� �α��� --%>
 					<c:if test="${USER.m_email != 'admin'}">
-						환영합니다.${USER.m_name}님
-						<a href="${path}amanda/user/mypage.do?id=${USER.m_email}">마이페이지</a>
+						<a href="${path}/amanda/user/mypage2.do">${USER.m_name}</a>�� ȯ���մϴ�
+						<%-- <a href="${path}/user/mypage.do?id=${USER.m_email}">����������</a> --%>
 					</c:if>
-					<a href="${path}/amanda/user/logout.do">로그아웃</a>
+					<b>| </b><a href="${path}/amanda/user/logout.do">�α׾ƿ�</a>
 				</c:when>
-				<%-- 로그인 안된 경우 --%>
+				<%-- �α��� �ȵ� ��� --%>
 				<c:otherwise>
-					<a href="${path}/amanda/user/loginForm.do">로그인</a>
+					<a href="${path}/amanda/user/loginForm.do">�α���</a>
 				</c:otherwise>
 			</c:choose>
 				</div>
@@ -69,11 +73,11 @@
 					<div class="navbar-collapse collapse">							
 						<div class="menu">
 							<ul class="nav nav-tabs" role="tablist">
-								<li role="presentation"><a href="main.do" class="active">HOME</a></li>
-								<li role="presentation"><a href="userList.do">List</a></li>
-								<li role="presentation"><a href="evaluate.do">evaluate</a></li>
-								<li role="presentation"><a href="${ContextPath}/amanda/sns/snsmain.do">SNS</a></li>
-								<li role="presentation"><a href="mypage11.do">MyPage</a></li>		
+								<li role="presentation"><a href="main.do">HOME</a></li>
+								<li role="presentation"><a href="userList.do" >List</a></li>
+								<li role="presentation"><a href="evaluate.do" >evaluate</a></li>
+								<li role="presentation"><a href="${ContextPath}/amanda/sns/snsmain.do" >SNS</a></li>
+								<li role="presentation"><a href="${path}/amanda/user/mypage2.do">MyPage</a></li>		
 								<li role="presentation"><a href="contact.html">Chat</a></li>						
 							</ul>
 						</div>
@@ -83,6 +87,20 @@
 		</nav>		
 	</header>
 	<decorator:body/>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<footer>
 		<div class="last-div">
 			<div class="container">
@@ -97,12 +115,11 @@
 				</div>
 			</div>
 			<a href="" class="scrollup"><i class="fa fa-chevron-up"></i></a>	
-		</div>		
-	</footer>
-   
+		</div>	
+   </footer>
 	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->	
-    <script src="${contextPath}/decorator/js/jquery-3.1.1.js"></script>	
+    <script src="${contextPath}/decorator/js/jquery-2.1.1.min.js"></script>	
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="${contextPath}/decorator/js/bootstrap.min.js"></script>
 	<script src="${contextPath}/decorator/js/wow.min.js"></script>
