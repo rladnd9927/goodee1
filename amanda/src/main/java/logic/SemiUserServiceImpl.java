@@ -34,10 +34,15 @@ public class SemiUserServiceImpl implements SemiUserService{
 		UserProfile test = semiuserDao.getsemiUserProfile(s_number);
 		return test;
 	}
-
+	
 	@Override
 	public void pointUp(int s_number, int s_score) {
 		semiuserDao.pointUp(s_number,s_score);
 		
+	}
+
+	@Override
+	public void countUp(int s_number, int s_usercount) {
+		semiuserDao.countUp(s_number,s_usercount);
 	}
 }
