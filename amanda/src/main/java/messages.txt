@@ -9,6 +9,8 @@ error.required.postCode=우편번호를 입력해 주세요
 error.required.address=주소를 입력해 주세요
 error.required.phoneNo=전화번호를 입력해 주세요
 error.required.email=EMAIL을 입력해 주세요
+error.required.sns_subject=제목을 입력해 주세요
+error.required.sns_content=내용을 입력해 주세요
 typeMismatch.birthDay=생년월일은 YYYY-MM-DD 형식으로 입력해 주세요
 #아이디 중복체크
 error.duplicate.user=이미 존재하는 회원 아이디 입니다.

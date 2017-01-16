@@ -12,7 +12,13 @@
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
   </head><body>
     
-    <div class="section"><div class="container"><div class="row"><div class="col-md-12"><ul class="lead nav nav-justified nav-pills"><li class="active"><a href="#">Home</a></li><li><a href="#">Profile</a></li><li><a href="#">Messages</a></li></ul></div></div></div></div><div class="section"><div class="container"><div class="row"><div class="col-md-12"><div class="section"><div class="container"><div class="row"><div class="col-md-4"><img src="https://unsplash.imgix.net/photo-1422728221357-57980993ea99?w=1024&amp;q=50&amp;fm=jpg&amp;s=b4a34018d745e33048bcfc326cb9907b" class="img-circle img-responsive"></div><div class="col-md-8"><ol><li>One</li><li>Two</li><li>Three</li></ol></div></div></div></div></div></div></div></div><div class="section"><div class="container"><div class="row"><div class="col-md-12"><hr></div></div></div></div><div class="section">
+    <div class="section"><div class="container"><div class="row"><div class="col-md-12"><ul class="lead nav nav-justified nav-pills"><li><a href="snsmain.do">나의 SNS</a>
+              </li>
+              <li class="active">
+                <a href="snsreg.do">글쓰기</a>
+              </li>
+              <li>
+                <a href="othersns.do">내가 좋아요한 회원</a></li></ul></div></div></div></div><div class="section"><div class="container"><div class="row"><div class="col-md-12"><div class="section"><div class="container"><div class="row"><div class="col-md-4"><img src="https://unsplash.imgix.net/photo-1422728221357-57980993ea99?w=1024&amp;q=50&amp;fm=jpg&amp;s=b4a34018d745e33048bcfc326cb9907b" class="img-circle img-responsive"></div><div class="col-md-8"><ol><li>One</li><li>Two</li><li>Three</li></ol></div></div></div></div></div></div></div></div><div class="section"><div class="container"><div class="row"><div class="col-md-12"><hr></div></div></div></div><div class="section">
       <div class="container">
         <div class="row">
           <div class="col-md-12">

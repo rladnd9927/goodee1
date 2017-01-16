@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,30 +37,24 @@ public class SnsServiceImpl implements SnsService {
 		return othersNum;
 	}
 
-	public Sns detail(Integer sns_no) {
-		Sns snsdetail = snsDao.detail(sns_no);
-		return snsdetail;
-	}
-
-	public List<Reply> replyList(Integer sns_no) {
-		List<Reply> replyList = snsDao.reply(sns_no);
-		return replyList;
-	}
-
 	public void write(Sns sns, HttpServletRequest request) {
-		if(sns.getSns_file() != null && !sns.getSns_file().isEmpty()){
-			updateFileCreate(sns.getSns_file(),request);
-			sns.setFileUrl(sns.getSns_file().getOriginalFilename());
+		if(sns.getSns_picture() != null && !sns.getSns_picture().isEmpty()){
+			updateFileCreate(sns.getSns_picture(),request);
+			sns.setFileUrl(sns.getSns_picture().getOriginalFilename());
+		}else{
+			sns.setFileUrl("nothing");
 		}
+		int snsMaxNum = snsDao.getMax(sns.getM_number());//로그인 회원의 M_number에 해당하는 SNS목록들중, 최대 SNS_no를 불러옴
+		sns.setSns_no(++snsMaxNum); 
 		snsDao.insert(sns);
 	}
 
-	private void updateFileCreate(MultipartFile file1, HttpServletRequest request) {
+	private void updateFileCreate(MultipartFile sns_picture, HttpServletRequest request) {
 		String uploadPath = request.getServletContext().getRealPath("/")+"/fileupload/";
 		FileOutputStream fos = null;
 		try{
-			fos = new FileOutputStream(uploadPath + file1.getOriginalFilename());
-			InputStream in = file1.getInputStream();
+			fos = new FileOutputStream(uploadPath + sns_picture.getOriginalFilename());
+			InputStream in = sns_picture.getInputStream();
 			int len;
 			byte[] buf = new byte[4096];
 			while((len=in.read(buf))!=-1){
@@ -82,8 +75,8 @@ public class SnsServiceImpl implements SnsService {
 	}
 	//@Override
 	public void update(Sns sns, HttpServletRequest request) {
-		if(!sns.getSns_file().isEmpty()){
-			updateFileCreate(sns.getSns_file(),request);
+		if(!sns.getSns_picture().isEmpty()){
+			updateFileCreate(sns.getSns_picture(),request);
 		}
 		snsDao.update(sns);
 	}
@@ -94,5 +87,13 @@ public class SnsServiceImpl implements SnsService {
 
 	public void delete(int sns_no) {
 		snsDao.delete(sns_no);
+	}
+
+	public Sns detail(Integer sns_no, int m_number) {
+		return snsDao.detail(sns_no,m_number);
+	}
+
+	public List<Reply> replyList(int sns_no, int m_number) {
+		return snsDao.replyList(sns_no,m_number);
 	}
 }
