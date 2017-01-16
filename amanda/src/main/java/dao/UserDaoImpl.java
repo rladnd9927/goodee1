@@ -139,35 +139,31 @@ public class UserDaoImpl implements UserDao{
 	      return sqlSession.selectList(NS + "nolist", param);
 	   }
 
-<<<<<<< HEAD
 	@Override 
 	public int m_like(int userNum, User myNum) {
 		  Map<String, Object> param = new HashMap<String, Object>();
 	      param.put("userNum", userNum); 
 	      param.put("myNum",  myNum.getM_number());
 	      return sqlSession.selectOne(NS + "m_like", param);
-=======
+	}
 	@Override
 	public User getUser(String id) {
 		// TODO Auto-generated method stub
 		return null;
->>>>>>> branch 'master' of https://github.com/rladnd9927/goodee1.git
 	}
 
 	@Override
-<<<<<<< HEAD
 	public String cer(int userNum, User myNum) {
 	    Map<String, Object> param = new HashMap<String, Object>();
 	      param.put("userNum", userNum);
 	      param.put("myNum", myNum.getM_number());  
-	      return sqlSession.selectOne(NS + "cer", param);  
-=======
+	      return sqlSession.selectOne(NS + "cer", param);
+	}
 	public List<User> list(String column, String find) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("column", column);
 		param.put("find", find);
 		return sqlSession.selectList(NS + "list" , param);
->>>>>>> branch 'master' of https://github.com/rladnd9927/goodee1.git
 	}
 
 }

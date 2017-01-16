@@ -86,12 +86,12 @@ $('.in_table').toggle();
 					<td><a href="likelist.do?userNum=${user.m_number}" class="ovalbutton"><img src="../img/Heart.png" alt="좋아요" width="20px"/></a></td>
 					<!-- <td><input type="button" name="m_email" onclick="win_oepn()" value="상세정보 보기"></td> -->
 				</tr>
-				 <tr class="userProfile">
+<%-- 				 <tr class="userProfile">
  				  <c:forEach items="${userProfile}" var="userProfile">
 				   <td>${userProfile.m_bodytype}</td>
 				</c:forEach>
 				 
-				 </tr>
+				 </tr> --%>
 				</c:if>
 			</c:forEach>
 	</table>

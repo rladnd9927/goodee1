@@ -56,9 +56,10 @@
    </select>  
    
    <select id="list" parameterType="map" resultType="User" >
-   	  select mem.m_number, mem.m_name, memPro.m_bodytype from member mem, member_Profile memPro where mem.m_number = memPro.m_number
+   	  select * from (select * from member
    	  	<if test="column !=null and find != null">
-   	  		and ${column} like '%${find}%'
+   	  		where ${column} like '%${find}%'
    	  	</if>
+   	  	)
    </select>   
 </mapper>
