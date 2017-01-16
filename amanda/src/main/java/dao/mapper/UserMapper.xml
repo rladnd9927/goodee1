@@ -39,4 +39,11 @@
       SELECT ser FROM I_Like_Member where Y_number=#{myNum} and M_number=#{userNum}
    </select>  
    
+   <select id="list" parameterType="map" resultType="User" >
+   	  select * from (select * from member
+   	  	<if test="column !=null and find != null">
+   	  		where ${column} like '%${find}%'
+   	  	</if>
+   	  	)
+   </select>   
 </mapper>

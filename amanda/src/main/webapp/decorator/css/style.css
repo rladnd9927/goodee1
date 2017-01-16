@@ -39,6 +39,9 @@ a {
 	color:#333;
 }
 /*----------table------------------------------------------------------------------  */
+.userprofile{
+	visibility: hidden;
+}
 table.logintab{
 	font-style: normal;
 	border-left:1px;

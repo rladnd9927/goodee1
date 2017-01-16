@@ -124,4 +124,18 @@ public class UserDaoImpl implements UserDao{
 	      return sqlSession.selectList(NS + "nolist", param);
 	   }
 
+	@Override
+	public User getUser(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> list(String column, String find) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("column", column);
+		param.put("find", find);
+		return sqlSession.selectList(NS + "list" , param);
+	}
+
 }

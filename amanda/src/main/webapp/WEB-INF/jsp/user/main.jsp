@@ -8,22 +8,14 @@
 <title>main</title>
 </head>
 <body>
-<div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<h1><span>A</span>manda</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-</div>
+<div class="slider">
+      <div class="img-responsive">
+         <ul class="bxslider">            
+            <li><img src="../img/1.jpg" alt=""></li>                        
+            <li><img src="../img/2.jpg" alt=""/></li>   
+            <li><img src="../img/3.jpg" alt=""/></li>         
+         </ul>
+      </div>   
+    </div>
 </body>
 </html>

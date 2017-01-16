@@ -1,6 +1,13 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ include file="/WEB-INF/jsp/jspHeader.jsp"%>
+<%
+	Date birthday = new Date();
+	request.setAttribute("birthday", birthday);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,7 +25,7 @@
 				<tbody>
 				 <tr>
 				 	<th>사진</th>
-				 	<td><img src="" alt="회원사진"></td>
+				 	<td><img src="../img/${pictureUrl1}" alt="회원사진"></td>
 				 </tr>
 				 <tr>
 				 	<th>닉네임</th>

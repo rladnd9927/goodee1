@@ -21,4 +21,5 @@ public interface UserService {
    List<User> likelist(int userNum, User myNum, int c_number);
    List<User> likelist2(int userNum, User myNum);
    List<User> nolist(int userNum, User myNum);
+   List<User> listFind(String column, String find);
 }

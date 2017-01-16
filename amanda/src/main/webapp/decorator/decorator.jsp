@@ -8,12 +8,6 @@
 <html lang="en">
   <head>
 <script>
-$(function() {
-	$('a').click(function(){
-		$('a').removeClass()
-		$(this).addClass('on')
-	})
-})
 </script>
  <style>
 
