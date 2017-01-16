@@ -102,9 +102,6 @@
 				 		<c:if test="${userProfile.m_character==11}">개성있는</c:if>
 				 	</td>
 				 </tr>
-				 <tr>
-				 	<th>SNS</th>
-				 	<td><a href="#">SNS 보러가기</a></td>
 				</tbody>
 			</table>
 			<br />

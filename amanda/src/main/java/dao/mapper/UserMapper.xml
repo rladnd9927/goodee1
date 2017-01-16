@@ -40,10 +40,9 @@
    </select>  
    
    <select id="list" parameterType="map" resultType="User" >
-   	  select * from (select * from member
+   	  select mem.m_number, mem.m_name, memPro.m_bodytype from member mem, member_Profile memPro where mem.m_number = memPro.m_number
    	  	<if test="column !=null and find != null">
-   	  		where ${column} like '%${find}%'
+   	  		and ${column} like '%${find}%'
    	  	</if>
-   	  	)
    </select>   
 </mapper>

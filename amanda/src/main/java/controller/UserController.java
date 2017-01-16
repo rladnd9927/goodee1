@@ -78,8 +78,8 @@ public class UserController {
 
 	@RequestMapping("user/userList")
 	public ModelAndView userList(String column, String find, HttpServletRequest request){
-		List<User> userList = userService.getUser();
-		
+	   List<User> userList = userService.getUser();
+	   
 	   List<UserProfile> userProfile = new ArrayList<UserProfile>();
 	   for(int i =0; i<userList.size(); i++){
 		   userProfile.add(userService.getUserProfile(userList.get(i).getM_number()));
