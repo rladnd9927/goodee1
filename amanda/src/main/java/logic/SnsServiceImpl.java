@@ -12,7 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+
 import dao.LikeUserDao;
+import dao.ReplyDao;
 import dao.SnsDao;
 import dao.UserDao;
 
@@ -25,6 +30,8 @@ public class SnsServiceImpl implements SnsService {
 	private LikeUserDao	likeUserDao;
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private ReplyDao replyDao;
 	
 	public List<Sns> getList(int m_number) {
 		List<Sns> snsList = snsDao.list(m_number);
@@ -85,8 +92,8 @@ public class SnsServiceImpl implements SnsService {
 		return snsUser;
 	}
 
-	public void delete(int sns_no) {
-		snsDao.delete(sns_no);
+	public void delete(int sns_no, int m_number) {
+		snsDao.delete(sns_no,m_number);
 	}
 
 	public Sns detail(Integer sns_no, int m_number) {
@@ -94,6 +101,13 @@ public class SnsServiceImpl implements SnsService {
 	}
 
 	public List<Reply> replyList(int sns_no, int m_number) {
-		return snsDao.replyList(sns_no,m_number);
+		return replyDao.replyList(sns_no,m_number);
+	}
+
+	@Override
+	public String ObjectToJSONString(Object obj) throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(obj);
+		return json;
 	}
 }

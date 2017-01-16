@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 public interface SnsService {
 
 	List<Sns> getList(int m_number);
@@ -21,6 +23,8 @@ public interface SnsService {
 
 	void update(Sns sns, HttpServletRequest request);
 
-	void delete(int sns_no);
+	void delete(int sns_no, int m_number);
+
+	String ObjectToJSONString(Object rawData) throws JsonProcessingException;
 
 }

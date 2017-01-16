@@ -1,24 +1,53 @@
 package logic;
 
+import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonAutoDetect(fieldVisibility=Visibility.NONE, 
+getterVisibility = Visibility.NONE, 
+setterVisibility = Visibility.NONE)
+
+@JsonPropertyOrder({"m_number","sns_no", "sns_subject", "sns_content", "sns_date", 
+    "fileUrl"})
+
 public class Sns {
 	@NotEmpty(message = "글 내용을 입력해 주세요")
+	@JsonProperty("sns_content")
 	private String sns_content; //글 내용
 	
 	@NotEmpty(message = "글 제목을 입력해 주세요")
+	@JsonProperty("sns_subject")
 	private String sns_subject;//글 제목
 	
+	@JsonProperty("sns_date") @JsonSerialize(using = ToStringSerializer.class)
 	private Date sns_date; //등록일
+	
+	@JsonProperty("sns_no")
 	private int sns_no; //글번호
+	
+	@JsonProperty("fileUrl")
 	private String fileUrl;
+	
+	@JsonProperty("m_number")
 	private int m_number; //유저번호
 	private MultipartFile sns_picture; //파일
 	
+	
+	public String getDatetoString(){
+		SimpleDateFormat sf= new SimpleDateFormat("yyyy-MM-dd");
+		return sf.format(sns_date);
+	}
 	
 	public MultipartFile getSns_picture() {
 		return sns_picture;
@@ -61,6 +90,13 @@ public class Sns {
 	}
 	public void setM_number(int m_number) {
 		this.m_number = m_number;
+	}
+
+	@Override
+	public String toString() {
+		return "Sns [sns_content=" + sns_content + ", sns_subject=" + sns_subject + ", sns_date=" + sns_date
+				+ ", sns_no=" + sns_no + ", fileUrl=" + fileUrl + ", m_number=" + m_number + ", sns_picture="
+				+ sns_picture + "]";
 	}
 	
 }
