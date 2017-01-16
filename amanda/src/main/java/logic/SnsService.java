@@ -11,9 +11,9 @@ public interface SnsService {
 
 	List<Integer> getOthersNum(int m_number);
 
-	Sns detail(Integer sns_no);
+	Sns detail(Integer sns_no, int m_number);
 
-	List<Reply> replyList(Integer sns_no);
+	List<Reply> replyList(int sns_no, int m_number);
 
 	void write(Sns sns, HttpServletRequest request);
 

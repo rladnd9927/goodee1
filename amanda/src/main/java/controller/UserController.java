@@ -37,15 +37,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import dao.UserDao;
+import dao.mapper.UserMapper;
 import exception.AdminRequiredException;
 import exception.LoginRequiredException;
 import exception.MailEmptyException;
+import exception.PasswordFailException;
 import logic.Board;
-import logic.ChatUser;
 import logic.Item;
 import logic.ItemService;
 import logic.Mail;
@@ -77,18 +77,39 @@ public class UserController {
 
 	 
 	@RequestMapping("user/userList")
-	public ModelAndView userList(){
-	   ModelAndView mav = new ModelAndView();
+	public ModelAndView userList(String column, String find, HttpServletRequest request){
+		List<User> userList = userService.getUser();
+		
 	   List<UserProfile> userProfile = new ArrayList<UserProfile>();
-	   List<User> userList = userService.getUser();
 	   for(int i =0; i<userList.size(); i++){
 		   userProfile.add(userService.getUserProfile(userList.get(i).getM_number()));
 	   }
-	   System.out.println(userProfile.get(0).getM_nickname());
-	   mav.addObject("userList",userList);
+	   
+	   if(column == null || column.equals("")) column = null;
+	   if(find == null || find.equals("")) find = null;
+	   if(column == null) find = null;
+	   if(find == null) column = null;
+	   if(find != null && request.getMethod().equalsIgnoreCase("GET")){
+	   	try{
+	   		find = new String(find.getBytes("8859_1"),"euc-kr");
+	   	}catch(UnsupportedEncodingException e){
+	   		e.printStackTrace();
+	   	}
+	   }
+	   ModelAndView mav = new ModelAndView();
+       List<User> userCount = userService.listFind(column,find);
+       mav.addObject("userList",userList);
 	   mav.addObject("userProfile",userProfile);
-	   return mav;
+       mav.addObject("userCount",userCount);
+       mav.addObject("find",find);
+       System.out.println(column +", " +find);
+       System.out.println(userCount);
+       return mav;
 	}
+	
+	
+	
+	
     @RequestMapping("user/userlist2")
     public ModelAndView userlist2(){
        ModelAndView mav = new ModelAndView("user/userlist2");
@@ -104,7 +125,6 @@ public class UserController {
 		mav.addObject(userProfile);
 		return mav;
 	}
-	
 	@RequestMapping("user/main")
 	public ModelAndView main(){
 		ModelAndView mav = new ModelAndView();
@@ -194,8 +214,8 @@ public class UserController {
 	      User myNum = (User)session.getAttribute("USER");
 	      List<Member> chat = userService.mypage(myNum);
 	      List<Member> chat2 = userService.youpage(myNum);
-	         
-	      System.out.println(chat);
+	      List<User> userList = userService.getUser();
+	      mav.addObject("userList",userList);
 	      mav.addObject("mypage", chat); 
 	      mav.addObject("youpage", chat2);   
 	      return mav; 
@@ -316,7 +336,7 @@ public class UserController {
 			e.printStackTrace();
 		}
 		userprofile.setSemiuser(semiuser);
-		/*mav.addObject("semiuser",semiuser);*/
+		userprofile.setM_number(userService.getNum());
 		mav.addObject("userprofile",userprofile);
 		return mav;
 	}

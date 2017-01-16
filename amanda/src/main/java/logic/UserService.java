@@ -21,4 +21,5 @@ public interface UserService {
    List<User> nolist(int userNum, User myNum); 
    int m_like(int userNum, User myNum);
    String cer(int userNum, User myNum);
+   List<User> listFind(String column, String find);
 }

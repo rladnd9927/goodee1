@@ -8,7 +8,13 @@
 <link rel="stylesheet" href="../decorator/css/style.css">
 <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
-
+/* function win_open(){
+	var url = "userDtail.do?m_email="+document.f.m_email.value";
+	var name="win_open";
+	window.oepn(url,"회원 상세 정보","width=300,height=300,tollbar=no,location=no,resizable=yes,left=50,right=50");
+    /* var op="width=300, height=250, scrollbars=yes, resizeable=no, left=50, top=10";
+    window.open("userDetail.do?m_number="+document.f.m_number.value,"m_number",op)}
+*/
 
 $(document).ready(function(){
 $('.user_btn').on('click',function(){
@@ -21,19 +27,17 @@ $('.in_table').toggle();
 <body>
 <div class="container">
 	<div class="searchuser">
-		<form action="listsearch.do" method = "post" name="f">
+		<form action="userList.do" method = "post" name="f">
 		 회원 검색:
 			<select name="column">
-				<option value="">선택하세요</option>
-				<option value="region">지역</option>
-				<option value="age">나이</option>
-				<option value="height">키</option>
+				<option selected="selected" value="">선택하세요</option>
+				<option value="m_name">이름</option>
 			</select>
 			<script type="text/javascript">
 				document.f.column.value="${param.column}";
 			</script>
 			<input type="text" name="find" size="50" value="${find}">
-			<input type="submit" value="검색" class="search">
+			<input type="submit" value="검색">
 		</form>
 	</div>
 
@@ -42,12 +46,14 @@ $('.in_table').toggle();
 		<table class="join02">
 			<thead>
 			<tr><th colspan="7">회원목록</th></tr>
-			<tr>
-				<td>아이디</td>
-				<td>이름</td>
-				<td>나이</td>
-			</tr>
 			</thead>
+			<tbody>
+			<tr>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>나이</th>
+				
+			</tr>
 			<tbody>
 
 			</tbody>
@@ -60,31 +66,28 @@ $('.in_table').toggle();
 		<table class="join02">
 		<thead>
 			<tr><th colspan="7">회원목록</th></tr>
-			<tr>
-				<td>사진</td>
-				<td>성별</td>
-				<td>이름</td>
-			</tr>
-		</thead>
+			</thead>
 		<tbody >
-			<c:forEach items="${userList}" var = "user">
+			<tr>
+				<th>성별</th>
+				<th>성별</th>
+				<th>이름</th>
+				<th>상세정보</th>
+				<th>좋아요</th> 
+			</tr>
+			<c:forEach items="${userCount}" var = "user">
+			<c:if test="${sessionScope.USER.m_email != user.m_email}">
 				<tr >
-					<td>${user.m_email}</td>
-					<td><a href="userDetail.do?m_number=${user.m_number}"> ${user.m_name}</a></td>
 					<td><c:if test="${user.gender == 0}">남자</c:if>
 						<c:if test="${user.gender == 1}">여자</c:if>
 					</td>
+					<td >${user.m_name}</td>					
+					<td><input type="button" onclick="location.href='userDetail.do?m_number=${user.m_number}'" class="white" value="상세정보"></a></td>
+					<td><a href="likelist.do?userNum=${user.m_number}" class="ovalbutton"><img src="../img/Heart.png" alt="좋아요" width="20px"/></a></td>
+					<!-- <td><input type="button" name="m_email" onclick="win_oepn()" value="상세정보 보기"></td> -->
 				</tr> 
-<%-- 				<tr>
-				<c:forEach items="${userProfile}" var="userProfile">
-					<c:if test="${userProfile.m_number == user.m_number}">
-					<td>${userProfile.m_nickname}</td>
-					<td>${userProfile.m_height}</td>
-					<td>${userProfile.m_nickname}</td>
-					</c:if>
+				</c:if>
 				</c:forEach>
-				</tr> --%>
-			</c:forEach>
 	</table>
 </div>
 </div> 

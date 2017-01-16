@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import dao.mapper.BoardMapper;
 import dao.mapper.UserMapper;
 import logic.SemiUser;
 import logic.User;
@@ -45,11 +46,6 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectList(NS+"getUser",map);
 	}
 
-	public User getUser(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public User getUserbyNum(int m_number) {
 		return sqlSession.getMapper(UserMapper.class).getUserbyNum(m_number);
 	}
@@ -60,6 +56,14 @@ public class UserDaoImpl implements UserDao{
 
 	public void createProfile(UserProfile userprofile) {
 		sqlSession.getMapper(UserMapper.class).createprofile(userprofile);
+	}
+
+	public int getNum() {
+		return sqlSession.getMapper(UserMapper.class).getNum();
+	}
+
+	public void delete(int num) {
+		sqlSession.getMapper(UserMapper.class).delete(num);
 	}
 
 	public UserProfile getUserProfile(int m_number) {
@@ -135,20 +139,35 @@ public class UserDaoImpl implements UserDao{
 	      return sqlSession.selectList(NS + "nolist", param);
 	   }
 
+<<<<<<< HEAD
 	@Override 
 	public int m_like(int userNum, User myNum) {
 		  Map<String, Object> param = new HashMap<String, Object>();
 	      param.put("userNum", userNum); 
 	      param.put("myNum",  myNum.getM_number());
 	      return sqlSession.selectOne(NS + "m_like", param);
+=======
+	@Override
+	public User getUser(String id) {
+		// TODO Auto-generated method stub
+		return null;
+>>>>>>> branch 'master' of https://github.com/rladnd9927/goodee1.git
 	}
 
 	@Override
+<<<<<<< HEAD
 	public String cer(int userNum, User myNum) {
 	    Map<String, Object> param = new HashMap<String, Object>();
 	      param.put("userNum", userNum);
 	      param.put("myNum", myNum.getM_number());  
 	      return sqlSession.selectOne(NS + "cer", param);  
+=======
+	public List<User> list(String column, String find) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("column", column);
+		param.put("find", find);
+		return sqlSession.selectList(NS + "list" , param);
+>>>>>>> branch 'master' of https://github.com/rladnd9927/goodee1.git
 	}
 
 }

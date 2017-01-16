@@ -17,16 +17,12 @@ public interface UserDao {
 	UserProfile getUserProfile(int m_number);
 	List<User> userlist();
 	   List<User> likelist(int userNum, User myNum,  int c_number);
-
 	   String ser(int userNum, User myNum);
-
 	   String aer(int userNum, User myNum);
-
 	   List<User> likelist2(int userNum, User myNum);
-
 	   List<User> likelist3(int userNum, User myNum, int m_like);
-
 	   List<User> nolist(int userNum, User myNum);
+	   List<User> list(String column, String find);
 	   
 	   int m_like(int userNum, User myNum);
 	   

@@ -9,20 +9,25 @@
 </head>
 <body>
 	<h2>회원심사 페이지</h2>
-	<table border="1" cellpadding="0" cellspacing="0">
+	<table class="join02">
+		<thead>
 		<tr>
-			<td>아이디</td>
-			<td>이름</td>
-			<td>성별</td>
-			<td>점수</td>
+			<th>아이디</th>
+			<th>이름</th>
+			<th>성별</th>
+			<th>점수</th>
+			<td>심사한 사람 수</td>
 			
 		</tr>
+		</thead>
+		<tbody>
 		<c:forEach items="${semiuserList}" var="semiuser">
 			<tr>
 				<td><a href="semiDetail.do?s_number=${semiuser.s_number}">${semiuser.s_email}</a></td>
 				<td>${semiuser.s_name}</td>
 				<td>${semiuser.gender}</td>
 				<td>${semiuser.s_score}</td>
+				<td>${semiuser.s_usercount}</td>
 			</tr>
 			<!-- 
 			<tr>
@@ -50,6 +55,7 @@
 			</tr>
 			 -->
 		</c:forEach>
+		</tbody>
 	</table>
 </body>
 </html>

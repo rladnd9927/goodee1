@@ -3,6 +3,8 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +33,16 @@ public class SemiUserServiceImpl implements SemiUserService{
 	public UserProfile getsemiUserProfile(int s_number) {
 		UserProfile test = semiuserDao.getsemiUserProfile(s_number);
 		return test;
+	}
+	
+	@Override
+	public void pointUp(int s_number, int s_score) {
+		semiuserDao.pointUp(s_number,s_score);
+		
+	}
+
+	@Override
+	public void countUp(int s_number, int s_usercount) {
+		semiuserDao.countUp(s_number,s_usercount);
 	}
 }

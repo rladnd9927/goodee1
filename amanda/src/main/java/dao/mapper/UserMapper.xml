@@ -55,4 +55,11 @@
       SELECT C_number FROM I_Like_Member where y_number=#{myNum} and m_number=#{userNum}
    </select>  
    
+   <select id="list" parameterType="map" resultType="User" >
+   	  select * from (select * from member
+   	  	<if test="column !=null and find != null">
+   	  		where ${column} like '%${find}%'
+   	  	</if>
+   	  	)
+   </select>   
 </mapper>

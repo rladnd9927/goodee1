@@ -17,7 +17,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import exception.LoginRequiredException;
-import exception.PasswordFailException;
 import logic.Reply;
 import logic.Sns;
 import logic.SnsService;
@@ -32,16 +31,12 @@ public class SnsController {
 	public ModelAndView snsmain(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		User loginUser = (User)session.getAttribute("USER");
-		SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd");
-		String today = sdate.format(new Date());
 		if(loginUser == null) {
 	         throw new LoginRequiredException();
 	    }
 		
 		List<Sns> snsList = new ArrayList<Sns>();
 		snsList = snsService.getList(loginUser.getM_number()); //sns디비의 모든 게시물 정보를 가져올건데, 현재 로그인 유저의 유저번호를 이용하여, 좋아요 한사람의 게시물만 sns디비에서 가져온다.
-		
-		mav.addObject("today", today);
 		mav.addObject("snsList",snsList);
 		mav.addObject("loginUser",loginUser);
 		return mav;
@@ -70,11 +65,11 @@ public class SnsController {
 		return mav;
 	}
 	@RequestMapping("sns/snsdetail")
-	public ModelAndView snsdetail(HttpSession session, int sns_no){
+	public ModelAndView snsdetail(HttpSession session, int sns_no, int m_number){
 		ModelAndView mav = new ModelAndView();
 		User loginUser = (User)session.getAttribute("USER");
-		Sns snsdetail = snsService.detail(sns_no);
-		List<Reply> replyList = snsService.replyList(sns_no);
+		Sns snsdetail = snsService.detail(sns_no,m_number);
+		List<Reply> replyList = snsService.replyList(sns_no,m_number);
 		
 		mav.addObject("replyList",replyList);
 		mav.addObject("snsdetail",snsdetail);
@@ -86,21 +81,23 @@ public class SnsController {
 	public ModelAndView snsreg(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		User loginUser = (User)session.getAttribute("USER");
-		mav.addObject(new Sns());
+		Sns sns = new Sns();
+		sns.setM_number(loginUser.getM_number());
+		mav.addObject(sns);
 		mav.addObject("loginUser",loginUser);
 		mav.setViewName("sns/snsreg");
 		return mav;
 	}
 
 	@RequestMapping("sns/snswrite")
-	public ModelAndView write(@Valid Sns sns, BindingResult bindingResult, HttpServletRequest request){
+	public ModelAndView snswrite(@Valid Sns sns, BindingResult bindingResult, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("sns/snsreg");
 		if(bindingResult.hasErrors()){
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}
 		snsService.write(sns,request);
-		mav.setViewName("redirect:/sns/snsmain.do");
+		mav.setViewName("redirect:snsmain.do");
 		return mav;
 	}
 	
@@ -108,11 +105,11 @@ public class SnsController {
 	public ModelAndView snsmodify(@Valid Sns sns, BindingResult bindingResult, HttpServletRequest request, HttpSession session){
 		ModelAndView mav = new ModelAndView("sns/snsmodifyForm");
 		User loginUser = (User)session.getAttribute("USER");
-		List<Reply> replyList = snsService.replyList(sns.getSns_no());
+		List<Reply> replyList = snsService.replyList(sns.getSns_no(),sns.getM_number());
 		
 		if(bindingResult.hasErrors()){
 			mav.getModel().putAll(bindingResult.getModel());
-			mav.addObject("snsdetail",snsService.detail(sns.getSns_no()));
+			mav.addObject("snsdetail",snsService.detail(sns.getSns_no(),sns.getM_number()));
 			mav.addObject("replyList",replyList);
 			return mav;
 		}
@@ -121,15 +118,15 @@ public class SnsController {
 			mav.setViewName("sns/snsmodifyForm");
 			bindingResult.reject("error.update.sns");
 			mav.getModel().putAll(bindingResult.getModel());
-			mav.addObject("snsdetail",snsService.detail(sns.getSns_no()));
+			mav.addObject("snsdetail",snsService.detail(sns.getSns_no(),sns.getM_number()));
 			mav.addObject("replyList",replyList);
 			return mav;
 		}
 		//수정시 새로 업로드 된 파일이 없음
-		if(sns.getSns_file().isEmpty()){
+		if(sns.getSns_picture().isEmpty()){
 			sns.setFileUrl(request.getParameter("file2"));
 		}else{//파일 업로드를 다시함
-			sns.setFileUrl(sns.getSns_file().getOriginalFilename());
+			sns.setFileUrl(sns.getSns_picture().getOriginalFilename());
 		}
 		snsService.update(sns,request);
 		mav.setViewName("redirect:list.shop");
@@ -139,23 +136,23 @@ public class SnsController {
 	}
 	
 	@RequestMapping("sns/snsmodifyForm")
-	public ModelAndView snsmodifyForm(int sns_no){
+	public ModelAndView snsmodifyForm(int sns_no, int m_number){
 		ModelAndView mav = new ModelAndView();
-		Sns sns = snsService.detail(sns_no);
+		Sns sns = snsService.detail(sns_no,m_number);
 		mav.addObject("sns",sns);
 		
 		return mav;
 	}
 	
 	@RequestMapping("sns/snsdelete")
-	public ModelAndView snsdelete(int sns_no, HttpSession session){
+	public ModelAndView snsdelete(int sns_no,int m_number, HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		User loginUser = (User)session.getAttribute("USER");
-		List<Reply> replyList = snsService.replyList(sns_no);
+		List<Reply> replyList = snsService.replyList(sns_no,m_number);
 		
 		if(!loginUser.getM_email().equals((snsService.getUserbyNum(sns_no)).getM_email())){ //로그인 유저와 sns유저가 다르다면? -> 삭제 불가하게..
 			mav.setViewName("sns/snsdetail");
-			mav.addObject("snsdetail",snsService.detail(sns_no));
+			mav.addObject("snsdetail",snsService.detail(sns_no,m_number));
 			mav.addObject("replyList",replyList);
 			return mav;
 		}
