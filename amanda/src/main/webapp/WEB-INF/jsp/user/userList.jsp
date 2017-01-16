@@ -27,19 +27,17 @@ $('.in_table').toggle();
 <body>
 <div class="container">
 	<div class="searchuser">
-		<form action="listsearch.do" method = "post" name="f">
+		<form action="userList.do" method = "post" name="f">
 		 회원 검색:
 			<select name="column">
-				<option value="">선택하세요</option>
-				<option value="region">지역</option>
-				<option value="age">나이</option>
-				<option value="height">키</option>
+				<option selected="selected" value="">선택하세요</option>
+				<option value="m_name">이름</option>
 			</select>
 			<script type="text/javascript">
 				document.f.column.value="${param.column}";
 			</script>
 			<input type="text" name="find" size="50" value="${find}">
-			<input type="submit" value="검색" class="search">
+			<input type="submit" value="검색">
 		</form>
 	</div>
 
@@ -68,15 +66,16 @@ $('.in_table').toggle();
 		<table class="join02">
 		<thead>
 			<tr><th colspan="7">회원목록</th></tr>
-		</thead>
+			</thead>
 		<tbody >
 			<tr>
+				<th>성별</th>
 				<th>성별</th>
 				<th>이름</th>
 				<th>상세정보</th>
 				<th>좋아요</th> 
 			</tr>
-			<c:forEach items="${userList}" var = "user">
+			<c:forEach items="${userCount}" var = "user">
 			<c:if test="${sessionScope.USER.m_email != user.m_email}">
 				<tr >
 					<td><c:if test="${user.gender == 0}">남자</c:if>
@@ -88,7 +87,7 @@ $('.in_table').toggle();
 					<!-- <td><input type="button" name="m_email" onclick="win_oepn()" value="상세정보 보기"></td> -->
 				</tr> 
 				</c:if>
-			</c:forEach>
+				</c:forEach>
 	</table>
 </div>
 </div> 

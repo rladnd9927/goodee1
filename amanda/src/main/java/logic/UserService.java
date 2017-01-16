@@ -9,6 +9,8 @@ public interface UserService {
 	User getUserByIdPw(User user);
 	void createUser(UserProfile userprofile, HttpServletRequest request);
 	List<User> getUser();
+	int getNum();
+	void delete(int num);
 	UserProfile getUserProfile(int m_number);
 	List<User> userlist();
    List<Member> mypage(User myNum);

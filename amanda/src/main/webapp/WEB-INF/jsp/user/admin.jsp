@@ -5,24 +5,33 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>admin@goodee.co.kr</title>
+<title>관리자페이지</title>
 </head>
 <body>
-<form action="mailForm.shop" method = "post">
+<form action="mailForm.do" method = "post">
 	<table border="1" cellpadding="0" cellspacing="0">
-		<tr><td colspan="7">회원목록</td></tr>
-		<tr><td>아이디</td><td>이름</td><td>생일</td>
-			<td>전화번호</td><td>이메일</td>
-			<td>&nbsp;</td><td>&nbsp;</td></tr>
+		<tr><td colspan="6">회원목록</td></tr>
+		<tr>
+			<td>No.</td>
+			<td>ID/EMAIL</td>
+			<td>이름</td>
+			<td>성별</td>
+			<td>편집항목</td>
+			<td>&nbsp;</td>
+		</tr>
 		<c:forEach items="${userList}" var="user">
-			<tr><td>${user.userId}</td><td>${user.userName}</td><td><f:formatDate value="${user.birthDay}" pattern="yyyy-MM-dd"/></td>
-				<td>${user.phoneNo}</td><td>${user.email}</td>
+			<tr>
+				<td>${user.m_number}</td>
+				<td>${user.m_email}</td>
+				<td>${user.m_name}</td>
+				<%-- <td><f:formatDate value="${user.birthDay}" pattern="yyyy-MM-dd"/></td> --%>
+				<td>${user.gender}</td>
 				<td>
-				<a href="userdateForm.shop?id=${user.userId}">수정</a>
-				<a href="deleteForm.shop?id=${user.userId}">탈퇴</a>
-				<a href="mypage.shop?id=${user.userId}">회원페이지</a>
+					<a href="userdateForm.do?id=${user.m_number}">수정</a>
+					<a href="deleteForm.do?id=${user.m_number}">탈퇴</a>
+					<a href="mypage.do?id=${user.m_number}">회원페이지</a>
 				</td>
-				<td><input type="checkbox" name="idchks" value="${user.userId}"></td></tr>
+				<td><input type="checkbox" name="idchks" value="${user.m_email}"></td></tr>
 		</c:forEach>
 		<tr><td colspan="7" align="center">
 			<input type="submit" value="메일보내기"></td></tr>

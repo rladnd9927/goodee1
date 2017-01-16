@@ -5,8 +5,9 @@ public class SemiUser {
 	private String s_email;
 	private String s_password;
 	private String s_name;
-	private int s_score;
 	private int gender;
+	private int s_score;
+	private int s_usercount;
 	
 	//getter,setter,toString
 	public int getS_number() {
@@ -45,10 +46,17 @@ public class SemiUser {
 	public void setGender(int gender) {
 		this.gender = gender;
 	}
+	public int getS_usercount() {
+		return s_usercount;
+	}
+	public void setS_usercount(int s_usercount) {
+		this.s_usercount = s_usercount;
+	}
 	@Override
 	public String toString() {
 		return "SemiUser [s_number=" + s_number + ", s_email=" + s_email + ", s_password=" + s_password + ", s_name="
-				+ s_name + ", s_score=" + s_score + ", gender=" + gender + "]";
+				+ s_name + ", gender=" + gender + ", s_score=" + s_score + ", s_usercount=" + s_usercount + "]";
 	}
+	
 	
 }

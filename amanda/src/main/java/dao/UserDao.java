@@ -14,6 +14,8 @@ public interface UserDao {
 	User getUserbyNum(int m_number);
 	void createSemi(UserProfile userprofile);
 	void createProfile(UserProfile userprofile);
+	int getNum();
+	void delete(int num);
 	UserProfile getUserProfile(int m_number);
 	List<User> userlist();
 	   List<User> likelist(int userNum, User myNum,  int c_number);
