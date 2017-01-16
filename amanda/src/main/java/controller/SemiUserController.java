@@ -44,7 +44,7 @@ public class SemiUserController {
 	  @RequestMapping("user/semi1")
 		public ModelAndView semi1(int s_number,SemiUser semiuser, BindingResult bindingResult, HttpServletRequest request, HttpSession session){
 			ModelAndView mav = new ModelAndView();
-			try{
+			try{ 
 				semiuserService.pointUp(s_number,semiuser.getS_score());
 				semiuserService.countUp(s_number,semiuser.getS_usercount());
 			}catch(DuplicateKeyException e){
