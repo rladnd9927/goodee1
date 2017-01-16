@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,22 +37,12 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import dao.UserDao;
-import dao.mapper.UserMapper;
 import exception.AdminRequiredException;
 import exception.LoginRequiredException;
 import exception.MailEmptyException;
-import exception.PasswordFailException;
-import logic.Board;
-import logic.Item;
-import logic.ItemService;
 import logic.Mail;
 import logic.Member;
-import logic.Sale;
-import logic.SaleItem;
 import logic.SemiUser;
-import logic.SemiUserService;
 import logic.ShopService;
 import logic.User;
 import logic.UserProfile;
@@ -70,11 +59,6 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private ItemService itemService;
-
-
 
 	@RequestMapping("user/userList")
 	public ModelAndView userList(){
@@ -297,7 +281,6 @@ public class UserController {
 	@RequestMapping("user/joinForm2")
 	public ModelAndView joinForm2(SemiUser semiuser, UserProfile userprofile, BindingResult bindingResult, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
-		DateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 		/*try{
 			userprofile.setM_birthday(sf.parse("1980-01-01"));
 		}catch(ParseException e){
@@ -378,7 +361,6 @@ public class UserController {
 	@RequestMapping("user/mypage")
 	public ModelAndView mypage(String id){
 		ModelAndView mav = new ModelAndView();
-		User user = shopService.getUserById(id);
 		List<User> userList = userService.getUser();
 		mav.addObject("userList",userList);
 		/*	   for(Sale sale : salelist){

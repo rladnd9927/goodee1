@@ -69,6 +69,7 @@ public class SnsController {
 		});
 		mav.addObject("loginUser",loginUser);
 		mav.addObject("snsList",snsList);
+		mav.setViewName("user/mypage2");
 		return mav;
 	}
 	@RequestMapping("sns/snsdetail")

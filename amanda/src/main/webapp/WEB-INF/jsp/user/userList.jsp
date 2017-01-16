@@ -75,6 +75,7 @@ $('.in_table').toggle();
 					<td>${user.m_name}</td>
 					<td>${user.m_email}</td>
 				</tr>
+				</c:forEach>
 		</thead>
 		<tbody >
 			<c:forEach items="${userList}" var = "user">
