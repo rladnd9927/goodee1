@@ -99,48 +99,60 @@ public class UserServiceImpl implements UserService{
 	public List<User> userlist() {
 		return userDao.userlist();
 	}
-	
 
 
 
 
 
-	public List<Member> mypage(User myNum) {
-	   return MemberDao.mypage(myNum); 
-	}
-	
-	public List<Member> youpage(User myNum) {
-	   return MemberDao.youpage(myNum);
-	}
-	
-	public String ser(int userNum, User myNum) {
-	   return userDao.ser(userNum, myNum);
-	}
-	
-	public String aer(int userNum, User myNum) {
-	   return userDao.aer(userNum, myNum);
-	}
-	@Override
-	  public List<User> likelist(int userNum, User myNum) {
-	     return userDao.likelist(userNum,myNum);
-	  }
-	
-	public List<User> likelist(int userNum, User myNum, int c_number) {
-		return userDao.likelist(userNum,myNum,c_number);
-	}
-	
-	public List<User> likelist2(int userNum, User myNum) {
-		return userDao.likelist2(userNum,myNum);
-	}
-	
-	@Override
-	  public List<User> nolist(int userNum, User myNum) { 
-	     return userDao.nolist(userNum,myNum); 
-	
-	  }
-	@Override
+	   public List<Member> mypage(User myNum) {
+	      return MemberDao.mypage(myNum); 
+	   }
+
+	   public List<Member> youpage(User myNum) {
+	      return MemberDao.youpage(myNum);
+	   }
+
+	   public String ser(int userNum, User myNum) {
+	      System.out.println(myNum+"ser로 여기까진옴"); 
+	      return userDao.ser(userNum, myNum);
+	   }
+
+	   public String aer(int userNum, User myNum) {
+	      System.out.println(myNum+"aer로 여기까진옴"); 
+	      return userDao.aer(userNum, myNum);
+	   }
+		@Override
+	   public List<User> likelist3(int userNum, User myNum,int m_like) {
+	      return userDao.likelist3(userNum,myNum,m_like);
+	   }
+		
+		public List<User> likelist(int userNum, User myNum, int c_number) {
+			return userDao.likelist(userNum,myNum,c_number);
+		}
+		
+		public List<User> likelist2(int userNum, User myNum) {
+			return userDao.likelist2(userNum,myNum);
+		}
+		
+		@Override
+	   public List<User> nolist(int userNum, User myNum) { 
+	      return userDao.nolist(userNum,myNum); 
+
+	   }
+	   	@Override
 	public List<User> listFind(String column, String find) {
 		return userDao.list(column, find);
 	}
+
+		@Override
+		public int m_like(int userNum, User myNum) {
+			return userDao.m_like(userNum, myNum);
+		}
+
+		@Override
+		public String cer(int userNum, User myNum) {
+			 System.out.println(myNum+"cer로 여기까진옴"); 
+		      return userDao.cer(userNum, myNum);
+		}
 
 }

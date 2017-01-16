@@ -19,6 +19,7 @@ public class UserDaoImpl implements UserDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	private final String NS = "dao.mapper.UserMapper.";
+	private final String CS = "dao.mapper.ChatMapper.";
 
 	//@Override
 	public User getUser(String email, String password) {
@@ -89,8 +90,13 @@ public class UserDaoImpl implements UserDao{
 	      //param.put("num", num);
 	      param.put("userNum", userNum); 
 	      param.put("myNum",  myNum.getM_number());
+	      Integer search1 = sqlSession.selectOne(NS + "search1",param); 
+	      System.out.println(search1); 
+	      if(search1!=1){	    	  
+	    	  sqlSession.delete(CS + "chatdelete1", search1);
+	      }
 	      return sqlSession.selectList(NS + "likelist2", param);
-	   }
+	   } 
 
 	   public String ser(int userNum, User myNum) {
 	      Map<String, Object> param = new HashMap<String, Object>();
@@ -107,35 +113,61 @@ public class UserDaoImpl implements UserDao{
 	      param.put("myNum", myNum.getM_number());  
 	      System.out.println(userNum+"++++"+myNum);
 	      System.out.println("누름? 안누름?");
-	      return sqlSession.selectOne(NS + "aer", param);  
+	      return sqlSession.selectOne(NS + "aer", param);   
 	   }
 
-	   public List<User> likelist(int userNum, User myNum) {
+	   public List<User> likelist3(int userNum, User myNum, int m_like) {
 	      Map<String, Object> param = new HashMap<String, Object>();
 	      param.put("userNum", userNum); 
 	      param.put("myNum",  myNum.getM_number());
+	      System.out.println(m_like);       
+	      //맞좋아요 되는순간 CHAT 테이블에 고유번호 추가되서 방만들기
+	      sqlSession.selectList(CS + "listadd", m_like);
 	      return sqlSession.selectList(NS + "likelist3", param);
 	   }
 
 	   public List<User> nolist(int userNum, User myNum) {
 	      Map<String, Object> param = new HashMap<String, Object>();
-	      param.put("userNum", userNum); 
+	      param.put("userNum", userNum);  
 	      param.put("myNum",  myNum.getM_number());
+	      
+	      Integer search2 = sqlSession.selectOne(NS + "search2",param);      
+	      if(search2!=1){	    	  
+	    	  sqlSession.delete(CS + "chatdelete1", search2);
+	      }
+	      sqlSession.delete(CS + "chatdelete2", param);
 	      return sqlSession.selectList(NS + "nolist", param);
 	   }
 
+<<<<<<< HEAD
+	@Override 
+	public int m_like(int userNum, User myNum) {
+		  Map<String, Object> param = new HashMap<String, Object>();
+	      param.put("userNum", userNum); 
+	      param.put("myNum",  myNum.getM_number());
+	      return sqlSession.selectOne(NS + "m_like", param);
+=======
 	@Override
 	public User getUser(String id) {
 		// TODO Auto-generated method stub
 		return null;
+>>>>>>> branch 'master' of https://github.com/rladnd9927/goodee1.git
 	}
 
 	@Override
+<<<<<<< HEAD
+	public String cer(int userNum, User myNum) {
+	    Map<String, Object> param = new HashMap<String, Object>();
+	      param.put("userNum", userNum);
+	      param.put("myNum", myNum.getM_number());  
+	      return sqlSession.selectOne(NS + "cer", param);  
+=======
 	public List<User> list(String column, String find) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("column", column);
 		param.put("find", find);
 		return sqlSession.selectList(NS + "list" , param);
+>>>>>>> branch 'master' of https://github.com/rladnd9927/goodee1.git
 	}
 
 }
