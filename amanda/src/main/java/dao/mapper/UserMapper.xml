@@ -7,7 +7,7 @@
 		<where>
 			<!-- <if test="idchks != null">m_email in<foreach collection="idchks" open="(" close=")" item="id" separator=",">#{email}</foreach></if> -->
 			<if test="email != null">m_email=#{email}</if>
-			<if test="password != null">and m_password=#{password}</if>
+			<if test="password != null">and m_password=#{password}</if> 
 		</where>
 	</select>
 	
@@ -37,6 +37,22 @@
    
    <select id="aer" parameterType="map" resultType="String">
       SELECT ser FROM I_Like_Member where Y_number=#{myNum} and M_number=#{userNum}
+   </select>
+   
+   <select id="cer" parameterType="map" resultType="String">
+      SELECT m_like FROM I_Like_Member where Y_number=#{myNum} and M_number=#{userNum}
+   </select>
+     
+   <select id="m_like" parameterType="map" resultType="int">
+      SELECT C_number FROM I_Like_Member where Y_number=#{myNum} and M_number=#{userNum}
+   </select>  
+   
+    <select id="search1" parameterType="map" resultType="int">
+      SELECT C_number FROM I_Like_Member where m_number=#{myNum} and y_number=#{userNum}
+   </select>  
+   
+     <select id="search2" parameterType="map" resultType="int">
+      SELECT C_number FROM I_Like_Member where y_number=#{myNum} and m_number=#{userNum}
    </select>  
    
 </mapper>

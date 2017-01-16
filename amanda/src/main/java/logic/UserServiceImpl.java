@@ -152,8 +152,8 @@ public class UserServiceImpl implements UserService{
 	      return userDao.aer(userNum, myNum);
 	   }
 		@Override
-	   public List<User> likelist(int userNum, User myNum) {
-	      return userDao.likelist(userNum,myNum);
+	   public List<User> likelist3(int userNum, User myNum,int m_like) {
+	      return userDao.likelist3(userNum,myNum,m_like);
 	   }
 		
 		public List<User> likelist(int userNum, User myNum, int c_number) {
@@ -169,5 +169,16 @@ public class UserServiceImpl implements UserService{
 	      return userDao.nolist(userNum,myNum); 
 
 	   }
+
+		@Override
+		public int m_like(int userNum, User myNum) {
+			return userDao.m_like(userNum, myNum);
+		}
+
+		@Override
+		public String cer(int userNum, User myNum) {
+			 System.out.println(myNum+"cer로 여기까진옴"); 
+		      return userDao.cer(userNum, myNum);
+		}
 
 }

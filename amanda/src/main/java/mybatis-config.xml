@@ -12,6 +12,7 @@
 		<typeAlias type="logic.Member" alias="Member"/>
 		<typeAlias type="logic.Sns" alias="Sns"/>
 		<typeAlias type="logic.LikeUser" alias="Likeuser"/>
+		<typeAlias type="logic.Chat" alias="Chat"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="dao/mapper/ItemMapper.xml"/>
@@ -23,5 +24,6 @@
 		<mapper resource="dao/mapper/MemberMapper.xml"/>
 		<mapper resource="dao/mapper/SnsMapper.xml"/>
 		<mapper resource="dao/mapper/LikeUserMapper.xml"/>
+		<mapper resource="dao/mapper/ChatMapper.xml"/>
 	</mappers>
 </configuration>

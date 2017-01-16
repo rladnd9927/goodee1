@@ -130,6 +130,16 @@ public class UserController {
 	      
 	      //이미 좋아요를 눌렀는지 테스트 1이 리턴되서 aa에 들어가면 이미 좋아요를 눌렀다는 뜻.
 	      String aa = userService.ser(userNum, myNum);
+	      
+	      String cc= userService.cer(userNum, myNum);
+	      
+
+	      //이미 좋아요 눌럿는데도 해제안되서 한번 검토
+		  if(cc!=null){  
+			  userService.nolist(userNum, myNum);
+		      return new ModelAndView("chat/alert");     	  
+		      
+	      }
 	      //상대가 나를 좋아요 누르지 않았을때
 	      if(bb==null){
 	         //내가 상대를 이미 좋아요늘 눌렀는지 안눌렀는지 
@@ -155,7 +165,10 @@ public class UserController {
 	         }
 	      //상대가 나를 좋아요 눌렀을때
 	      }else{
-	         List<User> chat = userService.likelist(userNum, myNum);
+	    	 int m_like = userService.m_like(userNum, myNum);
+	    	 
+	    	 //i_like_member 테이블에 m_like 1 추가.
+	         List<User> chat = userService.likelist3(userNum, myNum,m_like);
 	         mav.addObject("userlist", chat);
 	         mav.setViewName("redirect:/user/userlist2.do");
 	         return new ModelAndView("chat/alert2"); 
@@ -258,8 +271,8 @@ public class UserController {
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}
-		session.setAttribute("USER", loginUser);
-		
+		session.setAttribute("USER", loginUser); 
+		System.out.println(loginUser+"하하하하하하하");
 		mav.addObject("user",loginUser);
 		mav.setViewName("user/main");
 

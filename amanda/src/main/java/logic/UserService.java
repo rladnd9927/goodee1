@@ -15,8 +15,10 @@ public interface UserService {
    List<Member> youpage(User myNum);
    String ser(int userNum, User myNum);
    String aer(int userNum, User myNum);
-   List<User> likelist(int userNum, User myNum);
+   List<User> likelist3(int userNum, User myNum,int m_like);
    List<User> likelist(int userNum, User myNum, int c_number);
    List<User> likelist2(int userNum, User myNum);
-   List<User> nolist(int userNum, User myNum);
+   List<User> nolist(int userNum, User myNum); 
+   int m_like(int userNum, User myNum);
+   String cer(int userNum, User myNum);
 }
