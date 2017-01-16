@@ -21,4 +21,7 @@ public interface SemiUserMapper {
 
 	@Update("update semi_member set s_score=s_score + #{s_score} where s_number=#{s_number} ")
 	void pointUp(Map<Object, Object> map);
+
+	@Update("update semi_member set s_usercount=s_usercount+1 where s_number=#{s_number} ")
+	void countUp(Map<Object, Object> map);
 }

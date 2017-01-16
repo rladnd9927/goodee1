@@ -41,17 +41,18 @@ public class SemiUserController {
 			return mav;
 	 }
 	 
-	 @RequestMapping("user/semi1")
+	  @RequestMapping("user/semi1")
 		public ModelAndView semi1(int s_number,SemiUser semiuser, BindingResult bindingResult, HttpServletRequest request, HttpSession session){
 			ModelAndView mav = new ModelAndView();
 			try{
 				semiuserService.pointUp(s_number,semiuser.getS_score());
+				semiuserService.countUp(s_number,semiuser.getS_usercount());
 			}catch(DuplicateKeyException e){
 				e.printStackTrace();
 				bindingResult.reject("error.duplicate.user");
 				return mav;
 			}
-			mav.setViewName("redirect:semiDetail.do?s_number=" + s_number);
+			mav.setViewName("redirect:evaluate.do");
 			return mav;
 	}
 }
