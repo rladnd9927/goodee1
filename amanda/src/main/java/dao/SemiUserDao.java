@@ -14,5 +14,5 @@ public interface SemiUserDao {
 	UserProfile getsemiUserProfile(int s_number);
 	void pointUp(int s_number, int s_score);
 	void countUp(int s_number, int s_usercount);
-	UserProfile getUserProfile(int m_number);
+	void semiDelete(int s_number, int s_usercount);
 }

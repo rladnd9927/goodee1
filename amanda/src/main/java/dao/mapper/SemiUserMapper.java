@@ -3,6 +3,7 @@ package dao.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -25,6 +26,6 @@ public interface SemiUserMapper {
 	@Update("update semi_member set s_usercount=s_usercount+1 where s_number=#{s_number} ")
 	void countUp(Map<Object, Object> map);
 
-	@Select("select * from member_profile where m_number = #{m_number}")
-	UserProfile getUserProfile(int m_number);
+	@Delete("delete from semi_member where (select s_score/s_usercount from semi_member where s_usercount >= 5 and s_number=#{s_number}) < 3 and s_number=#{s_number}")
+	void semiDelete(Map<Object, Object> map);
 }

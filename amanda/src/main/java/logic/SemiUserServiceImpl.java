@@ -45,4 +45,9 @@ public class SemiUserServiceImpl implements SemiUserService{
 	public void countUp(int s_number, int s_usercount) {
 		semiuserDao.countUp(s_number,s_usercount);
 	}
+
+	@Override
+	public void semiDelete(int s_number, int s_usercount) {
+		semiuserDao.semiDelete(s_number,s_usercount);
+	}
 }

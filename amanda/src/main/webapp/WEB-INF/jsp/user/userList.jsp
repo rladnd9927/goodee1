@@ -7,6 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <link rel="stylesheet" href="../decorator/css/style.css">
 <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+function win_open(){
+	var op = "width = 500, height = 540, scrollbars = yes, resizable = yes, left = 50, op = 150";
+	window.open("userList.do", "picture", op);
+}
+</script>
 <script>
 /* function win_open(){
 	var url = "userDtail.do?m_email="+document.f.m_email.value";
@@ -32,6 +38,7 @@ $('.in_table').toggle();
 			<select name="column">
 				<option selected="selected" value="">선택하세요</option>
 				<option value="m_name">이름</option>
+				<option value="m_bodytype">체형</option>
 			</select>
 			<script type="text/javascript">
 				document.f.column.value="${param.column}";
@@ -41,6 +48,7 @@ $('.in_table').toggle();
 		</form>
 	</div>
 
+	
 	<h2>명예의 전당</h2>
 	<div class="userwrapper">
 		<table class="join02">
@@ -54,7 +62,6 @@ $('.in_table').toggle();
 				<th>나이</th>
 				
 			</tr>
-			<tbody>
 
 			</tbody>
 		</table>
@@ -65,11 +72,10 @@ $('.in_table').toggle();
 		<h2>회원리스트</h2>
 		<table class="join02">
 		<thead>
-			<tr><th colspan="7">회원목록</th></tr>
+			<tr><th colspan="4">회원목록</th></tr>
 			</thead>
 		<tbody >
 			<tr>
-				<th>성별</th>
 				<th>성별</th>
 				<th>이름</th>
 				<th>상세정보</th>
@@ -85,11 +91,36 @@ $('.in_table').toggle();
 					<td><input type="button" onclick="location.href='userDetail.do?m_number=${user.m_number}'" class="white" value="상세정보"></a></td>
 					<td><a href="likelist.do?userNum=${user.m_number}" class="ovalbutton"><img src="../img/Heart.png" alt="좋아요" width="20px"/></a></td>
 					<!-- <td><input type="button" name="m_email" onclick="win_oepn()" value="상세정보 보기"></td> -->
-				</tr> 
-				</c:if>
+				</tr>
+<%-- 				 <tr class="userProfile">
+ 				  <c:forEach items="${userProfile}" var="userProfile">
+				   <td>${userProfile.m_bodytype}</td>
 				</c:forEach>
+				 
+				 </tr> --%>
+				</c:if>
+			</c:forEach>
 	</table>
 </div>
+<hr>
+<h2>소개팅</h2><input type="button" value="이상형편집" onclick="javascript:win_open()">
+	<div class="userwrapper">
+		<table class="join02">
+			<thead>
+				<tr>
+					<th colspan="7">회원목록</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>아이디</th>
+					<th>이름</th>
+					<th>나이</th>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
 </div> 
 </body>
 </html>
