@@ -16,7 +16,8 @@
 			<th>이름</th>
 			<th>성별</th>
 			<th>점수</th>
-			<td>심사한 사람 수</td>
+			<td>평가자 수</td>
+			<td>평점</td>
 			
 		</tr>
 		</thead>
@@ -28,6 +29,7 @@
 				<td>${semiuser.gender}</td>
 				<td>${semiuser.s_score}</td>
 				<td>${semiuser.s_usercount}</td>
+				<td>${semiuser.s_score/semiuser.s_usercount}</td>
 			</tr>
 			<!-- 
 			<tr>

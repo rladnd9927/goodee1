@@ -47,6 +47,7 @@ public class SemiUserController {
 			try{ 
 				semiuserService.pointUp(s_number,semiuser.getS_score());
 				semiuserService.countUp(s_number,semiuser.getS_usercount());
+				semiuserService.semiDelete(s_number,semiuser.getS_usercount());
 			}catch(DuplicateKeyException e){
 				e.printStackTrace();
 				bindingResult.reject("error.duplicate.user");

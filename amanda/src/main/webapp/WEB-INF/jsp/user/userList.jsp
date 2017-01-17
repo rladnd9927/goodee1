@@ -7,6 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <link rel="stylesheet" href="../decorator/css/style.css">
 <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+function win_open(){
+	var op = "width = 500, height = 540, scrollbars = yes, resizable = yes, left = 50, op = 150";
+	window.open("userList.do", "picture", op);
+}
+</script>
 <script>
 /* function win_open(){
 	var url = "userDtail.do?m_email="+document.f.m_email.value";
@@ -42,6 +48,7 @@ $('.in_table').toggle();
 		</form>
 	</div>
 
+	
 	<h2>명예의 전당</h2>
 	<div class="userwrapper">
 		<table class="join02">
@@ -55,7 +62,6 @@ $('.in_table').toggle();
 				<th>나이</th>
 				
 			</tr>
-			<tbody>
 
 			</tbody>
 		</table>
@@ -96,6 +102,25 @@ $('.in_table').toggle();
 			</c:forEach>
 	</table>
 </div>
+<hr>
+<h2>소개팅</h2><input type="button" value="이상형편집" onclick="javascript:win_open()">
+	<div class="userwrapper">
+		<table class="join02">
+			<thead>
+				<tr>
+					<th colspan="7">회원목록</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>아이디</th>
+					<th>이름</th>
+					<th>나이</th>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
 </div> 
 </body>
 </html>

@@ -65,4 +65,11 @@ public class SemiUserDaoImpl implements SemiUserDao{
 		//sqlSession.getMapper(SemiUserMapper.class).pointUp(s_score,s_number);
 		sqlSession.getMapper(SemiUserMapper.class).countUp(map);
 	}
+	@Override
+	public void semiDelete(int s_number, int s_usercount) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("s_number", s_number);
+		map.put("s_usercount", s_usercount);
+		sqlSession.getMapper(SemiUserMapper.class).semiDelete(map);
+	}
 }
