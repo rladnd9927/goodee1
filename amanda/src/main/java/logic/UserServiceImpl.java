@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private MemberDao MemberDao;
-	
+
 	/*@Autowired
 	private SnsDao snsDao;*/
 
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService{
 			} catch(IOException e) {}
 		}
 	}
-	
+
 	public User getUserByIdPw(User user) {
 		return userDao.getUser(user.getM_email(),user.getM_password());
 	}
@@ -95,49 +95,44 @@ public class UserServiceImpl implements UserService{
 		userDao.delete(num);
 	}
 
-
 	public List<User> userlist() {
 		return userDao.userlist();
 	}
 
+	public List<Member> mypage(User myNum) {
+		return MemberDao.mypage(myNum); 
+	}
 
+	public List<Member> youpage(User myNum) {
+		return MemberDao.youpage(myNum);
+	}
 
+	public String ser(int userNum, User myNum) {
+		System.out.println(myNum+"ser로 여기까진옴"); 
+		return userDao.ser(userNum, myNum);
+	}
 
+	public String aer(int userNum, User myNum) {
+		System.out.println(myNum+"aer로 여기까진옴"); 
+		return userDao.aer(userNum, myNum);
+	}
+	@Override
+	public List<User> likelist(int userNum, User myNum) {
+		return userDao.likelist(userNum,myNum);
+	}
 
-	   public List<Member> mypage(User myNum) {
-	      return MemberDao.mypage(myNum); 
-	   }
+	public List<User> likelist(int userNum, User myNum, int c_number) {
+		return userDao.likelist(userNum,myNum,c_number);
+	}
 
-	   public List<Member> youpage(User myNum) {
-	      return MemberDao.youpage(myNum);
-	   }
+	public List<User> likelist2(int userNum, User myNum) {
+		return userDao.likelist2(userNum,myNum);
+	}
 
-	   public String ser(int userNum, User myNum) {
-	      System.out.println(myNum+"ser로 여기까진옴"); 
-	      return userDao.ser(userNum, myNum);
-	   }
+	@Override
+	public List<User> nolist(int userNum, User myNum) { 
+		return userDao.nolist(userNum,myNum); 
 
-	   public String aer(int userNum, User myNum) {
-	      System.out.println(myNum+"aer로 여기까진옴"); 
-	      return userDao.aer(userNum, myNum);
-	   }
-		@Override
-	   public List<User> likelist(int userNum, User myNum) {
-	      return userDao.likelist(userNum,myNum);
-	   }
-		
-		public List<User> likelist(int userNum, User myNum, int c_number) {
-			return userDao.likelist(userNum,myNum,c_number);
-		}
-		
-		public List<User> likelist2(int userNum, User myNum) {
-			return userDao.likelist2(userNum,myNum);
-		}
-		
-		@Override
-	   public List<User> nolist(int userNum, User myNum) { 
-	      return userDao.nolist(userNum,myNum); 
-
-	   }
+	}
 
 }

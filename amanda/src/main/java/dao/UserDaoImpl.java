@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectOne(NS + "getUser",param);
 	}
 
-/*	//@Override
+	/*	//@Override
 	public void create(User user) {
 		sqlSession.getMapper(UserMapper.class).create(user);
 	}*/
@@ -61,9 +61,9 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.getMapper(UserMapper.class).getNum();
 	}
 
-	public void delete(int num) {
+	/*public void delete(int num) {
 		sqlSession.getMapper(UserMapper.class).delete(num);
-	}
+	}*/
 
 	public UserProfile getUserProfile(int m_number) {
 		return sqlSession.getMapper(UserMapper.class).getUserProfile(m_number);
@@ -72,57 +72,57 @@ public class UserDaoImpl implements UserDao{
 	public List<User> userlist() {
 		return sqlSession.selectList(NS + "userlist"); 
 	}
-	
-	   public List<User> likelist(int userNum, User myNum, int c_number) {
-	      Map<String, Object> param = new HashMap<String, Object>();
-	      //param.put("num", num);
-	      param.put("userNum", userNum); 
-	      param.put("c_number", c_number);
-	      param.put("myNum",  myNum.getM_number());
-	      System.out.println(param);
-	      return sqlSession.selectList(NS + "likelist", param);
-	      
-	   }
 
-	   public List<User> likelist2(int userNum, User myNum) {
-	      Map<String, Object> param = new HashMap<String, Object>();
-	      //param.put("num", num);
-	      param.put("userNum", userNum); 
-	      param.put("myNum",  myNum.getM_number());
-	      return sqlSession.selectList(NS + "likelist2", param);
-	   }
+	public List<User> likelist(int userNum, User myNum, int c_number) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		//param.put("num", num);
+		param.put("userNum", userNum); 
+		param.put("c_number", c_number);
+		param.put("myNum",  myNum.getM_number());
+		System.out.println(param);
+		return sqlSession.selectList(NS + "likelist", param);
 
-	   public String ser(int userNum, User myNum) {
-	      Map<String, Object> param = new HashMap<String, Object>();
-	      param.put("userNum", userNum);
-	      param.put("myNum",  myNum.getM_number());  
-	      System.out.println( myNum.getM_number()+"User 확인 ㅎ");
-	      System.out.println(param+"ser param값");
-	      return sqlSession.selectOne(NS + "ser", param); 
-	   }
-	   
-	   public String aer(int userNum, User myNum) {
-	      Map<String, Object> param = new HashMap<String, Object>();
-	      param.put("userNum", userNum);
-	      param.put("myNum", myNum.getM_number());  
-	      System.out.println(userNum+"++++"+myNum);
-	      System.out.println("누름? 안누름?");
-	      return sqlSession.selectOne(NS + "aer", param);  
-	   }
+	}
 
-	   public List<User> likelist(int userNum, User myNum) {
-	      Map<String, Object> param = new HashMap<String, Object>();
-	      param.put("userNum", userNum); 
-	      param.put("myNum",  myNum.getM_number());
-	      return sqlSession.selectList(NS + "likelist3", param);
-	   }
+	public List<User> likelist2(int userNum, User myNum) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		//param.put("num", num);
+		param.put("userNum", userNum); 
+		param.put("myNum",  myNum.getM_number());
+		return sqlSession.selectList(NS + "likelist2", param);
+	}
 
-	   public List<User> nolist(int userNum, User myNum) {
-	      Map<String, Object> param = new HashMap<String, Object>();
-	      param.put("userNum", userNum); 
-	      param.put("myNum",  myNum.getM_number());
-	      return sqlSession.selectList(NS + "nolist", param);
-	   }
+	public String ser(int userNum, User myNum) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userNum", userNum);
+		param.put("myNum",  myNum.getM_number());  
+		System.out.println( myNum.getM_number()+"User 확인 ㅎ");
+		System.out.println(param+"ser param값");
+		return sqlSession.selectOne(NS + "ser", param); 
+	}
+
+	public String aer(int userNum, User myNum) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userNum", userNum);
+		param.put("myNum", myNum.getM_number());  
+		System.out.println(userNum+"++++"+myNum);
+		System.out.println("누름? 안누름?");
+		return sqlSession.selectOne(NS + "aer", param);  
+	}
+
+	public List<User> likelist(int userNum, User myNum) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userNum", userNum); 
+		param.put("myNum",  myNum.getM_number());
+		return sqlSession.selectList(NS + "likelist3", param);
+	}
+
+	public List<User> nolist(int userNum, User myNum) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userNum", userNum); 
+		param.put("myNum",  myNum.getM_number());
+		return sqlSession.selectList(NS + "nolist", param);
+	}
 
 
 
