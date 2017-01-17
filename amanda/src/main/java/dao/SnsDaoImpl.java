@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dao.mapper.SnsMapper;
-import logic.Reply;
 import logic.Sns;
-import logic.User;
 
 @Repository
 public class SnsDaoImpl implements SnsDao {

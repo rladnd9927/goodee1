@@ -5,4 +5,15 @@
 	<select id = "replyList" parameterType="map" resultType="Reply">
 		select * from reply where sns_no = #{sns_no} and m_number = #{m_number}
 	</select>
+	<select id = "delete" parameterType="map">
+		delete from reply
+		<where>
+			<if test="r_num == -1">
+				sns_no = #{sns_no} and m_number = #{m_number}
+			</if>
+			<if test="r_num != -1">
+				sns_no = #{sns_no} and m_number = #{m_number} and r_num = #{r_num}
+			</if>
+		</where>
+	</select>
 </mapper>

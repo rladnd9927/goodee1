@@ -27,4 +27,8 @@ public interface SnsService {
 
 	String ObjectToJSONString(Object rawData) throws JsonProcessingException;
 
+	void replyDelete(int sns_no, int m_number, int r_num);
+
+	void replyReg(int sns_no, int m_number, String r_content);
+
 }

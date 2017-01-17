@@ -43,7 +43,17 @@ public class Sns {
 	private int m_number; //유저번호
 	private MultipartFile sns_picture; //파일
 	
+	private UserProfile userProfile;
 	
+	
+	public UserProfile getUserProfile() {
+		return userProfile;
+	}
+
+	public void setUserProfile(UserProfile userProfile) {
+		this.userProfile = userProfile;
+	}
+
 	public String getDatetoString(){
 		SimpleDateFormat sf= new SimpleDateFormat("yyyy-MM-dd");
 		return sf.format(sns_date);

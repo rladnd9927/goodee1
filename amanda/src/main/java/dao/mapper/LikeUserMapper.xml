@@ -2,7 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper  namespace="dao.mapper.LikeUserMapper">
-	<select id="othersNum" parameterType="map" resultType="Integer">
-		select y_number from I_LIKE_MEMBER where m_number = #{m_number} 
+	<select id="othersNumA" parameterType="map" resultType="Integer">
+		select y_number from I_LIKE_MEMBER where m_number = #{m_number}
+	</select>
+	<select id="othersNumB" parameterType="map" resultType="Integer">
+		select m_number from I_LIKE_MEMBER where y_number = #{m_number} and m_like = 1
 	</select>
 </mapper> 

@@ -65,4 +65,10 @@ public class SemiUserDaoImpl implements SemiUserDao{
 		//sqlSession.getMapper(SemiUserMapper.class).pointUp(s_score,s_number);
 		sqlSession.getMapper(SemiUserMapper.class).countUp(map);
 	}
+
+	@Override
+	public UserProfile getUserProfile(int m_number) {
+		
+		return sqlSession.getMapper(SemiUserMapper.class).getUserProfile(m_number);
+	}
 }

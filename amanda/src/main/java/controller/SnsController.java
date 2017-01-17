@@ -48,18 +48,25 @@ public class SnsController {
 		mav.addObject("loginUser",loginUser);
 		return mav;
 	}
+	
 	@RequestMapping("sns/othersnslist") //snsmain 뷰단에서 "내가좋아요 한 회원의 sns게시물"을 눌렀을 경우, 이 requestmapping으로 연결
-	public ModelAndView otherssnslist(HttpSession session){
+	public ModelAndView othersnslist(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		List<Integer> m_numberList = new ArrayList<Integer>(); //좋아요 한 회원의 m_number를 받아올 변수
 		List<Sns> snsList = new ArrayList<Sns>(); //선택된 회원의 sns게시물 정보를 저장.
 
 		User loginUser = (User)session.getAttribute("USER");
-		
+		if(loginUser == null) {
+	         throw new LoginRequiredException();
+	    }
 		m_numberList = snsService.getOthersNum(loginUser.getM_number()); //로그인한 유저의 회원번호를 이용하여, 좋아요한 회원의 회원번호들을 가져온다.
 		
+	
 		for(int i = 0 ; i<m_numberList.size(); i++){
-			snsList.addAll(snsService.getList(m_numberList.get(i))); //내가 좋아요한 회원의 회원번호를 가져와서, 그 번호로 sns디비에서 게시물 목록을 뽑아서 snsList에 추가한다.
+			for(int j = 0 ; j < snsService.getList(m_numberList.get(i)).size(); j++){
+				snsList.add(snsService.getList(m_numberList.get(i)).get(j)); //내가 좋아요한 회원의 회원번호를 가져와서, 그 번호로 sns디비에서 게시물 목록을 뽑아서 게시물 객체들을 snsList에 등록
+			}
+			
 		}
 		
 		Collections.sort(snsList,new Comparator<Sns>() { //다른 회원들 sns리스트를 날짜,시간 최신별로 정렬.
@@ -67,9 +74,13 @@ public class SnsController {
 				return o2.getSns_date().compareTo(o1.getSns_date());
 			}
 		});
-		mav.addObject("loginUser",loginUser);
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String today = sdf.format(new Date());
+		mav.addObject("today",today);
 		mav.addObject("snsList",snsList);
-		mav.setViewName("user/mypage2");
+		mav.addObject("loginUser",loginUser);
 		return mav;
 	}
 	@RequestMapping("sns/snsdetail")
@@ -94,6 +105,9 @@ public class SnsController {
 	public ModelAndView snsreg(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		User loginUser = (User)session.getAttribute("USER");
+		if(loginUser == null) {
+	         throw new LoginRequiredException();
+	    }
 		Sns sns = new Sns();
 		sns.setM_number(loginUser.getM_number());
 		mav.addObject(sns);
@@ -167,6 +181,43 @@ public class SnsController {
 		}
 		
 		snsService.delete(sns_no, m_number);
+		mav.setViewName("redirect:snsmain.do");
+		return mav;
+	}
+	@RequestMapping("sns/replyreg")
+	public @ResponseBody List<Object> replyreg(int sns_no, String r_content, HttpSession session){
+		User loginUser = (User)session.getAttribute("USER");
+		int m_number = loginUser.getM_number();
+		snsService.replyReg(sns_no, m_number, r_content);
+		Sns sns = snsService.detail(sns_no,m_number);
+		
+		List<Reply> replyList = snsService.replyList(sns_no,m_number);
+		List<Object> responseObj = new ArrayList<Object>();
+		
+		String snsjson=null;
+		String snsreplyList=null;
+		try {
+			snsjson = snsService.ObjectToJSONString(sns);
+			snsreplyList = snsService.ObjectToJSONString(replyList); //sns객체와 replyList객체룰 json String형태로 변환함.
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		responseObj.add(snsjson);
+		responseObj.add(snsreplyList);
+		return responseObj;
+	}
+	@RequestMapping("sns/replydelete")
+	public ModelAndView replydelete(int sns_no,int m_number, int r_num, HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		User loginUser = (User)session.getAttribute("USER");
+		
+		if(loginUser.getM_number() != m_number){ //로그인 유저와 sns유저가 다르다면? -> 삭제 불가하게..
+			mav.setViewName("sns/snsmain");
+			mav.addObject("sns",snsService.detail(sns_no,m_number));
+			return mav;
+		}
+		
+		snsService.replyDelete(sns_no, m_number,r_num);
 		mav.setViewName("redirect:snsmain.do");
 		return mav;
 	}

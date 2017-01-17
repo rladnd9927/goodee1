@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import dao.mapper.ReplyMapper;
+import dao.mapper.SnsMapper;
 import logic.Reply;
 
 @Repository
@@ -21,6 +23,25 @@ public class ReplyDaoImpl implements ReplyDao {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("sns_no", sns_no);
 		map.put("m_number", m_number);
-		return sqlSession.selectList("dao.mapper.ReplyMapper.replyList",map);
+		return sqlSession.selectList(NS+"replyList",map);
 	}
+
+	@Override
+	public void delete(int sns_no, int m_number, int r_num) {
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("sns_no",sns_no);
+		map.put("m_number", m_number);
+		map.put("r_num", r_num);
+		sqlSession.selectOne(NS+"delete",map);
+	}
+	@Override
+	public int getMaxRnum(int sns_no) {
+		return sqlSession.getMapper(ReplyMapper.class).getMaxRnum(sns_no);
+	}
+
+	@Override
+	public void register(Reply reply) {
+		sqlSession.getMapper(ReplyMapper.class).register(reply);
+	}
+
 }
