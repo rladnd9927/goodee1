@@ -19,6 +19,7 @@ public class UserDaoImpl implements UserDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	private final String NS = "dao.mapper.UserMapper.";
+	private final String CS = "dao.mapper.ChatMapper.";
 
 	//@Override
 	public User getUser(String email, String password) {
@@ -27,11 +28,6 @@ public class UserDaoImpl implements UserDao{
 		param.put("password", password);
 		return sqlSession.selectOne(NS + "getUser",param);
 	}
-
-	/*	//@Override
-	public void create(User user) {
-		sqlSession.getMapper(UserMapper.class).create(user);
-	}*/
 
 	//@Override
 	public List<User> getUser() {
@@ -64,7 +60,7 @@ public class UserDaoImpl implements UserDao{
 	/*public void delete(int num) {
 		sqlSession.getMapper(UserMapper.class).delete(num);
 	}*/
-
+	
 	public UserProfile getUserProfile(int m_number) {
 		return sqlSession.getMapper(UserMapper.class).getUserProfile(m_number);
 	}
@@ -83,15 +79,19 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectList(NS + "likelist", param);
 
 	}
-
+	
 	public List<User> likelist2(int userNum, User myNum) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		//param.put("num", num);
 		param.put("userNum", userNum); 
 		param.put("myNum",  myNum.getM_number());
+		Integer search1 = sqlSession.selectOne(NS + "search1",param); 
+		System.out.println(search1); 
+		if(search1!=1){	    	  
+			sqlSession.delete(CS + "chatdelete1", search1);
+		}
 		return sqlSession.selectList(NS + "likelist2", param);
-	}
-
+	} 
 	public String ser(int userNum, User myNum) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("userNum", userNum);
@@ -100,7 +100,7 @@ public class UserDaoImpl implements UserDao{
 		System.out.println(param+"ser param값");
 		return sqlSession.selectOne(NS + "ser", param); 
 	}
-
+	
 	public String aer(int userNum, User myNum) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("userNum", userNum);
@@ -109,21 +109,72 @@ public class UserDaoImpl implements UserDao{
 		System.out.println("누름? 안누름?");
 		return sqlSession.selectOne(NS + "aer", param);  
 	}
-
-	public List<User> likelist(int userNum, User myNum) {
+	
+	public List<User> likelist3(int userNum, User myNum, int m_like) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("userNum", userNum); 
 		param.put("myNum",  myNum.getM_number());
+		System.out.println(m_like);       
+		//맞좋아요 되는순간 CHAT 테이블에 고유번호 추가되서 방만들기
+		sqlSession.selectList(CS + "listadd", m_like);
 		return sqlSession.selectList(NS + "likelist3", param);
 	}
+	
+	public List<User> noList(int userNum, User myNum) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userNum", userNum);  
+		param.put("myNum",  myNum.getM_number());
 
-	public List<User> nolist(int userNum, User myNum) {
+		Integer search2 = sqlSession.selectOne(NS + "search2",param);      
+		if(search2!=1){	    	  
+			sqlSession.delete(CS + "chatdelete1", search2);
+		}
+		sqlSession.delete(CS + "chatdelete2", param);
+		return sqlSession.selectList(NS + "nolist", param);
+	}
+	
+	@Override 
+	public int m_like(int userNum, User myNum) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("userNum", userNum); 
 		param.put("myNum",  myNum.getM_number());
-		return sqlSession.selectList(NS + "nolist", param);
+		return sqlSession.selectOne(NS + "m_like", param);
 	}
 
+	@Override
+	public String cer(int userNum, User myNum) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userNum", userNum);
+		param.put("myNum", myNum.getM_number());  
+		return sqlSession.selectOne(NS + "cer", param);
+	}
+	public List<User> list(String column, String find) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("column", column);
+		param.put("find", find);
+		return sqlSession.selectList(NS + "list" , param);
+	}
 
+	@Override
+	public User getUpdateUser(int m_number) {
+		return sqlSession.getMapper(UserMapper.class).getUpdateUser(m_number);
+	}
+
+	@Override
+	public UserProfile getUpdateUserProfile(int m_number) {
+		return sqlSession.getMapper(UserMapper.class).getUpdateUserProfile(m_number);
+	}
+
+	@Override
+	public void updateUser(UserProfile userProfile) {
+		sqlSession.getMapper(UserMapper.class).updateUser(userProfile);
+	}
+
+	@Override
+	public void updateProfile(UserProfile userProfile) {
+		sqlSession.getMapper(UserMapper.class).updateProfile(userProfile);
+	}
+
+	
 
 }

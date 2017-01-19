@@ -23,7 +23,7 @@
 				</c:forEach>
 			</font>
 		</spring:hasBindErrors>
-		<input type="hidden" name="s_number" value="${userprofile.semiuser.s_number}">
+		<input type="hidden" name="m_number" value="${userprofile.semiuser.m_number}">
 		<input type="hidden" name="s_email" value="${userprofile.semiuser.s_email }">
 		<input type="hidden" name="s_password" value="${userprofile.semiuser.s_password }">
 		<input type="hidden" name="s_name" value="${userprofile.semiuser.s_name }">

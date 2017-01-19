@@ -1,46 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ include file="/WEB-INF/jsp/jspHeader.jsp" %>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+     <%@include file ="/WEB-INF/jsp/jspHeader.jsp" %>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<link rel="stylesheet" href="./css/snsreg.css">
-<link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
-<script type="text/javascript" src="./js/snsreg.js"></script>
-<title>${loginUser.m_name}님의 SNS</title>
-</head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SNS에 글 작성하기</title>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+    rel="stylesheet" type="text/css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
+    rel="stylesheet" type="text/css">
+  </head>
 <body>
-
-
-<div class="container">
-	<div class="row">
-		<h3>Status Upload Snipp</h3>
-	</div>
-    
-    <div class="row">
-    
-    <div class="col-md-6">
-    						<div class="widget-area no-padding blank">
-								<div class="status-upload">
-									<form>
-										<textarea placeholder="What are you doing right now?" ></textarea>
-										<ul>
-											<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
-											<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
-											<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
-											<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>
-										</ul>
-										<button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
-									</form>
-								</div><!-- Status Upload  -->
-							</div><!-- Widget Area -->
-						</div>
-        
+<div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="lead nav nav-justified nav-pills">
+              <li>
+                <a href="snsmain.do">나의 SNS</a>
+              </li>
+              <li class="active">
+                <a href="snsreg.do">글쓰기</a>
+              </li>
+              <li>
+                <a href="othersns.do">내가 좋아요한 회원</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
+	<div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <form:form modelAttribute="sns" action = "snswrite.do" enctype="multipart/form-data" role="form" class="text-left">
+              <form:hidden path="m_number"/>
+              <div class="form-group">
+                <label class="control-label" for="exampleInputEmail1">제목</label>
+                <form:input path="sns_subject" class="form-control" placeholder="제목을 입력하세요"/>
+				<br>
+					<font color="red">
+						<form:errors path="sns_subject"/>
+					</font>
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="exampleInputEmail1">본문</label>
+                <form:textarea path="sns_content" cols="67" rows="15" class="form-control" placeholder="본문을 입력하세요"/>
+				<br>
+					<font color="red">
+						<form:errors path="sns_content"/>
+					</font>
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="exampleInputEmail1">파일첨부</label>
+                <input type="file" name="sns_picture">
+              </div>
+              <button type="submit" class="btn btn-block btn-primary btn-sm">등록하기</button>
+            </form:form>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
 </html>

@@ -6,9 +6,6 @@ import logic.Member;
 import logic.User;
 
 public interface MemberDao {
-	
     List<Member> mypage(User myNum);
-
     List<Member> youpage(User myNum);
-
 }

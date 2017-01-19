@@ -10,13 +10,15 @@ public interface SnsDao {
 
 	List<Sns> list(int m_number);
 
-	Sns detail(Integer sns_no);
-
-	List<Reply> reply(Integer sns_no);
+	Sns detail(int sns_no, int m_number);
 
 	void insert(Sns sns);
 
 	void update(Sns sns);
 
 	void delete(int sns_no);
+
+	List<Reply> replyList(int sns_no, int m_number);
+
+	int getMax(int m_number);
 }

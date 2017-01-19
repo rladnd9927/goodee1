@@ -71,30 +71,40 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	/*
-	@Autowired
-	private SemiUserService semiuserService;
-	 */
-
 	@Autowired
 	private ItemService itemService;
 
-
-
 	@RequestMapping("user/userList")
-	public ModelAndView userList(){
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView userList(String column, String find, HttpServletRequest request){
 		List<User> userList = userService.getUser();
-		mav.addObject("userList",userList);
+
 		List<UserProfile> userProfile = new ArrayList<UserProfile>();
 		for(int i =0; i<userList.size(); i++){
 			userProfile.add(userService.getUserProfile(userList.get(i).getM_number()));
 		}
-		System.out.println(userProfile.get(0).getM_nickname());
+
+		if(column == null || column.equals("")) column = null;
+		if(find == null || find.equals("")) find = null;
+		if(column == null) find = null;
+		if(find == null) column = null;
+		if(find != null && request.getMethod().equalsIgnoreCase("GET")){
+			try{
+				find = new String(find.getBytes("8859_1"),"euc-kr");
+			}catch(UnsupportedEncodingException e){
+				e.printStackTrace();
+			}
+		}
+		ModelAndView mav = new ModelAndView();
+		List<User> userCount = userService.listFind(column,find);
 		mav.addObject("userList",userList);
 		mav.addObject("userProfile",userProfile);
+		mav.addObject("userCount",userCount);
+		mav.addObject("find",find);
+		System.out.println(column +", " +find);
+		System.out.println(userCount);
 		return mav;
 	}
+	
 	@RequestMapping("user/userlist2")
 	public ModelAndView userlist2(){
 		ModelAndView mav = new ModelAndView("user/userlist2");
@@ -177,17 +187,15 @@ public class UserController {
 		return new ModelAndView("chat/alert");
 	} 
 
-
 	//mypage 컨트롤러
 	@RequestMapping("user/mypage2")
 	public ModelAndView mypage2 (HttpSession session){
-
 		ModelAndView mav = new ModelAndView("user/mypage2");
 		User myNum = (User)session.getAttribute("USER");
 		List<Member> chat = userService.mypage(myNum);
 		List<Member> chat2 = userService.youpage(myNum);
-
-		System.out.println(chat);
+		List<User> userList = userService.getUser();
+		mav.addObject("userList",userList);
 		mav.addObject("mypage", chat); 
 		mav.addObject("youpage", chat2);   
 		return mav; 
@@ -291,11 +299,10 @@ public class UserController {
 	public ModelAndView join1(SemiUser semiuser){
 		ModelAndView mav = new ModelAndView();
 		UserProfile userprofile = new UserProfile();
-		semiuser.setS_number(userService.getNum()+1);
+		semiuser.setM_number(userService.getNum()+1);
 		userprofile.setSemiuser(semiuser);
 		mav.addObject("userprofile",userprofile);
 		mav.setViewName("user/joinForm2");
-		System.out.println(mav);
 		return mav;
 	}
 
@@ -303,34 +310,28 @@ public class UserController {
 	public ModelAndView joinForm2(SemiUser semiuser, UserProfile userprofile, BindingResult bindingResult, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		DateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-		/*try{
+		try{
 			userprofile.setM_birthday(sf.parse("1980-01-01"));
 		}catch(ParseException e){
 			e.printStackTrace();
-		}*/
+		}
 		userprofile.setSemiuser(semiuser);
 		userprofile.setM_number(userService.getNum());
 		mav.addObject("userprofile",userprofile);
-		System.out.println(userprofile);
 
 		/*if(bindingResult.hasErrors()){
 			bindingResult.reject("error.input.user");
-			System.out.println("에러셋팅");
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}*/
 		try{
-			System.out.println("DB접속");
-			System.out.println("유저다:"+userprofile);
 			userService.createUser(userprofile,request);
 		}catch(DuplicateKeyException e){
 			e.printStackTrace();
-			System.out.println("DB미접속");
 			bindingResult.reject("error.duplicate.user");
 			return mav;
 		}
 		mav.setViewName("redirect:loginForm.do");
-		System.out.println(mav);
 		return mav;
 	}
 
@@ -380,27 +381,113 @@ public class UserController {
 	   return mav;
    }*/
 
-	@RequestMapping("user/mypage")
-	public ModelAndView mypage(String id){
+	/*@RequestMapping("user/mypage")
+	public ModelAndView mypage(String m_email){
 		ModelAndView mav = new ModelAndView();
-		User user = shopService.getUserById(id);
+		User user = userService.getUserById(m_email);
 		List<User> userList = userService.getUser();
 		mav.addObject("userList",userList);
-		/*	   for(Sale sale : salelist){
+			   for(Sale sale : salelist){
 		   List<SaleItem> saleItemList = shopService.saleItemList(sale.getSaleId());
 		   for(SaleItem sitem : saleItemList){
 			   Item item = itemService.getItemList(sitem.getItemId());
 			   sitem.setItem(item);
 		   }
 		   sale.setSaleItemList(saleItemList);
-	   }*/
-		/*mav.addObject("salelist",salelist);*/
+	   }
+		mav.addObject("salelist",salelist);
 		mav.addObject("userList",userList);
 		return mav;
-	}
-
+	}*/
+		
 	@RequestMapping("user/admin")
-	public ModelAndView admin(HttpSession session){
+	public ModelAndView admin(HttpSession session, String column, String find, HttpServletRequest request){
+		User loginUser = (User)session.getAttribute("USER");
+		if(loginUser == null){
+			throw new LoginRequiredException();
+		}
+		if(!loginUser.getM_email().equals("admin")){
+			throw new AdminRequiredException();
+		}
+		ModelAndView mav = new ModelAndView();
+		List<User> userList = userService.getUser();
+
+		List<UserProfile> userProfile = new ArrayList<UserProfile>();
+		for(int i =0; i<userList.size(); i++){
+			userProfile.add(userService.getUserProfile(userList.get(i).getM_number()));
+		}
+
+		if(column == null || column.equals("")) column = null;
+		if(find == null || find.equals("")) find = null;
+		if(column == null) find = null;
+		if(find == null) column = null;
+		if(find != null && request.getMethod().equalsIgnoreCase("GET")){
+			try{
+				find = new String(find.getBytes("8859_1"),"euc-kr");
+			}catch(UnsupportedEncodingException e){
+				e.printStackTrace();
+			}
+		}
+		List<User> userCount = userService.listFind(column,find);
+		mav.addObject("userList",userList);
+		mav.addObject("userProfile",userProfile);
+		mav.addObject("userCount",userCount);
+		mav.addObject("find",find);
+		return mav;
+	}
+	
+	@RequestMapping("user/updateForm")
+	public ModelAndView updateForm(int m_number){
+		ModelAndView mav = new ModelAndView();
+		User updateuser = userService.getUpdateUser(m_number);
+		UserProfile updateuserProfile = userService.getUpdateUserProfile(m_number);
+		updateuserProfile.setUser(updateuser);
+		mav.addObject(updateuser);
+		mav.addObject(updateuserProfile);
+		return mav;
+	}
+	
+	@RequestMapping("user/update") //편집한 이상형 업데이트 & 일치하는 이상형을 리스트로 출력
+	   public ModelAndView update(HttpSession session, 
+			   UserProfile userProfile, User user, 
+			   BindingResult bindingResult, HttpServletRequest request, int m_number){
+		ModelAndView mav = new ModelAndView("user/updateForm");
+		mav.addObject("userProfile",userProfile);
+		
+		if(userProfile.getUser().getM_password().equals("") || userProfile.getUser().getM_password() == null){
+			return mav;
+		}
+		
+		try{
+			userService.updateUserProfile(userProfile,request);
+		}catch(DuplicateKeyException e){
+			e.printStackTrace();
+			bindingResult.reject("error.duplicate.user");
+			return mav;
+		}
+		mav.setViewName("redirect:admin.do");
+		return mav;
+	}
+	/*@RequestMapping("user/idealtype_update") //편집한 이상형 업데이트 & 일치하는 이상형을 리스트로 출력
+	   public ModelAndView idealtype_update(HttpSession session, UserProfile userProfile, IdealType idealtype, BindingResult bindingResult){
+	      ModelAndView mav = new ModelAndView("user/idealtype_update");
+	      User loginUser = (User)session.getAttribute("USER");
+	      List<UserProfile> idealList = idealtypeService.getIdealList(idealtype.getI_height());
+	      int loginUserNumber = loginUser.getM_number();
+	      idealtypeService.idealUpdate(loginUserNumber, idealtype);
+	      mav.addObject("idealList",idealList);
+	      mav.setViewName("user/userList");
+	      return mav;
+	   }*/
+	/*@RequestMapping("user/userDetail")
+	public ModelAndView userDetail(int m_number){
+		ModelAndView mav = new ModelAndView();
+		UserProfile userProfile = userService.getUserProfile(m_number);
+		mav.addObject(userProfile);
+		return mav;
+	}*/
+	/*@RequestMapping("user/admin")
+	public ModelAndView admin(HttpSession session, String column, String find, HttpServletRequest request){
 		User loginUser = (User)session.getAttribute("USER");
 		if(loginUser == null){
 			throw new LoginRequiredException();
@@ -413,20 +500,7 @@ public class UserController {
 		mav.addObject("userList",userList);
 		mav.addObject(userList);
 		return mav;
-	}
-
-	/*@RequestMapping("user/delete")
-	public ModelAndView delete(int num, String pass){
-		ModelAndView mav = new ModelAndView("user/deleteForm");
-		String dbPass = userService.getPassword(num);
-		if(!pass.equals(dbPass)){
-			throw new PasswordFailException();
-		}
-		userService.delete(num);
-		mav.setViewName("redirect:list.shop");
-		return mav;
 	}*/
-
 	/*
    @RequestMapping("user/blindDate")
    public ModelAndView blindDate(){

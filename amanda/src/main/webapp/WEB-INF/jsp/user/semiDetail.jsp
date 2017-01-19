@@ -11,7 +11,7 @@
 	<h2>디테일페이지 Test</h2>
 	<table border="1" cellpadding="0" cellspacing="0">
 		<tr>
-			<td width="100" height="100">
+			<td>
 				여기에 semi_member의 사진
 				${semiuserProfile.m_pictureUrl1}
 			</td>
@@ -48,41 +48,23 @@
 				</table>
 			</td>
 		</tr>
-		<tr>
-			<td colspan="2">
-				<form action="../user/evaluate.do">
-					<input type="hidden" name="s_number" value="${semiuserProfile.s_number}">
-					<table>
-						<tr>
-							<td>
-								<select name="m_score">
-									<c:forEach begin="1" end="5" var="idx">
-										<option>${idx}</option>
-									</c:forEach>
-								</select>
-							</td>
-							<td>
-								<input type="submit" value="점수주기">
-							</td>
-						</tr>
-					</table>
-				</form>
-			</td>
-			<!-- 
-			<td>
-				<select>
-					<option>★☆☆☆☆</option>
-					<option>★★☆☆☆</option>
-					<option>★★★☆☆</option>
-					<option>★★★★☆</option>
-					<option>★★★★★</option>
-				</select>
-			</td>
-			<td>
-				<input type="submit" value="점수주기">
-			</td>
-			-->
-		</tr>
+		<form:form modelAttribute="semiuser" method="post" action="semi1.do">
+			<tr>
+				<td>
+				<input type="hidden" name="s_number" value="${semiuser.s_number}">
+					<form:select path="s_score">
+						<form:option value="1">★☆☆☆☆</form:option>
+						<form:option value="2">★★☆☆☆</form:option>
+						<form:option value="3">★★★☆☆</form:option>
+						<form:option value="4">★★★★☆</form:option>
+						<form:option value="5">★★★★★</form:option>
+					</form:select>
+				</td>
+				<td>
+					<input type="submit" class="jb" value="점수주기">
+				</td>
+			</tr>
+		</form:form>
 	</table>
 </body>
 </html>
