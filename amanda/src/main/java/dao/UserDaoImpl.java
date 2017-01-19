@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dao.mapper.BoardMapper;
+import dao.mapper.SemiUserMapper;
 import dao.mapper.UserMapper;
 import logic.SemiUser;
 import logic.User;
@@ -165,5 +166,4 @@ public class UserDaoImpl implements UserDao{
 		param.put("find", find);
 		return sqlSession.selectList(NS + "list" , param);
 	}
-
 }

@@ -1,15 +1,11 @@
 package logic;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.SemiUserDao;
-import dao.UserDao;
 
 @Service
 public class SemiUserServiceImpl implements SemiUserService{
@@ -17,37 +13,52 @@ public class SemiUserServiceImpl implements SemiUserService{
 	@Autowired
 	private SemiUserDao semiuserDao;
 	
-	public List<SemiUser> getSemiUser() {
-		return semiuserDao.getSemiUser();
+	public List<SemiUser> getSemiUser(int loginUserNumber) {
+		return semiuserDao.getSemiUser(loginUserNumber);
 	}
 
-	public List<Integer> getOthersNum(int s_number) {
-		List<Integer> othersNum = new ArrayList<Integer>();
-		return othersNum;
-	}
-
-	public SemiUser getSemiUserByIdPw(SemiUser semiuser) {
-		return semiuserDao.getSemiUser(semiuser.getS_email(),semiuser.getS_password());
-	}
-
-	public UserProfile getsemiUserProfile(int s_number) {
-		UserProfile test = semiuserDao.getsemiUserProfile(s_number);
-		return test;
-	}
-	
-	@Override
-	public void pointUp(int s_number, int s_score) {
-		semiuserDao.pointUp(s_number,s_score);
-		
+	public UserProfile getsemiUserProfile(int m_number) {
+		UserProfile semiuserProfile = semiuserDao.getsemiUserProfile(m_number);
+		return semiuserProfile;
 	}
 
 	@Override
-	public void countUp(int s_number, int s_usercount) {
-		semiuserDao.countUp(s_number,s_usercount);
+	public SemiUser getSemiUserByNumScore(int m_number, int s_score) {
+		return semiuserDao.getSemiUserbyNumScore(m_number, s_score);
 	}
 
 	@Override
-	public void semiDelete(int s_number, int s_usercount) {
-		semiuserDao.semiDelete(s_number,s_usercount);
+	public void pointCountUp(SemiUser semiuser) {
+		semiuserDao.pointCountUp(semiuser);
+	}
+
+	@Override
+	public void semiDelete(SemiUser semiuser) {
+		semiuserDao.semiDelete(semiuser);
+	}
+
+	@Override
+	public SemiUser getOkMember(SemiUser semiuser) {
+		return semiuserDao.getOkMember(semiuser);
+	}
+
+	@Override
+	public void memberInsert(SemiUser selectOkMember) {
+		semiuserDao.memberInsert(selectOkMember);
+	}
+
+	@Override
+	public void idealTypeInsert(SemiUser selectOkMember) {
+		semiuserDao.idealTypeInsert(selectOkMember);
+	}
+
+	@Override
+	public Simsa getSimsaMember(int m_number) {
+		return semiuserDao.getSimsaMember(m_number);
+	}
+
+	@Override
+	public void UpdateSimsa(int m_number, int loginUserNumber) {
+		semiuserDao.UpdateSimsa(m_number, loginUserNumber);
 	}
 }

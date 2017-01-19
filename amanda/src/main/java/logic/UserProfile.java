@@ -12,6 +12,7 @@ public class UserProfile {
 	private String m_pictureUrl1;
 	private String m_pictureUrl2;
 	private String m_pictureUrl3;
+	private String gender;
 	private String m_nickname;
 	private String m_school;
 	private String m_major;
@@ -26,33 +27,8 @@ public class UserProfile {
 	private String m_bodytype;
 	private String m_character;
 	private int m_score;
-	private int s_number;
 	private SemiUser semiuser;
 	
-	public String getM_pictureUrl1() {
-		return m_pictureUrl1;
-	}
-	public void setM_pictureUrl1(String m_pictureUrl1) {
-		this.m_pictureUrl1 = m_pictureUrl1;
-	}
-	public String getM_pictureUrl2() {
-		return m_pictureUrl2;
-	}
-	public void setM_pictureUrl2(String m_pictureUrl2) {
-		this.m_pictureUrl2 = m_pictureUrl2;
-	}
-	public String getM_pictureUrl3() {
-		return m_pictureUrl3;
-	}
-	public void setM_pictureUrl3(String m_pictureUrl3) {
-		this.m_pictureUrl3 = m_pictureUrl3;
-	}
-	public SemiUser getSemiuser() {
-		return semiuser;
-	}
-	public void setSemiuser(SemiUser semiuser) {
-		this.semiuser = semiuser;
-	}
 	public int getM_number() {
 		return m_number;
 	}
@@ -76,6 +52,30 @@ public class UserProfile {
 	}
 	public void setM_picture3(MultipartFile m_picture3) {
 		this.m_picture3 = m_picture3;
+	}
+	public String getM_pictureUrl1() {
+		return m_pictureUrl1;
+	}
+	public void setM_pictureUrl1(String m_pictureUrl1) {
+		this.m_pictureUrl1 = m_pictureUrl1;
+	}
+	public String getM_pictureUrl2() {
+		return m_pictureUrl2;
+	}
+	public void setM_pictureUrl2(String m_pictureUrl2) {
+		this.m_pictureUrl2 = m_pictureUrl2;
+	}
+	public String getM_pictureUrl3() {
+		return m_pictureUrl3;
+	}
+	public void setM_pictureUrl3(String m_pictureUrl3) {
+		this.m_pictureUrl3 = m_pictureUrl3;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	public String getM_nickname() {
 		return m_nickname;
@@ -161,22 +161,21 @@ public class UserProfile {
 	public void setM_score(int m_score) {
 		this.m_score = m_score;
 	}
-	public int getS_number() {
-		return s_number;
+	public SemiUser getSemiuser() {
+		return semiuser;
 	}
-	public void setS_number(int s_number) {
-		this.s_number = s_number;
+	public void setSemiuser(SemiUser semiuser) {
+		this.semiuser = semiuser;
 	}
 	@Override
 	public String toString() {
 		return "UserProfile [m_number=" + m_number + ", m_picture1=" + m_picture1 + ", m_picture2=" + m_picture2
 				+ ", m_picture3=" + m_picture3 + ", m_pictureUrl1=" + m_pictureUrl1 + ", m_pictureUrl2=" + m_pictureUrl2
-				+ ", m_pictureUrl3=" + m_pictureUrl3 + ", m_nickname=" + m_nickname + ", m_school=" + m_school
-				+ ", m_major=" + m_major + ", m_job=" + m_job + ", m_area=" + m_area + ", m_birthday=" + m_birthday
-				+ ", m_height=" + m_height + ", m_bloodtype=" + m_bloodtype + ", m_religion=" + m_religion
-				+ ", m_smoking=" + m_smoking + ", m_drinking=" + m_drinking + ", m_bodytype=" + m_bodytype
-				+ ", m_character=" + m_character + ", m_score=" + m_score + ", s_number=" + s_number + ", semiuser="
+				+ ", m_pictureUrl3=" + m_pictureUrl3 + ", gender=" + gender + ", m_nickname=" + m_nickname
+				+ ", m_school=" + m_school + ", m_major=" + m_major + ", m_job=" + m_job + ", m_area=" + m_area
+				+ ", m_birthday=" + m_birthday + ", m_height=" + m_height + ", m_bloodtype=" + m_bloodtype
+				+ ", m_religion=" + m_religion + ", m_smoking=" + m_smoking + ", m_drinking=" + m_drinking
+				+ ", m_bodytype=" + m_bodytype + ", m_character=" + m_character + ", m_score=" + m_score + ", semiuser="
 				+ semiuser + "]";
 	}
-	
 }

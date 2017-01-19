@@ -8,7 +8,7 @@
 <title>Amanda</title>
 </head>
 <body>
-	<h2>회원심사 페이지</h2>
+	<h2>회원심사</h2>
 	<table class="join02">
 		<thead>
 		<tr>
@@ -16,46 +16,30 @@
 			<th>이름</th>
 			<th>성별</th>
 			<th>점수</th>
-			<td>평가자 수</td>
-			<td>평점</td>
+			<th>평가자 수</th>
+			<th>평점</th>
 			
 		</tr>
 		</thead>
 		<tbody>
 		<c:forEach items="${semiuserList}" var="semiuser">
+			<c:if test="${semiuser.s_usercount >= 5}"></c:if>
+			<c:if test="${semiuser.s_usercount < 5}">
 			<tr>
-				<td><a href="semiDetail.do?s_number=${semiuser.s_number}">${semiuser.s_email}</a></td>
+				<td><a href="semiDetail.do?m_number=${semiuser.m_number}">${semiuser.s_email}</a></td>
 				<td>${semiuser.s_name}</td>
-				<td>${semiuser.gender}</td>
+				<td>
+					<c:if test="${semiuser.gender == 0}">남자</c:if>
+					<c:if test="${semiuser.gender == 1}">여자</c:if>
+				</td>
 				<td>${semiuser.s_score}</td>
 				<td>${semiuser.s_usercount}</td>
-				<td>${semiuser.s_score/semiuser.s_usercount}</td>
-			</tr>
-			<!-- 
-			<tr>
-				<td colspan="5">
-					<form action="detail.do">
-						<input type="hidden" name="id" value="${item.id }">
-						<table>
-							<tr align="right">
-								<td>
-									<select name="quantity">
-										<option>★☆☆☆☆</option>
-										<option>★★☆☆☆</option>
-										<option>★★★☆☆</option>
-										<option>★★★★☆</option>
-										<option>★★★★★</option>
-									</select>
-								</td>
-								<td>
-									<input type="submit" value="점수주기">
-								</td>
-							</tr>
-						</table>
-					</form>
+				<td>
+					<c:if test="${semiuser.s_score/semiuser.s_usercount == 'NaN'}">X</c:if>
+					<c:if test="${semiuser.s_score/semiuser.s_usercount != 'NaN'}">${semiuser.s_score/semiuser.s_usercount}</c:if>
 				</td>
 			</tr>
-			 -->
+			</c:if>
 		</c:forEach>
 		</tbody>
 	</table>

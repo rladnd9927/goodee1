@@ -1,7 +1,7 @@
 package logic;
 //semiuser
 public class SemiUser {
-	private int s_number;
+	private int m_number;
 	private String s_email;
 	private String s_password;
 	private String s_name;
@@ -10,11 +10,11 @@ public class SemiUser {
 	private int s_usercount;
 	
 	//getter,setter,toString
-	public int getS_number() {
-		return s_number;
+	public int getM_number() {
+		return m_number;
 	}
-	public void setS_number(int s_number) {
-		this.s_number = s_number;
+	public void setM_number(int m_number) {
+		this.m_number = m_number;
 	}
 	public String getS_email() {
 		return s_email;
@@ -54,7 +54,7 @@ public class SemiUser {
 	}
 	@Override
 	public String toString() {
-		return "SemiUser [s_number=" + s_number + ", s_email=" + s_email + ", s_password=" + s_password + ", s_name="
+		return "SemiUser [m_number=" + m_number + ", s_email=" + s_email + ", s_password=" + s_password + ", s_name="
 				+ s_name + ", s_score=" + s_score + ", gender=" + gender + ", s_usercount=" + s_usercount + "]";
 	}
 }

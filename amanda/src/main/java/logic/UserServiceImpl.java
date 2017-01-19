@@ -154,5 +154,4 @@ public class UserServiceImpl implements UserService{
 			 System.out.println(myNum+"cer로 여기까진옴"); 
 		      return userDao.cer(userNum, myNum);
 		}
-
 }

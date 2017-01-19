@@ -27,5 +27,4 @@ public interface UserDao {
 	   int m_like(int userNum, User myNum);
 	   
        String cer(int userNum, User myNum);
-	
 }

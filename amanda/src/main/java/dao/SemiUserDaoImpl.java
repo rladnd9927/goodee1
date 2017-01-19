@@ -11,65 +11,67 @@ import org.springframework.stereotype.Repository;
 import dao.mapper.SemiUserMapper;
 import dao.mapper.UserMapper;
 import logic.SemiUser;
+import logic.Simsa;
+import logic.User;
 import logic.UserProfile;
 
 @Repository
 public class SemiUserDaoImpl implements SemiUserDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	private final String NS = "dao.mapper.SemiUserMapper.";
 
 	//@Override
-	public List<SemiUser> getSemiUser() {
-		return sqlSession.getMapper(SemiUserMapper.class).getSemiUser();
+	public List<SemiUser> getSemiUser(int loginUserNumber) {
+		return sqlSession.getMapper(SemiUserMapper.class).getSemiUser(loginUserNumber);
 	}
 
-	public List<SemiUser> getSemiUser(String[] idchks) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("idchks", idchks);
-		return sqlSession.selectList(NS+"getSemiUser",map);
+	public UserProfile getsemiUserProfile(int m_number) {
+		return sqlSession.getMapper(SemiUserMapper.class).getsemiUserProfile(m_number);
 	}
-
-	public SemiUser getSemiUser(String email, String password) {
-		Map<String, String> param = new HashMap<String,String>();
-		param.put("email", email);
-		param.put("password", password);
-		return sqlSession.selectOne(NS + "getSemiUser",param);
-	}
-
-	public SemiUser getSemiUserbyNum(int s_number) {
-		return sqlSession.getMapper(SemiUserMapper.class).getSemiUserbyNum(s_number);
-	}
-
-	public UserProfile getsemiUserProfile(int s_number) {
-		return sqlSession.getMapper(SemiUserMapper.class).getsemiUserProfile(s_number);
-	}
+	
 	@Override
-	public void pointUp(int s_number, int s_score) {
+	public SemiUser getSemiUserbyNumScore(int m_number, int s_score) {
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("s_number", s_number);
+		map.put("m_number", m_number);
 		map.put("s_score", s_score);
-		//int s_score = semiuser.getS_score();
-		//System.out.println(s_score);
-		//sqlSession.getMapper(SemiUserMapper.class).pointUp(s_score,s_number);
-		sqlSession.getMapper(SemiUserMapper.class).pointUp(map);
+		return sqlSession.getMapper(SemiUserMapper.class).getSemiUserByNumScore(map);
 	}
 
 	@Override
-	public void countUp(int s_number, int s_usercount) {
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("s_number", s_number);
-		map.put("s_usercount", s_usercount);
-		//int s_score = semiuser.getS_score();
-		//System.out.println(s_score);
-		//sqlSession.getMapper(SemiUserMapper.class).pointUp(s_score,s_number);
-		sqlSession.getMapper(SemiUserMapper.class).countUp(map);
+	public void pointCountUp(SemiUser semiuser) {
+		sqlSession.getMapper(SemiUserMapper.class).pointCountUp(semiuser);
 	}
+
 	@Override
-	public void semiDelete(int s_number, int s_usercount) {
+	public void semiDelete(SemiUser semiuser) {
+		sqlSession.getMapper(SemiUserMapper.class).semiDelete(semiuser);
+	}
+
+	@Override
+	public SemiUser getOkMember(SemiUser semiuser) {
+		return sqlSession.getMapper(SemiUserMapper.class).getOkMember(semiuser);
+	}
+
+	@Override
+	public void memberInsert(SemiUser selectOkMember) {
+		sqlSession.getMapper(SemiUserMapper.class).memberInsert(selectOkMember);
+	}
+
+	@Override
+	public void idealTypeInsert(SemiUser selectOkMember) {
+		sqlSession.getMapper(SemiUserMapper.class).idealTypeInsert(selectOkMember);
+	}
+
+	@Override
+	public Simsa getSimsaMember(int m_number) {
+		return sqlSession.getMapper(SemiUserMapper.class).getSimsaMember(m_number);
+	}
+
+	@Override
+	public void UpdateSimsa(int m_number, int loginUserNumber) {
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("s_number", s_number);
-		map.put("s_usercount", s_usercount);
-		sqlSession.getMapper(SemiUserMapper.class).semiDelete(map);
+		map.put("m_number", m_number);
+		map.put("loginUserNumber", loginUserNumber);
+		sqlSession.getMapper(SemiUserMapper.class).UpdateSimsa(map);
 	}
 }

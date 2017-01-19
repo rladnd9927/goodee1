@@ -46,6 +46,8 @@ import exception.LoginRequiredException;
 import exception.MailEmptyException;
 import exception.PasswordFailException;
 import logic.Board;
+import logic.IdealType;
+import logic.IdealTypeService;
 import logic.Item;
 import logic.ItemService;
 import logic.Mail;
@@ -74,9 +76,10 @@ public class UserController {
 	@Autowired
 	private ItemService itemService;
 	
-
-	 
-	@RequestMapping("user/userList")
+	@Autowired
+	private IdealTypeService idealtypeService;
+	
+	   @RequestMapping("user/userList")
 	public ModelAndView userList(String column, String find, HttpServletRequest request){
 	   List<User> userList = userService.getUser();
 	   
@@ -102,13 +105,8 @@ public class UserController {
 	   mav.addObject("userProfile",userProfile);
        mav.addObject("userCount",userCount);
        mav.addObject("find",find);
-       System.out.println(column +", " +find);
-       System.out.println(userCount);
        return mav;
 	}
-	
-	
-	
 	
     @RequestMapping("user/userlist2")
     public ModelAndView userlist2(){
@@ -141,7 +139,6 @@ public class UserController {
 	   //좋아요를 눌렀을때.
 	   @RequestMapping("user/likelist")
 	   public ModelAndView likelist(int userNum, HttpSession session){
-		   System.out.println(userNum+"유저아이디"); 
 		  User myNum = (User)session.getAttribute("USER");
 	      ModelAndView mav = new ModelAndView();  
 	      
@@ -167,7 +164,6 @@ public class UserController {
 	         if(aa==null){   
 	         //고유번호 생성
 	            int c_number = (int)(Math.random() * 1000 + 1);
-	            System.out.println("ㄴㄴ");
 	            //좋아요 테이블에 상대추가.
 	            List<User> chat = userService.likelist(userNum, myNum,c_number);
 	            mav.addObject("userlist", chat);
@@ -176,7 +172,6 @@ public class UserController {
 	             
 	         //내가 좋아요룰 이미 누른상태일때. 
 	         }else{
-	            System.out.println("ㅇㅇ");
 	            //likelist2는 좋아요 해제. 
 	            List<User> chat = userService.likelist2(userNum, myNum);
 	            mav.addObject("userlist", chat);
@@ -284,7 +279,6 @@ public class UserController {
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}
-		
 		User loginUser = userService.getUserByIdPw(user);
 		if(loginUser == null){
 			bindingResult.reject("error.login.userId");
@@ -292,7 +286,6 @@ public class UserController {
 			return mav;
 		}
 		session.setAttribute("USER", loginUser); 
-		System.out.println(loginUser+"하하하하하하하");
 		mav.addObject("user",loginUser);
 		mav.setViewName("user/main");
 
@@ -390,6 +383,38 @@ public class UserController {
 //	   ModelAndView mav = new ModelAndView();
 //	   return mav;
 //   }
+   
+   @RequestMapping("user/idealtype") //현재 내가 설정한 이상형 보여주기
+   public ModelAndView idealtype(HttpSession session){
+		ModelAndView mav = new ModelAndView("user/idealtype");
+		User loginUser = (User)session.getAttribute("USER");
+		int loginUserNumber = loginUser.getM_number();//로그인 번호 빼오기
+		IdealType idealType = idealtypeService.getIdealType(loginUserNumber);//로그인 유저가 설정한 이상형 테이블을 검색
+		mav.addObject("idealType",idealType);
+		return mav; 
+   }
+   
+   @RequestMapping("user/idealtype2") //내 이상형 편집
+   public ModelAndView idealtype2(HttpSession session){
+		ModelAndView mav = new ModelAndView("user/idealtype2");
+		User loginUser = (User)session.getAttribute("USER");
+		int loginUserNumber = loginUser.getM_number();
+		IdealType idealType = idealtypeService.getIdealType(loginUserNumber);
+		mav.addObject("idealType",idealType);
+		return mav; 
+   }
+   
+   @RequestMapping("user/idealtype_update") //편집한 이상형 업데이트 & 일치하는 이상형을 리스트로 출력
+   public ModelAndView idealtype_update(HttpSession session, UserProfile userProfile, IdealType idealType, BindingResult bindingResult){
+	   ModelAndView mav = new ModelAndView("user/idealtype_update");
+		User loginUser = (User)session.getAttribute("USER");
+		List<UserProfile> idealList = idealtypeService.getIdealList(idealType.getI_height());
+		int loginUserNumber = loginUser.getM_number();
+		idealtypeService.idealUpdate(loginUserNumber, idealType);
+		mav.addObject("idealList",idealList);
+		mav.setViewName("user/userList");
+		return mav;
+   }
    
    @RequestMapping("user/mailForm")
    public ModelAndView mailForm(String[] idchks){

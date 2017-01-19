@@ -32,5 +32,4 @@ public interface UserMapper {
 
 	@Select("select nvl(max(s_number),0) from semi_member")
 	int getNum();
-
 }
