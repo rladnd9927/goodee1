@@ -36,7 +36,7 @@ public class SemiUserController {
 			mav.addObject(semiuserList);
 			return mav;
 	 } 
-	 
+	    
 	 @RequestMapping("user/semiDetail")
 	 public ModelAndView semiDetail(int m_number, SemiUser semiuser, HttpSession session){
 			ModelAndView mav = new ModelAndView();
