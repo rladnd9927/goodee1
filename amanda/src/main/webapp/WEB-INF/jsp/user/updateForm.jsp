@@ -44,7 +44,8 @@
 						</tr>
 						<tr>
 							<th>비밀번호</th>
-							<td><form:password path="user.m_password" /></td>
+							<%-- <td><form:password path="user.m_password" /></td> --%>
+							<td><input type="password" name="user.m_password" required></td>
 						</tr>
 						<tr>
 							<th>이름</th>
@@ -66,7 +67,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><img src="../../fileupload/${userProfile.m_pictureUrl1 }" id="pic"
+							<td><img src="../fileupload/${userProfile.m_pictureUrl1 }" id="pic"
 								width="100" height="120">
 							<img src="../fileupload/${userProfile.m_pictureUrl2 }" id="pic"
 								width="100" height="120">

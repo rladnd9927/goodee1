@@ -62,4 +62,8 @@
    	  	</if>
    	  	)
    </select>   
+   <select id="duplicateUser" parameterType="map" resultType="SemiUser">
+		select s_email from semi_member where s_email=#{UserId}
+
+	</select>
 </mapper>

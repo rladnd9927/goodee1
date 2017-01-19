@@ -175,6 +175,13 @@ public class UserDaoImpl implements UserDao{
 		sqlSession.getMapper(UserMapper.class).updateProfile(userProfile);
 	}
 
+	@Override
+	public SemiUser duplicateUser(String semiuser) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("UserId", semiuser);
+		return sqlSession.selectOne(NS + "duplicateUser" , param);
+	}
+
 	
 
 }

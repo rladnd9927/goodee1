@@ -176,7 +176,9 @@ public class UserServiceImpl implements UserService{
 		userDao.updateProfile(userProfile);
 	}
 
+	@Override
+	public SemiUser duplicateUser(String semiuser) {
+		return userDao.duplicateUser(semiuser);
+	}
 
-
-	
 }

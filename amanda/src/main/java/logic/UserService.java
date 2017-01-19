@@ -28,5 +28,7 @@ public interface UserService {
 	UserProfile getUpdateUserProfile(int m_number);
 	
 	void updateUserProfile(UserProfile userProfile, HttpServletRequest request);
+	//ID 중복확인
+	SemiUser duplicateUser(String semiuser);
 	
 }

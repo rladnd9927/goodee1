@@ -1,9 +1,17 @@
 package logic;
+
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 //semiuser
 public class SemiUser {
 	private int m_number;
+	@Size(min=5,max=20,message="아이디는 5자 이상 20자 이하로 입력하세요.")
 	private String s_email;
+	@Size(min=3,max=10,message="비밀번호는 3자 이상 10자 이하로 입력하세요.")
 	private String s_password;
+	@NotEmpty(message="글쓴이를 입력하세요")
 	private String s_name;
 	private int s_score;
 	private int gender;

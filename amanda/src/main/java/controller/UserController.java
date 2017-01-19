@@ -296,14 +296,29 @@ public class UserController {
 		return mav;
 	}
 	@RequestMapping("user/join1")
-	public ModelAndView join1(SemiUser semiuser){
+	public ModelAndView join1(@Valid SemiUser semiuser, BindingResult bindingResult){
 		ModelAndView mav = new ModelAndView();
+		
+		System.out.println(semiuser.getS_email());
+		if(bindingResult.hasErrors()){
+			bindingResult.reject("error.input.user");
+			mav.getModel().putAll(bindingResult.getModel());
+			return mav;
+		}
+		
 		UserProfile userprofile = new UserProfile();
 		semiuser.setM_number(userService.getNum()+1);
 		userprofile.setSemiuser(semiuser);
+		
+		SemiUser a = userService.duplicateUser(semiuser.getS_email());
+		if(a != null) {
+//			bindingResult.reject("error.duplicate.user"); 	
+			return new ModelAndView("user/alert");
+		} else {
 		mav.addObject("userprofile",userprofile);
 		mav.setViewName("user/joinForm2");
 		return mav;
+		}
 	}
 
 	@RequestMapping("user/joinForm2")

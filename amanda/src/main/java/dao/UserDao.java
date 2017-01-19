@@ -32,6 +32,8 @@ public interface UserDao {
 	void updateUser(UserProfile userProfile);
 	//UserProfile update
 	void updateProfile(UserProfile userProfile);
+	//ID 중복확인
+	SemiUser duplicateUser(String semiuser);
 	
 	
 }
