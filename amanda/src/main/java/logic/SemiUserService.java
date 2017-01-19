@@ -3,11 +3,14 @@ package logic;
 import java.util.List;
 
 public interface SemiUserService {
-	List<Integer> getOthersNum(int s_number);
-	List<SemiUser> getSemiUser();
-	SemiUser getSemiUserByIdPw(SemiUser semiuser);
-	UserProfile getsemiUserProfile(int s_number);
-	void pointUp(int s_number, int s_score);
-	void countUp(int s_number, int s_usercount);
-	void semiDelete(int s_number, int s_usercount);
+	List<SemiUser> getSemiUser(int loginUserNumber);
+	UserProfile getsemiUserProfile(int m_number);
+	SemiUser getSemiUserByNumScore(int m_number, int s_score);
+	void pointCountUp(SemiUser semiuser);
+	void semiDelete(SemiUser semiuser);
+	SemiUser getOkMember(SemiUser semiuser);
+	void memberInsert(SemiUser selectOkMember);
+	void idealTypeInsert(SemiUser selectOkMember);
+	Simsa getSimsaMember(int m_number);
+	void UpdateSimsa(int m_number, int loginUserNumber);
 }

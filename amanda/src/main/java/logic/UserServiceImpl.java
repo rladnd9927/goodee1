@@ -181,4 +181,15 @@ public class UserServiceImpl implements UserService{
 		return userDao.duplicateUser(semiuser);
 	}
 
+
+		@Override
+		public int m_like(int userNum, User myNum) {
+			return userDao.m_like(userNum, myNum);
+		}
+
+		@Override
+		public String cer(int userNum, User myNum) {
+			 System.out.println(myNum+"cer로 여기까진옴"); 
+		      return userDao.cer(userNum, myNum);
+		}
 }

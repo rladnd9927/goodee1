@@ -50,6 +50,7 @@
       	exception.AdminRequiredException=adminLogin
       	exception.PasswordFailException=passwordFail
       	exception.MailEmptyException=mailEmpty
+      	exception.SimsaException=simsa
       </value>
    	</property>
 </bean>

@@ -33,6 +33,7 @@ public interface UserMapper {
 
 	@Select("select nvl(max(m_number),0) from semi_member")
 	int getNum();
+<<<<<<< HEAD
 
 	
 	@Select("select * from member where m_number = #{m_number}")
@@ -61,4 +62,6 @@ public interface UserMapper {
 	         + "m_bodytype=#{m_bodytype} "
 	         + "where m_number=#{user.m_number}") 
 	void updateProfile(UserProfile userProfile);
+=======
+>>>>>>> branch 'master' of https://github.com/rladnd9927/goodee1.git
 }

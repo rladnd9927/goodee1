@@ -34,10 +34,8 @@ public class ChatController {
 	public ModelAndView chatlsit(HttpSession session){
 			  User myNum = (User)session.getAttribute("USER");
 		      ModelAndView mav = new ModelAndView();      
-		      System.out.println(myNum);
 		      //내가 좋아요를 누르기 전에 내가 좋아요를 누르려는 사람이 이미 나를 좋아요를 눌렀는지 안눌렀는지 테스트.
 		      List<User> chat = chatService.mlikelist(myNum); 
-		      System.out.println(chat+"chat이 chatlist로 넘겨주는지 확인.");
 		            mav.addObject("chatlist", chat);
 		            mav.setViewName("chat/chatlist");
 		            return mav; 
@@ -51,7 +49,6 @@ public class ChatController {
 		ModelAndView mav = new ModelAndView();
 		List<Member> chat = chatService.detail(num);
 		mav.addObject("chat", chat);
-		System.out.println("detail : " + chat);  
 		return mav;
 		
 	}

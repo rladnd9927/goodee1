@@ -24,9 +24,6 @@ public class Reply {
 	@JsonProperty("r_num")
 	private int r_num;
 	
-	@JsonProperty("r_reflevel")
-	private int r_reflevel;
-	
 	@JsonProperty("r_content")
 	private String r_content;
 	
@@ -51,12 +48,6 @@ public class Reply {
 	public void setR_num(int r_num) {
 		this.r_num = r_num;
 	}
-	public int getR_reflevel() {
-		return r_reflevel;
-	}
-	public void setR_reflevel(int r_reflevel) {
-		this.r_reflevel = r_reflevel;
-	}
 	public String getR_content() {
 		return r_content;
 	}
@@ -71,8 +62,7 @@ public class Reply {
 	}
 	@Override
 	public String toString() {
-		return "Reply [m_number=" + m_number + ", m_nickname=" + m_nickname + ", r_num=" + r_num + ", ref_level="
-				+ r_reflevel + ", r_content=" + r_content + ", sns_no=" + sns_no + "]";
+		return "Reply [m_number=" + m_number + ", m_nickname=" + m_nickname + ", r_num=" + r_num + ", r_content=" + r_content + ", sns_no=" + sns_no + "]";
 	}
 	
 	

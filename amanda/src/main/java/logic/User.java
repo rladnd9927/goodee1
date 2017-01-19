@@ -14,6 +14,7 @@ public class User {
     
     private String m_name;
     private int gender;
+    private int s_score;    
     
 	public int getM_number() {
 		return m_number;
@@ -45,10 +46,16 @@ public class User {
 	public void setGender(int gender) {
 		this.gender = gender;
 	}
+	
+	public int getS_score() {
+		return s_score;
+	}
+	public void setS_score(int s_score) {
+		this.s_score = s_score;
+	}
 	@Override
 	public String toString() {
 		return "User [m_number=" + m_number + ", m_email=" + m_email + ", m_password=" + m_password + ", m_name="
-				+ m_name + ", gender=" + gender + "]";
+				+ m_name + ", gender=" + gender + ", s_score=" + s_score + "]";
 	}
-	
 }

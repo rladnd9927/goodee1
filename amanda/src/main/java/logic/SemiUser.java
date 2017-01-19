@@ -7,7 +7,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 //semiuser
 public class SemiUser {
 	private int m_number;
+<<<<<<< HEAD
 	@Size(min=5,max=20,message="아이디는 5자 이상 20자 이하로 입력하세요.")
+=======
+>>>>>>> branch 'master' of https://github.com/rladnd9927/goodee1.git
 	private String s_email;
 	@Size(min=3,max=10,message="비밀번호는 3자 이상 10자 이하로 입력하세요.")
 	private String s_password;
@@ -59,5 +62,13 @@ public class SemiUser {
 	}
 	public void setS_usercount(int s_usercount) {
 		this.s_usercount = s_usercount;
+<<<<<<< HEAD
+=======
+	}
+	@Override
+	public String toString() {
+		return "SemiUser [m_number=" + m_number + ", s_email=" + s_email + ", s_password=" + s_password + ", s_name="
+				+ s_name + ", s_score=" + s_score + ", gender=" + gender + ", s_usercount=" + s_usercount + "]";
+>>>>>>> branch 'master' of https://github.com/rladnd9927/goodee1.git
 	}
 }

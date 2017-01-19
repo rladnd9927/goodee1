@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dao.mapper.BoardMapper;
+import dao.mapper.SemiUserMapper;
 import dao.mapper.UserMapper;
 import logic.SemiUser;
 import logic.User;
@@ -154,6 +155,7 @@ public class UserDaoImpl implements UserDao{
 		param.put("find", find);
 		return sqlSession.selectList(NS + "list" , param);
 	}
+<<<<<<< HEAD
 
 	@Override
 	public User getUpdateUser(int m_number) {
@@ -184,4 +186,6 @@ public class UserDaoImpl implements UserDao{
 
 	
 
+=======
+>>>>>>> branch 'master' of https://github.com/rladnd9927/goodee1.git
 }
