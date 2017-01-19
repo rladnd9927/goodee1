@@ -27,7 +27,7 @@
                 <a href="snsreg.do">글쓰기</a>
               </li>
               <li>
-                <a href="othersns.do">내가 좋아요한 회원들 소식</a>
+                <a href="othersnslist.do">내가 좋아요한 회원들 소식</a>
               </li>
             </ul>
           </div>

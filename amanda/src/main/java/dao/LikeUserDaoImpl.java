@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dao.mapper.LikeUserMapper;
+import logic.LikeUser;
 
 @Repository
 public class LikeUserDaoImpl implements LikeUserDao {
@@ -27,8 +28,17 @@ public class LikeUserDaoImpl implements LikeUserDao {
 		param.put("m_number", m_number);
 		return sqlSession.selectList(NS+"othersNumB",param);
 	}
-	public int getMnumFromLikeTable(int loginUserNumber) {
-		return sqlSession.getMapper(LikeUserMapper.class).getMnumFromLikeTable(loginUserNumber);		
+	@Override
+	public List<Integer> othersNumWhenC(int m_number) {
+		Map<String, Object> param= new HashMap<String, Object>();
+		param.put("m_number", m_number);
+		return sqlSession.selectList(NS+"othersNumC",param);
+	}
+	@Override
+	public List<LikeUser> getAll(Integer loginUserNumber) {
+		Map<String, Object> param= new HashMap<String, Object>();
+		param.put("loginUserNumber", loginUserNumber);
+		return sqlSession.selectList(NS+"getAll",param);
 	}
   
 }

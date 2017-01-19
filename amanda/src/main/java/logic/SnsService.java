@@ -11,7 +11,7 @@ public interface SnsService {
 
 	List<Sns> getList(int m_number);
 
-	List<Integer> getOthersNum(int m_number);
+	List<Integer> getOthersNum(Integer m_number);
 
 	Sns detail(Integer sns_no, int m_number);
 

@@ -102,8 +102,6 @@ public class UserController {
 	   mav.addObject("userProfile",userProfile);
        mav.addObject("userCount",userCount);
        mav.addObject("find",find);
-       System.out.println(column +", " +find);
-       System.out.println(userCount);
        return mav;
 	}
 	
@@ -141,7 +139,6 @@ public class UserController {
 	   //좋아요를 눌렀을때.
 	   @RequestMapping("user/likelist")
 	   public ModelAndView likelist(int userNum, HttpSession session){
-		   System.out.println(userNum+"유저아이디"); 
 		  User myNum = (User)session.getAttribute("USER");
 	      ModelAndView mav = new ModelAndView();  
 	      
@@ -167,7 +164,6 @@ public class UserController {
 	         if(aa==null){   
 	         //고유번호 생성
 	            int c_number = (int)(Math.random() * 1000 + 1);
-	            System.out.println("ㄴㄴ");
 	            //좋아요 테이블에 상대추가.
 	            List<User> chat = userService.likelist(userNum, myNum,c_number);
 	            mav.addObject("userlist", chat);
@@ -176,7 +172,6 @@ public class UserController {
 	             
 	         //내가 좋아요룰 이미 누른상태일때. 
 	         }else{
-	            System.out.println("ㅇㅇ");
 	            //likelist2는 좋아요 해제. 
 	            List<User> chat = userService.likelist2(userNum, myNum);
 	            mav.addObject("userlist", chat);
@@ -292,7 +287,6 @@ public class UserController {
 			return mav;
 		}
 		session.setAttribute("USER", loginUser); 
-		System.out.println(loginUser+"하하하하하하하");
 		mav.addObject("user",loginUser);
 		mav.setViewName("user/main");
 

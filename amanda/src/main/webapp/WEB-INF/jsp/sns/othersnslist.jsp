@@ -26,6 +26,9 @@
 #bgc{
 	background-color :  #ffffff;
 }
+#makepopup{
+	visibility : hidden;
+}
 #fixedSize{
 	width : 200px;
 	height : 200px;
@@ -50,138 +53,132 @@
 #next{
 	cursor : pointer;
 }
+.popupImg{
+	width : 400px;
+	height : 400px;
+}
 </style>
 
 <script type="text/javascript"
 	src="${contextPath}/decorator/js/jquery-3.1.1.js"></script>
 <script type="text/javascript">
-		$(document).ready(function() {
-			$("a#clickAtag").bind("click", function(event){
-				event.preventDefault();
-				var sns_no = $(this).parents().parents().children("#snsno").val();
-				var m_number = $(this).parents().parents().children("#mnumber").val();
-				ajax(sns_no, m_number);
-			});
-			$("a#prev").bind("click", function(event){
-				event.preventDefault();
-				var sns_no = parseInt($("#currsnsnum").val()) - 1;
-				var m_number = parseInt($("#currmembernum").val()) - 1;
-				console.log(sns_no);
-				console.log(m_number);
-				ajax(sns_no, m_number);
-			});
-			$("a#next").bind("click", function(event){
-				event.preventDefault();
-				var sns_no = parseInt($("#currsnsnum").val()) + 1;
-				var m_number = parseInt($("#currmembernum").val()) + 1;
-				ajax(sns_no, m_number);
-			});
-			
-			function ajax(sns_no, m_number) {
-				$.ajax({url:"snsdetail.do",
-					data:"sns_no="+sns_no+"&m_number="+m_number, //현재, 데이터를 서버로 보내는 것까지는 됨..
-					success : function(data) {
-						makePopup(data); //해당 앵커태그 눌리면 팝업형식으로 띄우기 
-					},
-					 error : function(xhr, status, error){
-			                alert(" 서버를 불러오는데 실패 했습니다. : "+xhr.status + "\n status :" + status + "\n error : "+error);
-		            }
-				});
-			}
-			
-			function makePopup(json){ // json이라는 스트링 배열을 받는다.
-				
-				var data1 = eval("("+json[0]+")"); //json형태 ({,,,})로 들어온것을 요소별로 나눠서 파싱해주는 역할을 eval()이 한다.
-				var data2 = eval("("+json[1]+")"); //data1 = SNS게시글의 정보, data2 = 게시글에 대한 댓글의 정보
-				//data1 (게시물)의 정보는 아래 picturesrc변수에 불러오는 방식으로 부르고, data2(댓글)정보는 배열의 형태로 들어오므로, for문을 이용하여 data2[i].~~~의 형태로 뽑아낸다.
-				var loginUserNum = $("#loginuser").val();
-				var picturesrc = "../fileupload/"+data1.fileUrl; //게시물 사진주소
-				var replyCnt = data2.length; //댓글의 갯수
-				var html = "";
-				html += "<div class=\"section\" id=\"ajaxprepend\">                                                                                                                                     ";
-			    html += "  <div class=\"container\">                                                                                                                                 ";
-			    html += "    <div class=\"row\" id=\"bgc\">                                                                                                                                     ";
-			    html += "      <div class=\"col-md-8\">                                                                                                                              ";
-			    html += "        <div data-interval=\"false\" id=\"fullcarousel-example\" class=\"carousel slide\" data-ride=\"carousel\">" ;
-			    html += "          <div class=\"carousel-inner\">                                                                                                                    ";
-			    html += "            <div class=\"item active\">                                                                                                                     ";
-			    html += "              <img src=\"https://unsplash.imgix.net/photo-1423347834838-5162bb452ca7?w=1024&amp;q=50&amp;fm=jpg&amp;s=c255e589621f06513c1d123c7323fe9c\">   ";
-			    html += "            </div>                                                                                                                                        ";
-			    html += "          </div>                                                                                                                                          ";
-			    html += "          <a href=\"javascript:void(0);\" class=\"left carousel-control\"  id=\"prev\"><i class=\"icon-prev fa fa-angle-left\"></i></a>          ";
-			    html += "          <a href=\"javascript:void(0);\" class=\"right carousel-control\"  id=\"next\"><i class=\"icon-next fa fa-angle-right\"></i></a>         ";
-			    html += "        </div>                                                                                                                                            ";
-			    html += "      </div>                                                                                                                                              ";
-			    html += "      <div class=\"col-md-4\">                                                                                                                              ";
-			   	html += " 		<i id = \"close\" class=\"fa fa-2x fa-fw fa-times-circle pull-right text-muted\"></i>";
-			    html += "        <div class=\"row\">                                                                                                                                 ";
-			    html += "          <h3 class=\"text-primary\">"
-			    html += "이 게시물에 대한 "+replyCnt+"개 의 댓글</h3>"
-			    html += "        </div>"
-			    html += "        <hr>                                                                                                                                              ";
-			    html += "        <div class=\"replyWrapper\">                                                                                                                        ";
-			    for(var i = 0; i < replyCnt; i++){
-			    html += "          <div class=\"replyDetail\">                                                                                                                       ";
-			    html += "            <ul>                                                                                                                                          ";
-			    html += "              <li id=\"replyTitle\">                                                                                                                        ";
-			    html += "                <h4 class=\"text-primary\">"+data2[i].m_nickname+"님의 댓글</h4>";
-			    html += "              </li>                                                                                                                                       ";
-			    html += "              <h5>"+data2[i].r_content+"</h5>                                                                                                                                 ";
-			    console.log(data2[i].m_number);
-			    console.log(loginUserNum);
-			    if(data2[i].m_number == loginUserNum){
-		    	html += "            	<a href=\"javascript:if(confirm('지우시겠습니까?')) document.location.href='replydelete.do?sns_no="+data1.sns_no+"&m_number="+data1.m_number+"&r_num="+data2[i].r_num+"'\">[댓글 삭제]</a>";
-			    }
-			    html += "            </ul>                                                                                                                                         ";
-			    html += "          </div>                                                                                                                                          ";
-			    }
-			    html += "        </div>                                                     ";
-			    html += " 		<hr>                                                              ";
-	            html += " 		<div class=\"custom-search-form input-group input-group-sm\">       ";
-	            html += "   			<input type=\"text\" class=\"form-control\" placeholder=\"Type the comment\" id = \"comment\">";
-	            html += "   			<input type=\"hidden\" id = \"currsnsnum\" value =\""+data1.sns_no+"\">";
-	            html += "   			<input type=\"hidden\" id = \"currmembernum\" value =\""+data1.m_number+"\">";
-	            html += "   			<span class=\"input-group-btn\"> ";
-	            html += "     		<button class=\"btn btn-default\" type=\"button\" onclick=\"replyReg()\">";
-	            html += "       <i class=\"fa fa-comment-o\"></i>                                ";
-	            html += "     </button>                                                     ";
-	            html += "   </span>                                                         ";
-	            html += " </div>                                                            ";
-	            html += " </div>                                                            ";
-	            html += " </div>                                                            ";
-	            html += " </div>                                                            ";
-	            html += " </div>                                                             ";
-	            
-                
-	            $("#makePopup").append(html);
-				$("#ajaxprepend").fadeIn(); //.ajaxprepend : 가장 바깥 div의 클래스명. css설정 해주어야 함.
-				$("#close").off("click");
-				$("#close").on("click", function () {
-					$("#ajaxprepend").fadeOut(function () {
-						$("#ajaxprepend").remove();
-							
-					});
-					
-				});
-			}
+$(document).ready(function() {
+	$("a#clickAtag").bind("click", function(event){
+		event.preventDefault();
+		var sns_no = $(this).parents().parents().children("#snsno").val();
+		var m_number = $(this).parents().parents().children("#mnumber").val();
+		ajax(sns_no, m_number);
+	});
+
+});
+
+function ajax(sns_no, m_number) {
+	$.ajax({url:"snsdetail.do",
+		data:"sns_no="+sns_no+"&m_number="+m_number, //현재, 데이터를 서버로 보내는 것까지는 됨..
+		success : function(data) {
+			makePopup(data); //해당 앵커태그 눌리면 팝업형식으로 띄우기 
+		},
+		 error : function(xhr, status, error){
+                alert(" 서버를 불러오는데 실패 했습니다. : "+xhr.status + "\n status :" + status + "\n error : "+error);
+        }
+	});
+}
+
+function makePopup(json){ // json이라는 스트링 배열을 받는다.
+	
+	var data1 = eval("("+json[0]+")"); //json형태 ({,,,})로 들어온것을 요소별로 나눠서 파싱해주는 역할을 eval()이 한다.
+	var data2 = eval("("+json[1]+")"); //data1 = SNS게시글의 정보, data2 = 게시글에 대한 댓글의 정보
+	//data1 (게시물)의 정보는 아래 picturesrc변수에 불러오는 방식으로 부르고, data2(댓글)정보는 배열의 형태로 들어오므로, for문을 이용하여 data2[i].~~~의 형태로 뽑아낸다.
+	var loginUserNum = $("#loginuser").val();
+	var picturesrc = "../fileupload/"+data1.fileUrl; //게시물 사진주소
+	var replyCnt = data2.length; //댓글의 갯수
+	var html = "";
+ 	
+	html += "<div class=\"section\" id=\"ajaxprepend\" tabindex=\"0\">                                                                                                                                     ";
+    html += "  <div class=\"container\">                                                                                                                                 ";
+    html += "    <div class=\"row\" id=\"bgc\">                                                                                                                                     ";
+    html += "      <div class=\"col-md-8\">                                                                                                                              ";
+    html += "        <div data-interval=\"false\" id=\"fullcarousel-example\" class=\"carousel slide\" data-ride=\"carousel\">" ;
+    html += "          <div class=\"carousel-inner\">                                                                                                                    ";
+    html += "            <div class=\"item active\">                                                                                                                     ";
+    html += "              <img src="+picturesrc+" class= \"popupImg\">";
+    html += "            </div>                                                                                                                                        ";
+    html += "          </div>                                                                                                                                          ";
+    html += "        </div>                                                                                                                                            ";
+    html += "      </div>                                                                                                                                              ";
+    html += "      <div class=\"col-md-4\">                                                                                                                              ";
+   	html += " 		<i id = \"close\" class=\"fa fa-2x fa-fw fa-times-circle pull-right text-muted\"></i>";
+    html += "        <div class=\"row\">                                                                                                                                 ";
+    html += "          <h3 class=\"text-primary\">"
+    html += "이 게시물에 대한 "+replyCnt+"개 의 댓글</h3>"
+    html += "        </div>"
+    html += "        <hr>                                                                                                                                              ";
+    html += "        <div class=\"replyWrapper\">                                                                                                                        ";
+    for(var i = 0; i < replyCnt; i++){
+    html += "          <div class=\"replyDetail\">                                                                                                                       ";
+    html += "            <ul>                                                                                                                                          ";
+    html += "              <li id=\"replyTitle\">                                                                                                                        ";
+    html += "                <h5 class=\"text-primary\">"+data2[i].m_nickname+"님의 댓글</h5>";
+    html += "              </li>                                                                                                                                       ";
+    html += "              <h6>"+data2[i].r_content+"</h6>                                                                                                                                 ";
+    if(data2[i].m_number == loginUserNum){
+    html += "            	<a href=\"javascript:if(confirm('지우시겠습니까?')) document.location.href='replydelete.do?sns_no="+data1.sns_no+"&m_number="+data2[i].m_number+"&r_num="+data2[i].r_num+"'\">[댓글 삭제]</a>";
+    }
+    html += "            </ul>                                                                                                                                         ";
+    html += "          </div>                                                                                                                                          ";
+    }
+    html += "        </div>                                                     ";
+    html += " 		<hr>                                                              ";
+    html += " 		<div class=\"custom-search-form input-group input-group-sm\">       ";
+    html += "   			<input type=\"text\" class=\"form-control\" placeholder=\"Type the comment\" id = \"comment\">";
+    html += "   			<input type=\"hidden\" id = \"currsnsnum\" value =\""+data1.sns_no+"\">";
+    html += "   			<input type=\"hidden\" id = \"currmembernum\" value =\""+data1.m_number+"\">";
+    html += "   			<span class=\"input-group-btn\"> ";
+    html += "     		<button class=\"btn btn-default\" type=\"button\" onclick=\"replyReg()\">";
+    html += "       <i class=\"fa fa-comment-o\"></i>                                ";
+    html += "     </button>                                                     ";
+    html += "   </span>                                                         ";
+    html += " </div>                                                            ";
+    html += " </div>                                                            ";
+    html += " </div>                                                            ";
+  	html += "  <div class=\"row\">                                                                ";
+  	html += "  <div class=\"col-md-12\">                                                          ";
+  	html += "    <div class=\"well\">                                                             ";
+  	html += "      <h2 class=\"text-center\">제목 : "+data1.sns_subject+"</h2>                                                             ";
+  	html += "      <p class=\"lead\">내용 :<br>"+data1.sns_content+"</p>                                                              ";
+  	html += "    </div>                                                                         ";
+  	html += "  </div>                                                                           ";
+  	html += "</div>                                                                             ";
+    html += " </div>                                                            ";
+    html += " </div>                                                            ";
+
+    $("#makePopup").html(html);
+	$("#ajaxprepend").fadeIn(); //.ajaxprepend : 가장 바깥 div의 클래스명. css설정 해주어야 함.
+	$("#ajaxprepend").trigger("focus");
+	$("#close").off("click");
+	$("#close").on("click", function () {
+		$("#ajaxprepend").fadeOut(function () {
+			$("#ajaxprepend").remove();
 		});
-		
-		function replyReg(){
-			var r_content = $("#comment").val();
-			var sns_no = $("#currsnsnum").val();
-			console.log(r_content);
-			console.log(sns_no);
-			$.ajax({
-				url : "replyreg.do",
-				data : "sns_no="+sns_no+"&r_content="+r_content,
-				success : function(data){
-					makePopup(data);
-				},
-				error : function(xhr, status, error){
-	                alert(" 서버를 불러오는데 실패 했습니다. : "+xhr.status + "\n status :" + status + "\n error : "+error);
-            	}
-			});
-		}
+	});
+	
+}		
+function replyReg(){
+	var r_content = $("#comment").val();
+	var sns_no = $("#currsnsnum").val();
+	var m_number = $("#currmembernum").val();
+	$.ajax({
+		url : "replyreg.do",
+		type : "GET",
+		data : "sns_no="+sns_no+"&r_content="+r_content+"&m_number="+m_number,
+		success : function(data){
+			makePopup(data);
+		},
+		error : function(xhr, status, error){
+            alert(" 서버를 불러오는데 실패 했습니다. : "+xhr.status + "\n status :" + status + "\n error : "+error);
+    	}
+	});
+}
 </script>
 </head>
 
@@ -210,7 +207,7 @@
 		</div>
 	</div>
 	
-     <div id = "makePopup">
+     
      
 	<div class="section">
 		<%--게시물 섹션 시작 (컨테이너) --%>
@@ -248,6 +245,8 @@
 		</c:if>
 		<c:if test="${not empty snsList}">
 			<c:forEach items="${snsList}" var="sns">
+			<div id = "makePopup">
+			</div>
 				<div class="section">
 					<%--게시물섹션 반복구간 시작 --%>
 					<div class="container">
@@ -299,8 +298,6 @@
 			</c:forEach>
 		</c:if>
 	</div>
-
-</div>
 
 	<script type="text/javascript">
             $(function(){

@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,9 +60,8 @@ public class SnsController {
 		if(loginUser == null) {
 	         throw new LoginRequiredException();
 	    }
-		m_numberList = snsService.getOthersNum(loginUser.getM_number()); //로그인한 유저의 회원번호를 이용하여, 좋아요한 회원의 회원번호들을 가져온다.
+		m_numberList = snsService.getOthersNum(loginUser.getM_number()); //로그인한 유저의 회원번호를 이용하여, 좋아요한 회원의 회원번호들을 list로 가져온다.
 		
-	
 		for(int i = 0 ; i<m_numberList.size(); i++){
 			for(int j = 0 ; j < snsService.getList(m_numberList.get(i)).size(); j++){
 				snsList.add(snsService.getList(m_numberList.get(i)).get(j)); //내가 좋아요한 회원의 회원번호를 가져와서, 그 번호로 sns디비에서 게시물 목록을 뽑아서 게시물 객체들을 snsList에 등록
@@ -185,10 +185,19 @@ public class SnsController {
 		return mav;
 	}
 	@RequestMapping("sns/replyreg")
-	public @ResponseBody List<Object> replyreg(int sns_no, String r_content, HttpSession session){
+	public @ResponseBody List<Object> replyreg(int sns_no, String r_content, int m_number, HttpSession session){
 		User loginUser = (User)session.getAttribute("USER");
-		int m_number = loginUser.getM_number();
-		snsService.replyReg(sns_no, m_number, r_content);
+		try {
+			r_content = new String(r_content.getBytes("8859_1"),"EUC-KR");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		int loginUserNumber = loginUser.getM_number();
+		
+		snsService.replyReg(sns_no, loginUserNumber, r_content);
+		
 		Sns sns = snsService.detail(sns_no,m_number);
 		
 		List<Reply> replyList = snsService.replyList(sns_no,m_number);
@@ -216,9 +225,12 @@ public class SnsController {
 			mav.addObject("sns",snsService.detail(sns_no,m_number));
 			return mav;
 		}
-		
 		snsService.replyDelete(sns_no, m_number,r_num);
-		mav.setViewName("redirect:snsmain.do");
+		if(r_num != -1){
+			mav.setViewName("redirect:othersnslist.do");
+		}else{
+			mav.setViewName("redirect:snsmain.do");
+		}
 		return mav;
 	}
 }

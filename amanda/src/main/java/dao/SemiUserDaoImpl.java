@@ -50,7 +50,6 @@ public class SemiUserDaoImpl implements SemiUserDao{
 		map.put("s_number", s_number);
 		map.put("s_score", s_score);
 		//int s_score = semiuser.getS_score();
-		//System.out.println(s_score);
 		//sqlSession.getMapper(SemiUserMapper.class).pointUp(s_score,s_number);
 		sqlSession.getMapper(SemiUserMapper.class).pointUp(map);
 	}
@@ -61,7 +60,6 @@ public class SemiUserDaoImpl implements SemiUserDao{
 		map.put("s_number", s_number);
 		map.put("s_usercount", s_usercount);
 		//int s_score = semiuser.getS_score();
-		//System.out.println(s_score);
 		//sqlSession.getMapper(SemiUserMapper.class).pointUp(s_score,s_number);
 		sqlSession.getMapper(SemiUserMapper.class).countUp(map);
 	}
@@ -71,5 +69,10 @@ public class SemiUserDaoImpl implements SemiUserDao{
 		map.put("s_number", s_number);
 		map.put("s_usercount", s_usercount);
 		sqlSession.getMapper(SemiUserMapper.class).semiDelete(map);
+	}
+
+	@Override
+	public UserProfile getUserProfile(int m_number) {
+		return sqlSession.getMapper(SemiUserMapper.class).getUserProfile(m_number);
 	}
 }
