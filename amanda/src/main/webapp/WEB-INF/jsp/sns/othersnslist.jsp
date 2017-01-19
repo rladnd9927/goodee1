@@ -7,7 +7,7 @@
 <head>
 <meta charset="EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SNS 메인 페이지</title>
+<title>좋아요 한 회원들의 게시물</title>
 <script type="text/javascript"
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script type="text/javascript"
@@ -22,7 +22,7 @@
 <link
 	href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
 	rel="stylesheet" type="text/css">
-<style type="text/css">
+	<style type="text/css">
 #bgc{
 	background-color :  #ffffff;
 }
@@ -52,6 +52,10 @@
 }
 #next{
 	cursor : pointer;
+}
+.popupImg{
+	width : 400px;
+	height : 400px;
 }
 </style>
 
@@ -89,7 +93,7 @@ function makePopup(json){ // json이라는 스트링 배열을 받는다.
 	var picturesrc = "../fileupload/"+data1.fileUrl; //게시물 사진주소
 	var replyCnt = data2.length; //댓글의 갯수
 	var html = "";
- 	console.log(picturesrc);
+ 	
 	html += "<div class=\"section\" id=\"ajaxprepend\" tabindex=\"0\">                                                                                                                                     ";
     html += "  <div class=\"container\">                                                                                                                                 ";
     html += "    <div class=\"row\" id=\"bgc\">                                                                                                                                     ";
@@ -177,6 +181,8 @@ function replyReg(){
 }
 </script>
 </head>
+
+
 <body data-spy="scroll">
 	<div class="section">
 		<div class="container">
@@ -200,7 +206,9 @@ function replyReg(){
 			</div>
 		</div>
 	</div>
-
+	
+     
+     
 	<div class="section">
 		<%--게시물 섹션 시작 (컨테이너) --%>
 		<c:if test="${empty snsList}">
@@ -212,9 +220,6 @@ function replyReg(){
 							src="https://unsplash.imgix.net/photo-1423347834838-5162bb452ca7?w=1024&amp;q=50&amp;fm=jpg&amp;s=c255e589621f06513c1d123c7323fe9c">
 						<div class="carousel-caption">
 							<h1>등록된 게시물이 없습니다.</h1>
-							<p>
-								<a href="snsreg.do" style="color: red;">지금 게시물을 등록해 보세요!</a>
-							</p>
 						</div>
 					</div>
 					<div class="item active">
@@ -222,9 +227,6 @@ function replyReg(){
 							src="https://unsplash.imgix.net/photo-1421986527537-888d998adb74?w=1024&amp;q=50&amp;fm=jpg&amp;s=e633562a1da53293c4dc391fd41ce41d">
 						<div class="carousel-caption">
 							<h1>등록된 게시물이 없습니다.</h1>
-							<p>
-								<a href="snsreg.do" style="color: red;">지금 게시물을 등록해 보세요!</a>
-							</p>
 						</div>
 					</div>
 					<div class="item">
@@ -232,9 +234,6 @@ function replyReg(){
 							src="https://ununsplash.imgix.net/reserve/RONyPwknRQOO3ag4xf3R_Kinsey.jpg?w=1024&amp;q=50&amp;fm=jpg&amp;s=c8e85e7825f6c74ff13321833a9bc28d">
 						<div class="carousel-caption">
 							<h1>등록된 게시물이 없습니다.</h1>
-							<p>
-								<a href="snsreg.do" style="color: red;">지금 게시물을 등록해 보세요!</a>
-							</p>
 						</div>
 					</div>
 				</div>
@@ -245,7 +244,6 @@ function replyReg(){
 			</div>
 		</c:if>
 		<c:if test="${not empty snsList}">
-		
 			<c:forEach items="${snsList}" var="sns">
 			<div id = "makePopup">
 			</div>
@@ -266,10 +264,10 @@ function replyReg(){
 								<h5 class="text-muted text-right">
 									<c:if test="${sns.datetoString == today}">
 										<%--SNS객체의 property인 datetoString을 이용해 오늘 날짜인지 비교 --%>
-          			오늘 <f:formatDate value="${sns.sns_date}" pattern="a hh:mm" />&nbsp;에 등록
+          			${sns.userProfile.m_nickname}님이 오늘 <f:formatDate value="${sns.sns_date}" pattern="a hh:mm" />&nbsp;에 등록
        			</c:if>
 									<c:if test="${sns.datetoString != today}">
-										<f:formatDate value="${sns.sns_date}"
+										${sns.userProfile.m_nickname}님이 <f:formatDate value="${sns.sns_date}"
 											pattern="yyyy-MM-dd a hh:mm" />&nbsp;에 등록
        			</c:if>
 								</h5>
@@ -280,10 +278,7 @@ function replyReg(){
 								<p>${sns.sns_content}</p>
 								<div class="col-md-12 text-right">
 									<a href="javascript:void(0);" id="clickAtag"><i class="fa fa-3x fa-comments-o fa-fw text-success"></i></a> 
-									<a href="snsmodifyForm.do?sns_no=${sns.sns_no}&m_number=${sns.m_number}">
-									<i class="fa fa-3x fa-fw fa-undo s-o text-warning"></i></a> 
-									<a href="javascript:if(confirm('지우시겠습니까?')) document.location.href='snsdelete.do?sns_no=${sns.sns_no}&m_number=${sns.m_number}'">
-									<i class="fa fa-3x fa-fw text-muted fa-minus"></i></a>
+									
             					</div>
 							</div>
 						</div>
@@ -303,7 +298,6 @@ function replyReg(){
 			</c:forEach>
 		</c:if>
 	</div>
-
 
 	<script type="text/javascript">
             $(function(){

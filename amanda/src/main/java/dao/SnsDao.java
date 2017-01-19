@@ -16,9 +16,7 @@ public interface SnsDao {
 
 	void update(Sns sns);
 
-	void delete(int sns_no);
-
-	List<Reply> replyList(int sns_no, int m_number);
+	void delete(int sns_no,int m_number);
 
 	int getMax(int m_number);
 }

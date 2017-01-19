@@ -43,4 +43,9 @@ public interface SemiUserMapper {
 
 	@Update("update duplication set simsa_number=#{loginUserNumber} where m_number=#{m_number}")
 	void UpdateSimsa(Map<Object, Object> map);
+	@Delete("delete from semi_member where (select s_score/s_usercount from semi_member where s_usercount >= 5 and s_number=#{s_number}) < 3 and s_number=#{s_number}")
+	void semiDelete(Map<Object, Object> map);
+
+	@Select("select * from member_profile where m_number = #{m_number}")
+	UserProfile getUserProfile(int m_number);
 }

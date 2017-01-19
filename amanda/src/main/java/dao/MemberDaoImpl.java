@@ -21,14 +21,12 @@ public class MemberDaoImpl implements MemberDao {
 	   public List<Member> mypage(User myNum) {
 	      Map<String, Object> param = new HashMap<String, Object>();
 	      param.put("myNum", myNum.getM_number());
-	      System.out.println(param+"여기까지 오다");
 	      return sqlSession.selectList(MS + "mypage", param);
 	   }
 
 	   public List<Member> youpage(User myNum) {
 	      Map<String, Object> param = new HashMap<String, Object>();
 	      param.put("myNum", myNum.getM_number());
-	      System.out.println(param+"2도 여기까지 오다");
 	      return sqlSession.selectList(MS + "youpage", param);
 	   }
 	
