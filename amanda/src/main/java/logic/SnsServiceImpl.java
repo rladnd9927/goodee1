@@ -12,7 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import dao.LikeUserDao;
+import dao.ReplyDao;
+import dao.SemiUserDao;
 import dao.SnsDao;
 import dao.UserDao;
 
@@ -25,15 +30,34 @@ public class SnsServiceImpl implements SnsService {
 	private LikeUserDao	likeUserDao;
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private ReplyDao replyDao;
+	@Autowired
+	private SemiUserDao semiDao;
 	
-	public List<Sns> getList(int m_number) {
-		List<Sns> snsList = snsDao.list(m_number);
+	
+	public List<Sns> getList(int m_number) {//m_number : 게시물객체에 있는 m_number (어떤 회원의 게시물인지 판단하기위함)
+		List<Sns> snsList = null;
 		
+		snsList = snsDao.list(m_number);
+		for(int i = 0 ; i<snsList.size(); i++){
+			if(snsList.get(i).getM_number() == m_number){
+				snsList.get(i).setUserProfile(userDao.getUserProfile(m_number));
+			}else{
+				break;
+			}
+		}
 		return snsList;
 	}
 
-	public List<Integer> getOthersNum(int m_number) {
-		List<Integer> othersNum = likeUserDao.othersNum(m_number); //나를 좋아요한 회원들의 회원번호를 리스트형태로 가져옴
+	public List<Integer> getOthersNum(int loginUserNumber) {
+		List<Integer> othersNum = null;
+		int mNumFromLikeTable = likeUserDao.getMnumFromLikeTable(loginUserNumber);
+		if(loginUserNumber!=mNumFromLikeTable){//로그인유저 넘버랑 라이크테이블 m넘버랑 같으면 m넘버를, 틀리면 -1리턴
+			othersNum=likeUserDao.othersNumWhenB(loginUserNumber); //나를 좋아요한 회원들의 회원번호를 리스트형태로 가져옴
+		}else{
+			othersNum = likeUserDao.othersNumWhenA(loginUserNumber);
+		}
 		return othersNum;
 	}
 
@@ -85,8 +109,9 @@ public class SnsServiceImpl implements SnsService {
 		return snsUser;
 	}
 
-	public void delete(int sns_no) {
-		snsDao.delete(sns_no);
+	public void delete(int sns_no, int m_number) {
+		snsDao.delete(sns_no,m_number);
+		replyDao.delete(sns_no, m_number, -1); //sns게시물 자체를 삭제할시, -1을 넘겨 플래그로 사용
 	}
 
 	public Sns detail(Integer sns_no, int m_number) {
@@ -94,6 +119,33 @@ public class SnsServiceImpl implements SnsService {
 	}
 
 	public List<Reply> replyList(int sns_no, int m_number) {
-		return snsDao.replyList(sns_no,m_number);
+		return replyDao.replyList(sns_no,m_number);
+	}
+
+	@Override
+	public String ObjectToJSONString(Object obj) throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(obj);
+		return json;
+	}
+
+	@Override
+	public void replyDelete(int sns_no, int m_number, int r_num) {
+		replyDao.delete(sns_no, m_number, r_num);
+	}
+
+	@Override
+	public void replyReg(int sns_no, int m_number, String r_content) {
+		Reply reply = new Reply();
+		String m_nickname = semiDao.getUserProfile(m_number).getM_nickname();
+		int r_num = replyDao.getMaxRnum(sns_no);
+		
+		reply.setSns_no(sns_no);
+		reply.setM_number(m_number);
+		reply.setR_content(r_content);
+		reply.setR_reflevel(0);
+		reply.setM_nickname(m_nickname);
+		reply.setR_num(r_num);
+		replyDao.register(reply);
 	}
 }

@@ -184,6 +184,21 @@
 		<version>11.1.0.7.0</version>
 	</dependency>	
 	<dependency>
+  			<groupId>com.fasterxml.jackson.core</groupId>
+  			<artifactId>jackson-core</artifactId>
+  			<version>2.8.1</version>
+  		</dependency>
+  		<dependency>
+  			<groupId>com.fasterxml.jackson.core</groupId>
+  			<artifactId>jackson-annotations</artifactId>
+  			<version>2.8.0</version>
+  		</dependency>
+  		<dependency>
+  			<groupId>com.fasterxml.jackson.core</groupId>
+  			<artifactId>jackson-databind</artifactId>
+  			<version>2.8.5</version>
+  		</dependency>
+	<dependency>
 		<groupId>org.codehaus.jackson</groupId>
 		<artifactId>jackson-mapper-lgpl</artifactId>
 		<version>1.8.0</version>
@@ -197,4 +212,23 @@
   <build>
     <finalName>mavenshop</finalName>
   </build>
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+  			<groupId>com.fasterxml.jackson.core</groupId>
+  			<artifactId>jackson-core</artifactId>
+  			<version>2.8.1</version>
+  		</dependency>
+  		<dependency>
+  			<groupId>com.fasterxml.jackson.core</groupId>
+  			<artifactId>jackson-annotations</artifactId>
+  			<version>2.8.0</version>
+  		</dependency>
+  		<dependency>
+  			<groupId>com.fasterxml.jackson.core</groupId>
+  			<artifactId>jackson-databind</artifactId>
+  			<version>2.8.5</version>
+  		</dependency>
+  	</dependencies>
+  </dependencyManagement>
 </project>

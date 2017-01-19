@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dao.mapper.SnsMapper;
-import logic.Reply;
 import logic.Sns;
-import logic.User;
 
 @Repository
 public class SnsDaoImpl implements SnsDao {
@@ -26,13 +24,6 @@ public class SnsDaoImpl implements SnsDao {
 		return sqlSession.selectList(NS+"list",map);
 	}
 
-	public List<Reply> replyList(int sns_no, int m_number) { //SnsMApper에서 쿼리결과인 Reply객체를 리턴받을수 있는지 잘 모르겠음. 에러시 수정할것.
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("sns_no", sns_no);
-		map.put("m_number", m_number);
-		return sqlSession.selectList("dao.mapper.ReplyMapper.replyList",map);
-	}
-
 	public void insert(Sns sns) {
 		sqlSession.getMapper(SnsMapper.class).insert(sns);		
 	}
@@ -41,8 +32,11 @@ public class SnsDaoImpl implements SnsDao {
 		sqlSession.getMapper(SnsMapper.class).update(sns);
 	}
 
-	public void delete(int sns_no) {
-		sqlSession.getMapper(SnsMapper.class).delete(sns_no);
+	public void delete(int sns_no,int m_number) {
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("sns_no",sns_no);
+		map.put("m_number", m_number);
+		sqlSession.selectOne(NS+"delete",map);
 	}
 
 	public Sns detail(int sns_no, int m_number) {
